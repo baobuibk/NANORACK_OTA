@@ -1,0 +1,2 @@
+../../Drivers/CMSIS/Include/core_cm7.h:2156:34:__NVIC_SystemReset	1
+../Source/bootmode/bootmode.c:23:6:full_system_reset	0

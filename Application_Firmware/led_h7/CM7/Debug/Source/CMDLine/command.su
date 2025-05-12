@@ -1,0 +1,6 @@
+../Source/CMDLine/command.c:30:6:command_init	8	static
+../Source/CMDLine/command.c:47:8:ftoa	56	static
+../Source/CMDLine/command.c:110:6:command_task_update	24	static
+../Source/CMDLine/command.c:146:5:Cmd_help	24	static
+../Source/CMDLine/command.c:176:5:Cmd_get_temp	24	static
+../Source/CMDLine/command.c:193:5:Cmd_bootloader	16	static
