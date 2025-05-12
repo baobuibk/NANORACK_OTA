@@ -19,7 +19,7 @@ Applications must be linked to the following addresses:
 - **Firmware 1**: `0x08040000` (Bank 1, Sectors 2-5).
 - **Firmware 2**: `0x08140000` (Bank 2, Sectors 2-5).
 
-For detail, you can see this: [Memory Map](../STM32_BOOTLOADER.md#memory-map)
+For detail, you can see this: [Memory Map](STM32_BOOTLOADER.md#memory-map)
 
 The linker script must set the vector table to these addresses, and the `.bin` file must start at the specified address.
 
