@@ -197,6 +197,15 @@ To ensure the application works with the bootloader, follow these guidelines:
      ```c
      #define USE_CORE_M4
      ```
+     **Note**: After save `.ioc` file, the tool will generate code and you must go to function `HAL_Init()` in `stm32h7xxx_hal.c` file and modify at line `__HAL_ART_CONFIG_BASE_ADDRESS` with argument is `FIRMWARE_BANK2_BASE`. You can see this:
+     ```c
+      #if defined(DUAL_CORE) && defined(CORE_CM4)
+        /* Configure Cortex-M4 Instruction cache through ART accelerator */
+        __HAL_RCC_ART_CLK_ENABLE();                   /* Enable the Cortex-M4 ART Clock */
+        __HAL_ART_CONFIG_BASE_ADDRESS(0x08140000UL);  /* Configure the Cortex-M4 ART Base address to the Flash Bank 2 : */
+        __HAL_ART_ENABLE();                           /* Enable the Cortex-M4 ART */
+      #endif /* DUAL_CORE &&  CORE_CM4 */
+     ```
 
 3. **UART Support**:
    - If the application uses UART (e.g., for console), configure it to match the bootloader (115200 baud, 8-N-1).
