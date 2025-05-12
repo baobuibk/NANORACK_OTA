@@ -1,42 +1,38 @@
 # Python Host for STM32 FOTA
 
 ## Overview
-The Python host script (`fota_host.py`) is a command-line tool for managing firmware updates on STM32 microcontrollers (STM32F4, STM32F7, STM32H7) via UART. It communicates with a custom bootloader on the STM32 to perform operations such as erasing flash, uploading firmware, setting firmware versions, and jumping to the application.
-
+The Python host script (`FOTA.py`) is a command-line tool for managing firmware updates on STM32 microcontrollers (STM32F407VGTx, STM32F765VGTx, STM32H745ZIT3) via UART.
 ## Features
 - **Two Operation Modes**:
   - **Option Mode**: Interactive menu for manual control of bootloader operations.
   - **Sequential Mode**: Automated firmware update via command-line arguments.
-- Supports single-core (STM32F4/F7) and dual-core (STM32H7) MCUs.
-- Firmware selection and version management (e.g., 1.0.0 format).
+- Supports single-core (STM32F407VGTx, STM32F765VGTx) and dual-core (STM32H745ZIT3) MCUs.
+- Firmware version management (e.g., 1.0.0 format).
 - CRC32-based data integrity verification.
-- Progress bar for firmware upload using `tqdm`.
 - UART console mode for real-time interaction with the application.
 - Automatic detection and listing of `.bin` files in the current directory.
-
+- **Command Protocol** [Command Protocol](../STM32_BOOTLOADER.md#implementation-details)
 ## Requirements
 - **Python Version**: 3.8 or higher.
 - **Libraries**:
   - `pyserial`: For UART communication.
   - `tqdm`: For progress bar visualization.
 - **Hardware**:
-  - STM32 development board with UART interface.
   - UART-to-USB adapter (e.g., FT232R).
 - **Firmware Files**: `.bin` files for flashing.
 
 ## Installation
 1. Install Python dependencies:
    ```bash
-   pip install pyserial tqdm
+   pip install -r requirements.txt
    ```
-2. Place the `fota_host.py` script in the project directory.
+2. Place the `FOTA.py` script in the project directory.
 3. Ensure `.bin` firmware files are available in the same directory or a specified path.
 
 ## Code Structure
 The Python script is organized as follows:
 
 - **Imports and Constants**:
-  - Standard libraries: `serial`, `os`, `struct`, `threading`, `argparse`, `re`, `tqdm`, `serial.tools.list_ports`.
   - `CRC_TABLE`: Precomputed CRC32 MPEG-2 table for data integrity checks.
 - **Utility Functions**:
   - `calculate_crc32(data)`: Computes CRC32 checksum for packets.
@@ -65,7 +61,7 @@ The Python script is organized as follows:
 ### Option Mode
 Run the script in interactive mode:
 ```bash
-python fota_host.py -mode opt
+python FOTA.py -mode opt
 ```
 - **Steps**:
   1. Select a COM port from the listed options.
@@ -73,7 +69,7 @@ python fota_host.py -mode opt
   3. Use the menu to perform operations:
      - Check connection.
      - Read chip ID.
-     - Select firmware bank (1 or 2 for H7).
+     - Select firmware (1 or 2 for dual-core).
      - Erase flash.
      - Select and upload a `.bin` file.
      - Set firmware version.
@@ -84,11 +80,12 @@ python fota_host.py -mode opt
 
 ### Sequential Mode
 Run the script with arguments for automated flashing:
-- For STM32F4/F7:
+
+- For single-core (STM32F407VGTx, STM32F765VGTx):
   ```bash
-  python fota_host.py -mode seq -port COM5 -mcu F4 -bin firmware1.bin -v 1.0.0
+  python FOTA.py -mode seq -port COM5 -mcu F4 -bin firmware1.bin -v 1.0.0
   ```
-- For STM32H7:
+- For dual-core (STM32H745ZIT3):
   ```bash
   python fota_host.py -mode seq -port COM5 -mcu H7 -bin1 firmware1.bin -bin2 firmware2.bin -v1 1.0.0 -v2 1.0.0
   ```
@@ -108,13 +105,11 @@ Run the script with arguments for automated flashing:
 
 ## Notes
 - The script uses a baud rate of 115200, matching the bootloader configuration.
-- Firmware uploads are chunked into 128-byte packets to optimize flash writing.
-- The UART console mode supports real-time interaction with the application (e.g., sending "reset" commands).
+- The UART console mode supports real-time interaction with the application (e.g., sending "help" commands).
 - CRC32 verification ensures data integrity during transmission.
+- In Sequential Mode, if version's argument is not given, the default version will be 1.0.0.
 
 ## Limitations
 - Requires manual COM port selection in Option Mode.
 - No support for non-UART communication (e.g., CAN, SPI).
 - Assumes `.bin` files are correctly aligned with the STM32 memory map.
-
-For more details on the bootloader and application, refer to `README_BOOTLOADER.md` and `README_APPLICATION.md`.
