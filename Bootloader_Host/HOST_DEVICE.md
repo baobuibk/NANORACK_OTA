@@ -6,12 +6,12 @@ The Python host script (`FOTA.py`) is a command-line tool for managing firmware 
 - **Two Operation Modes**:
   - **Option Mode**: Interactive menu for manual control of bootloader operations.
   - **Sequential Mode**: Automated firmware update via command-line arguments.
+- [Command Protocol](../STM32_BOOTLOADER.md#implementation-details)
 - Supports single-core (STM32F407VGTx, STM32F765VGTx) and dual-core (STM32H745ZIT3) MCUs.
 - Firmware version management (e.g., 1.0.0 format).
 - CRC32-based data integrity verification.
 - UART console mode for real-time interaction with the application.
 - Automatic detection and listing of `.bin` files in the current directory.
-- **Command Protocol** [Command Protocol](../STM32_BOOTLOADER.md#implementation-details)
 ## Requirements
 - **Python Version**: 3.8 or higher.
 - **Libraries**:

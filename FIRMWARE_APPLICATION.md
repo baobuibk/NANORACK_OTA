@@ -1,25 +1,25 @@
 # STM32 Application for FOTA
 
 ## Overview
-This document describes the requirements and structure for developing applications compatible with the STM32H745ZIT3 bootloader. A sample application is provided for both Cortex-M7 and Cortex-M4 cores (for STM32H7), demonstrating how to initialize the system and interact with the bootloader. The application must be compiled as a `.bin` file and flashed to the correct memory address (`FIRMWARE_BANK1_BASE` or `FIRMWARE_BANK2_BASE`).
+This document describes the requirements and structure for developing applications compatible with the STM32H745ZIT3 bootloader. A sample application is provided for both Cortex-M7 and Cortex-M4 cores, demonstrating how to initialize the system and interact with the bootloader.
 
 ## Features
-- **UART Interaction**: Supports console commands (e.g., "reset") via UART.
-- **Simple Demo**: Toggles GPIO pins to demonstrate functionality.
+- **UART Interaction**: Supports console commands (e.g., "help") via UART.
+- **Simple Demo**: Toggles GPIO pins. Additionally, a command-line interface is provided via UART to demonstrate functionality.
 
 ## Requirements
 - **Hardware**:
-  - STM32 development board (STM32F4, STM32F7, or STM32H7).
+  - STM32H745ZIT3.
   - UART interface for console output.
 - **Software**:
-  - STM32CubeIDE for compilation.
-  - STM32CubeProgrammer for generating `.bin` files.
-- **Bootloader**: Must be flashed and configured correctly.
+  - STM32CubeIDE for compilation and generating `.bin` files.
 
 ## Memory Map
 Applications must be linked to the following addresses:
 - **Firmware 1**: `0x08040000` (Bank 1, Sectors 2-5).
-- **Firmware 2** (STM32H7 only): `0x08140000` (Bank 2, Sectors 2-5).
+- **Firmware 2**: `0x08140000` (Bank 2, Sectors 2-5).
+
+For detail, you can see this: [Memory Map](../STM32_BOOTLOADER.md#memory-map)
 
 The linker script must set the vector table to these addresses, and the `.bin` file must start at the specified address.
 
@@ -36,16 +36,65 @@ The provided sample application includes:
 ### Key Code Snippets
 #### Cortex-M7 (`main_m7.c`)
 ```c
-int main(void) {
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+/* USER CODE BEGIN Boot_Mode_Sequence_0 */
+
+/* USER CODE END Boot_Mode_Sequence_0 */
+
+  /* MPU Configuration--------------------------------------------------------*/
   MPU_Config();
+
+/* USER CODE BEGIN Boot_Mode_Sequence_1 */
+
+/* USER CODE END Boot_Mode_Sequence_1 */
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
   SystemClock_Config();
+/* USER CODE BEGIN Boot_Mode_Sequence_2 */
+#ifdef USE_CORE_M4
+  __HAL_RCC_HSEM_CLK_ENABLE();
+  HAL_HSEM_FastTake(1);
+
+  while(!HAL_HSEM_IsSemTaken(0));
+  HAL_HSEM_Release(0, 0);
+  while (!__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY));
+#endif
+/* USER CODE END Boot_Mode_Sequence_2 */
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  /* USER CODE BEGIN 2 */
   command_init();
-  while (1) {
-    SchedulerRun();
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+	  SchedulerRun();
   }
+  /* USER CODE END 3 */
 }
 ```
 - Initializes peripherals and runs the scheduler.
@@ -53,15 +102,56 @@ int main(void) {
 
 #### Cortex-M4 (`main_m4.c`)
 ```c
-int main(void) {
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+/* USER CODE BEGIN Boot_Mode_Sequence_1 */
+#ifdef USE_CORE_M4
   __HAL_RCC_HSEM_CLK_ENABLE();
   HAL_HSEM_FastTake(0);
+#else
+  __HAL_RCC_HSEM_CLK_ENABLE();
+  HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+  HAL_PWREx_ClearPendingEvent();
+  HAL_PWREx_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFE, PWR_D2_DOMAIN);
+  __HAL_HSEM_CLEAR_FLAG(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+#endif
+/* USER CODE END Boot_Mode_Sequence_1 */
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  while (1) {
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_7);
-    HAL_Delay(100);
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_7);
+	  HAL_Delay(100);
+
   }
+  /* USER CODE END 3 */
 }
 ```
 - Synchronizes with M7 using HSEM.
@@ -71,31 +161,46 @@ int main(void) {
 To ensure the application works with the bootloader, follow these guidelines:
 
 1. **Memory Layout**:
-   - Set the linker script to place the vector table at `FIRMWARE_BANK1_BASE` (`0x08040000`) or `FIRMWARE_BANK2_BASE` (`0x08140000`).
-   - Example linker script (STM32CubeIDE):
+   - Set the linker script to place the vector table at `FIRMWARE_BANK1_BASE` (`0x08040000`) and `FIRMWARE_BANK2_BASE` (`0x08140000`).
+   - Example linker script for core M7 (STM32CubeIDE):
+      ```ld
+      MEMORY
+      {
+        RAM_D1 (xrw)   : ORIGIN = 0x24000000, LENGTH =  512K
+        FLASH  (rx)    : ORIGIN = 0x08040000, LENGTH = 512K
+        DTCMRAM (xrw)  : ORIGIN = 0x20000000, LENGTH = 128K
+        RAM_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 288K
+        RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K
+        ITCMRAM (xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
+      }
+      ```
+      Modify the linker script to configure the address and size of the FLASH memory. The origin address is set to `FIRMWARE_BANK1_BASE`, spanning 4 sectors (sectors 2 to 5), with a total capacity of 512KB (as per the datasheet: 128KB x 4).
+
+   - Example linker script for core M4 (STM32CubeIDE):
      ```ld
-     MEMORY {
-       FLASH (rx) : ORIGIN = 0x08040000, LENGTH = 512K
-       RAM (xrw)  : ORIGIN = 0x20000000, LENGTH = 128K
-     }
+      MEMORY
+      {
+        FLASH (rx)     : ORIGIN = 0x08140000, LENGTH = 512K
+        RAM (xrw)      : ORIGIN = 0x10000000, LENGTH = 288K
+      }
      ```
-   - Set `SCB->VTOR = FIRMWARE_BANK1_BASE` in the application if needed.
+     For the Cortex-M4 core, similar to the Cortex-M7 core, the linker script must be modified to configure the address and size of the FLASH memory. The origin address is set to `FIRMWARE_BANK2_BASE`, spanning 4 sectors, with a total capacity of 512KB (128KB x 4).
 
-2. **Vector Table**:
-   - Ensure the vector table includes a valid reset handler.
-   - The bootloader jumps to the address stored at `app_address + 4` (reset handler).
-
-3. **System Initialization**:
+2. **System Initialization**:
    - Initialize the system clock, peripherals, and HAL in `main()`.
-   - For STM32H7, the Cortex-M4 must synchronize with Cortex-M7 using HSEM:
+   - For STM32H745ZIT3, the Cortex-M4 must synchronize with Cortex-M7 using HSEM:
      ```c
      __HAL_RCC_HSEM_CLK_ENABLE();
-     HAL_HSEM_FastTake(0); // Take semaphore for M4
+     HAL_HSEM_FastTake(0); 
+     ```
+     According to the sample application, to use both cores, you only need to add the following code:
+     ```c
+     #define USE_CORE_M4
      ```
 
-4. **UART Support**:
-   - If the application uses UART (e.g., for console), configure it to match the bootloader (115200 baud, 8-N-1, PA2: TX, PD6: RX).
-   - Implement command handling (e.g., "reset" to return to bootloader mode).
+3. **UART Support**:
+   - If the application uses UART (e.g., for console), configure it to match the bootloader (115200 baud, 8-N-1).
+   - Implement command handling (e.g., "reset" to return to bootloader mode) or use hardware and sortware reset to boot to bootloader mode.
 
 5. **Reset Command**:
    - To return to bootloader mode, implement a UART command (e.g., "reset"):
@@ -107,10 +212,7 @@ To ensure the application works with the bootloader, follow these guidelines:
    - The bootloader will handle the reset and enter bootloader mode if a connection is detected.
 
 6. **Binary Generation**:
-   - Compile the application and generate a `.bin` file using STM32CubeProgrammer or `objcopy`:
-     ```bash
-     arm-none-eabi-objcopy -O binary app.elf app.bin
-     ```
+   - Compile the application and generate a `.bin` file using STM32CubeIDE.
    - Ensure the `.bin` file starts at the correct address (`0x08040000` or `0x08140000`).
 
 ## Compilation and Flashing
@@ -125,16 +227,14 @@ To ensure the application works with the bootloader, follow these guidelines:
 4. **Flash via FOTA**:
    - Use the Python host script to upload the `.bin` file:
      ```bash
-     python fota_host.py -mode seq -port COM5 -mcu H7 -bin1 app.bin -v 1.0.0
+     python FOTA.py -mode seq -port COM5 -mcu H7 -bin1 app1.bin -v1 1.0.0 -bin2 app2.bin -v2 1.0.0
      ```
 
 ## Notes
 - The application must not overwrite the bootloader or metadata regions.
-- For STM32H7, ensure both M7 and M4 applications are synchronized via HSEM.
+- Both M7 and M4 applications are synchronized via HSEM.
 - Test the application with the UART console to verify functionality.
 
 ## Limitations
 - The sample application is minimal and may need expansion for real-world use.
 - No support for secure boot or encrypted firmware.
-
-For details on the Python host and bootloader, refer to `README_HOST.md` and `README_BOOTLOADER.md`.
