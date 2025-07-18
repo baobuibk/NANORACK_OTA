@@ -1,0 +1,6 @@
+../Source/bootloader/bootloader.c:577:17:Firmware_CRC_Verification	4	static
+../Source/bootloader/bootloader.c:702:28:Flash_Write_All_Metadata	144	static
+../Source/bootloader/bootloader.c:203:7:Jump_To_App	24	static,ignoring_inline_asm
+../Source/bootloader/bootloader.c:79:6:BL_UART_Fetch_Host_Command	96	static,ignoring_inline_asm
+../Source/bootloader/bootloader.c:528:6:Bootloader_CRC_Verify_Seq	4	static
+../Source/bootloader/bootloader.c:789:6:Firmware_Check_Available	48	static

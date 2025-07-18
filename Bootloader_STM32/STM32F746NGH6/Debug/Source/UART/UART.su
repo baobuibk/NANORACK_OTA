@@ -1,0 +1,10 @@
+../Source/UART/UART.c:21:6:USART6_IRQ	8	static,ignoring_inline_asm
+../Source/UART/UART.c:49:6:USART6_init	8	static,ignoring_inline_asm
+../Source/UART/UART.c:55:6:USART6_send_char	16	static,ignoring_inline_asm
+../Source/UART/UART.c:62:6:USART6_send_string	8	static
+../Source/UART/UART.c:68:6:USART6_send_array	16	static
+../Source/UART/UART.c:75:9:USART6_rx_count	8	static
+../Source/UART/UART.c:79:10:USART6_read_char	8	static
+../Source/UART/UART.c:87:6:USART6_close	8	static
+../Source/UART/UART.c:93:6:USART6_SetBaudRate	48	static
+../Source/UART/UART.c:110:24:uart_get_USART6_rx_buffer_address	0	static

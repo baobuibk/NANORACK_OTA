@@ -1,0 +1,6 @@
+../Source/UART/RingBuffer.c:11:6:rbuffer_init	0	static,ignoring_inline_asm
+../Source/UART/RingBuffer.c:19:9:rbuffer_count	0	static
+../Source/UART/RingBuffer.c:23:6:rbuffer_full	0	static
+../Source/UART/RingBuffer.c:27:6:rbuffer_empty	0	static
+../Source/UART/RingBuffer.c:31:6:rbuffer_insert	0	static,ignoring_inline_asm
+../Source/UART/RingBuffer.c:39:6:rbuffer_remove	0	static,ignoring_inline_asm
