@@ -107,12 +107,7 @@ class STM32Bootloader:
         self.serial = None
         self.firmware_number = None  # Store firmware selection
         self.NOT_ACKNOWLEDGE = 0xAB
-        self.JUMP_SUCCEEDED = 0x01
-        self.ERASE_SUCCEEDED = 0x01
-        self.WRITE_SUCCEEDED = 0x01
-        self.RESET_SUCCEEDED = 0x01
-        self.READ_VERSION_SUCCEEDED = 0x01
-        self.WRITE_VERSION_SUCCEEDED = 0x01
+        self.FOTA_SUCCEEDED = 0
 
     def read_firmware_detail(self):
         """Read Firmware Version (0x16)"""
@@ -127,12 +122,11 @@ class STM32Bootloader:
         crc = calculate_crc32(packet[:3])
         struct.pack_into('<I', packet, 3, crc)
         
-        response = self.send_packet(packet, 7, 10)  # Expecting 1 status byte + 1 avaiable + 3 version bytes
-        if response and response[0] == self.READ_VERSION_SUCCEEDED and len(response) == 7:
+        response = self.send_packet(packet, 6, 10)  # Expecting 1 status byte + 3 version bytes
+        if response and response[0] == self.FOTA_SUCCEEDED and len(response) == 6:
             print("   \033[32mDone ✓\033[0m")
             print(f"Firmware {self.firmware_number} Version: {response[1]}.{response[2]}.{response[3]}")
-            print(f"Firmware {self.firmware_number} Size: {(response[5]<< 8) | response[6]}KB")
-            print(f"Firmware {self.firmware_number} Status: {'Available' if response[4] != 0 else 'Unavailable'}")
+            print(f"Firmware {self.firmware_number} Size: {(response[4]<< 8) | response[5]}KB")
             return True
         print("   \033[31mFailed ✗\033[0m")# to read firmware data!")
         return False
@@ -157,7 +151,7 @@ class STM32Bootloader:
         struct.pack_into('<I', packet, 6, crc)
         
         response = self.send_packet(packet, 1, 20)
-        if response and response[0] == self.WRITE_VERSION_SUCCEEDED:
+        if response and response[0] == self.FOTA_SUCCEEDED:
             print("   \033[32mDone ✓\033[0m")#Write Firmware Version Successful")
             return True
         print("   \033[31mFailed ✗\033[0m")#Write Firmware Version Failed")
@@ -209,10 +203,23 @@ class STM32Bootloader:
     def check_connection(self):
         """Send 'bootmode' command to bootloader to jump to boot mode"""
         print("\rChecking connection...", end='')
-        packet = bytearray([7, ord('b'), ord('t'), ord('m'), ord('o'), ord('d'), ord('e'), ord('\r')])
+        
+        packet = bytearray(6)
+        packet[0] = 5
+        packet[1] = 0x15
+        crc = calculate_crc32(packet[:2])
+        struct.pack_into('<I', packet, 2, crc)
+        response = self.send_packet(packet, 3, 3)
+        if response and response[0] == self.FOTA_SUCCEEDED and response[1] == ord('O') and response[2] == ord('K'):
+            print("   \033[32mDone ✓\033[0m")
+            time.sleep(0.6)
+            return True
+        '''        
+        # If MCU in App mode, call Reset to boot to bootloader mode
+        packet_str = bytearray([ord('\r'), ord('r'), ord('e'), ord('s'), ord('e'), ord('t'), ord('\r')])
         self.serial.reset_input_buffer()
         self.serial.reset_output_buffer()
-        self.serial.write(packet)
+        self.serial.write(packet_str)
         start_time = time.time()
         response = bytearray()
         while time.time() - start_time < 5:
@@ -222,11 +229,18 @@ class STM32Bootloader:
                 for i in range(len(response)):
                     if i + 2 < len(response):  # Đảm bảo đủ 3 byte
                         if (response[i] == 1 and response[i + 1] == ord('O') and response[i + 2] == ord('K')):
-                            print("   \033[32mDone ✓\033[0m")
+                            response = bytearray()
+                            response = self.send_packet(packet, 3, 3)
+                            if response and response[0] == self.FOTA_SUCCEEDED and response[1] == ord('O') and response[2] == ord('K'):
+                                print("   \033[32mDone ✓\033[0m")
+                                time.sleep(0.6)
+                                return True
+                            print("   \033[31mFailed ✗\033[0m")
                             time.sleep(0.6)
-                            return True
+                            return False
             
             time.sleep(0.01)  # Ngủ ngắn để giảm tải CPU
+        '''
         print("   \033[31mFailed ✗\033[0m")
         #print("   \033[32mDone ✓\033[0m")
         #time.sleep(0.6)
@@ -269,7 +283,7 @@ class STM32Bootloader:
         struct.pack_into('<I', packet, 3, crc)
         print(f"\rErasing firmware {self.firmware_number}...", end='')
         response = self.send_packet(packet, 1, 20)
-        if response and response[0] == self.ERASE_SUCCEEDED:
+        if response and response[0] == self.FOTA_SUCCEEDED:
             print("   \033[32mDone ✓\033[0m")#Erase Flash Successful")
             return True
         print("   \033[31mFailed ✗\033[0m")
@@ -318,7 +332,7 @@ class STM32Bootloader:
             #print(f"Send frame {frame_index + 1}/{total_frames}, Size: {actual_chunk_size} bytes")
 
             response = self.send_packet(packet, 1, 20)
-            if not response or response[0] != self.WRITE_SUCCEEDED:
+            if not response or response[0] != self.FOTA_SUCCEEDED:
                 print("\r\n\033[31mUpload failed!\033[0m")
                 return False
 
@@ -339,60 +353,44 @@ class STM32Bootloader:
         crc = calculate_crc32(packet[:2])  # CRC trên 2 byte đầu
         struct.pack_into('<I', packet, 2, crc)  # Nhúng CRC vào packet
         response = self.send_packet(packet, 1, 5)
-        if response and response[0] == self.JUMP_SUCCEEDED:
+        if response and response[0] == self.FOTA_SUCCEEDED:
             print("   \033[32mDone ✓\033[0m")
             return True
         print("   \033[31mFailed ✗\033[0m")
         return False
     
-    def reset_chip(self):
-        """Reset STM32 chip (0x15)"""
-        print("Resetting STM32 chip...")
-        packet = bytearray(6)
-        packet[0] = 5
-        packet[1] = 0x15
-        crc = calculate_crc32(packet[:2])
-        struct.pack_into('<I', packet, 2, crc)
-        response = self.send_packet(packet, 1, 1)
-        if response and response[0] != self.NOT_ACKNOWLEDGE:
-            print("STM32 Reset Successful")
-            return True
-        print("STM32 Reset Failed")
-        return False
 
     def uart_terminal(self):
-    
+        """Real-time UART terminal mode"""
+        if not self.serial:
+            print("UART is not connected!")
+            return
         print("STM32 Console. Enter commands (Ctrl+C to exit).")
         self.serial.reset_input_buffer()
         self.serial.reset_output_buffer()
+        stop_event = threading.Event()
+        def read_uart():
+            """Thread to continuously read UART data"""
+            while not stop_event.is_set():
+                if self.serial.in_waiting:
+                    data = self.serial.read(self.serial.in_waiting).decode(errors='ignore')
+                    print(data.strip() + ' ', end='', flush=True)
+                time.sleep(0.1)
+
+        uart_thread = threading.Thread(target=read_uart, daemon=True)
+        uart_thread.start()
         try:
             while True:
-                # Nhập lệnh từ người dùng
-                command = input(' ').strip()     
-                # Gửi lệnh với \r
+                command = input()  # Get user input
+                if command.lower() == "exit":
+                    stop_event.set()
+                    break  # Exit terminal mode
                 self.serial.write((command + '\r').encode('utf-8'))
-                
-                # Đợi và nhận phản hồi
-                time.sleep(0.1)  # Đợi 100ms để STM32 xử lý
-                response = ""
-                start_time = time.time()
-                while time.time() - start_time < 1:  # Timeout 1 giây
-                    if self.serial.in_waiting:
-                        response += self.serial.read(self.serial.in_waiting).decode('utf-8', errors='ignore')
-                        if ">" in response:  # Dừng khi nhận được dấu nhắc
-                            break
-                    time.sleep(0.01)
-                
-                # Hiển thị phản hồi, loại bỏ dấu nhắc "> "
-                if response:
-                    print(response.strip(command).rstrip(), end='')
-                self.serial.reset_input_buffer()
-                self.serial.reset_output_buffer()
-        
+                #self.send_packet((command + '\r').encode('utf-8'), 0, 0)  # Send input over UART
         except KeyboardInterrupt:
-            return
-        finally:
-            return
+            stop_event.set()
+            print("\nExiting STM32 Console mode...")
+        
 
     def close(self):
         """Close the serial connection"""
@@ -488,10 +486,7 @@ def process_opt_mode():
                     continue
                 
             if choice == "1":
-                if bootloader.check_connection():
-                    None
-                if bootloader.check_connection():
-                    connection_checked = True      
+                    connection_checked = bootloader.check_connection()      
             elif choice == "2":
                 bootloader.read_chip_id()
             elif choice == "3":
@@ -596,9 +591,7 @@ def process_seq_mode(args):
     if not bootloader.check_connection():
         bootloader.close()
         sys.exit(1)
-    if not bootloader.check_connection():
-        bootloader.close()
-        sys.exit(1)
+        
     time.sleep(0.2)
     '''Step 2: Select firmware 1'''
     bootloader.select_firmware(1)
