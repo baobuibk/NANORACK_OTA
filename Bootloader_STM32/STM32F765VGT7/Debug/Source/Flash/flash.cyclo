@@ -1,0 +1,7 @@
+../Source/Flash/flash.c:9:6:FLASH_Unlock	1
+../Source/Flash/flash.c:17:6:FLASH_Lock	1
+../Source/Flash/flash.c:28:21:FLASH_Write_64Bit	4
+../Source/Flash/flash.c:51:21:FLASH_Erase_Sectors	4
+../Source/Flash/flash.c:84:21:FLASH_Erase_All	3
+../Source/Flash/flash.c:115:21:FLASH_Erase_Both_Banks	1
+../Source/Flash/flash.c:128:21:FLASH_Write_Data	7
