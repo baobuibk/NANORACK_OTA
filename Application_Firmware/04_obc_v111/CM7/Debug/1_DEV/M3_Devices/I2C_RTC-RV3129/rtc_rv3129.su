@@ -1,0 +1,7 @@
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:29:23:bcd2dec	16	static
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:34:23:dec2bcd	16	static
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:40:23:RV3129_Driver_Init	16	static
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:53:23:RV3129_GetHandle	4	static
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:58:16:RV3129_GetTime	32	static
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:79:16:RV3129_SetTime	32	static
+../1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.c:94:16:RV3129_GetTemp	32	static

@@ -1,0 +1,7 @@
+../1_DEV/M2_System/Dmesg/dmesg.c:31:6:Dmesg_Init	8	static
+../1_DEV/M2_System/Dmesg/dmesg.c:41:13:dmesg_write	32	static
+../1_DEV/M2_System/Dmesg/dmesg.c:75:6:Dmesg_HardWrite	24	static
+../1_DEV/M2_System/Dmesg/dmesg.c:80:6:Dmesg_SafeWrite	16	static
+../1_DEV/M2_System/Dmesg/dmesg.c:87:13:dmesg_print_entry	160	static
+../1_DEV/M2_System/Dmesg/dmesg.c:106:6:Dmesg_GetLogs	24	static
+../1_DEV/M2_System/Dmesg/dmesg.c:118:6:Dmesg_GetLatestN	40	static

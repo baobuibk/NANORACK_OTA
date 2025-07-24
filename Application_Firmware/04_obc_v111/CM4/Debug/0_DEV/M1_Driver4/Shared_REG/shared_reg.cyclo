@@ -1,0 +1,4 @@
+../0_DEV/M1_Driver4/Shared_REG/shared_reg.c:13:6:SharedREG_Write	4
+../0_DEV/M1_Driver4/Shared_REG/shared_reg.c:24:9:SharedREG_Read	3
+../0_DEV/M1_Driver4/Shared_REG/shared_reg.c:33:6:SharedREG_Clear	3
+../0_DEV/M1_Driver4/Shared_REG/shared_reg.c:43:6:SharedREG_Init	2

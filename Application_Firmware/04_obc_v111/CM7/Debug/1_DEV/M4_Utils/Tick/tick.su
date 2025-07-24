@@ -1,0 +1,4 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_tim.h:4203:22:LL_TIM_ClearFlag_UPDATE	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_tim.h:4214:26:LL_TIM_IsActiveFlag_UPDATE	16	static
+../1_DEV/M4_Utils/Tick/tick.c:16:6:TickTimer_IRQHandler	8	static
+../1_DEV/M4_Utils/Tick/tick.c:24:10:Utils_GetTick	4	static

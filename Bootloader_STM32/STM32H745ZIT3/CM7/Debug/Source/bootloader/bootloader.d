@@ -43,8 +43,6 @@ Source/bootloader/bootloader.o: ../Source/bootloader/bootloader.c \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dma.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dmamux.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_exti.h \
- ../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h745xx.h \
- D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/Flash/flash.h \
  D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/UART.h \
  D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/RingBuffer.h \
  ../../Drivers/CMSIS/Include/cmsis_gcc.h
@@ -93,8 +91,6 @@ Source/bootloader/bootloader.o: ../Source/bootloader/bootloader.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dma.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dmamux.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_exti.h:
-../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h745xx.h:
-D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/Flash/flash.h:
 D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/UART.h:
 D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/RingBuffer.h:
 ../../Drivers/CMSIS/Include/cmsis_gcc.h:

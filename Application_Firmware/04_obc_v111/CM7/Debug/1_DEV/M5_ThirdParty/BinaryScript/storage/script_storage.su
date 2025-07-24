@@ -1,0 +1,14 @@
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:69:17:ScriptStorage_CalculateCRC16	32	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:98:17:ScriptStorage_GetFramAddress	16	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:117:17:ScriptStorage_GetMagicCode	16	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:136:20:ScriptStorage_GetTypeName	16	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:158:7:ScriptStorage_Init	8	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:193:23:ScriptStorage_SaveScript	56	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:275:23:ScriptStorage_LoadScript	72	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:373:7:ScriptStorage_ScriptExists	40	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:409:23:ScriptStorage_EraseScript	32	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:441:9:ScriptStorage_AutoLoadScripts	5152	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:512:6:ScriptStorage_GetStatus	32	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:534:6:ScriptStorage_PrintStatus	48	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:562:6:ScriptStorage_SetAutoLoadEnabled	16	static
+../1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.c:572:6:ScriptStorage_SetAutoLoadDelay	16	static

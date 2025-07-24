@@ -46,8 +46,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/RingBuffer.h \
  ../../Drivers/CMSIS/Include/cmsis_gcc.h \
  D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/bootloader/bootloader.h \
- ../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h745xx.h \
- D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/Flash/flash.h \
  D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/scheduler/scheduler.h
 ../Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
@@ -97,6 +95,4 @@ D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/UART.h:
 D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/UART/RingBuffer.h:
 ../../Drivers/CMSIS/Include/cmsis_gcc.h:
 D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/bootloader/bootloader.h:
-../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h745xx.h:
-D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/Flash/flash.h:
 D:/WorkSpace/STM32\ PRJ/OBC_FOTA/CM7/Source/scheduler/scheduler.h:

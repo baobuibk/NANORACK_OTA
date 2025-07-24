@@ -1,0 +1,3 @@
+../1_DEV/M0_App/OS/rtos.c:16:6:OBC_RTOS_Start	1
+../1_DEV/M0_App/OS/rtos.c:24:6:vApplicationStackOverflowHook	1
+../1_DEV/M0_App/OS/rtos.c:31:6:vApplicationMallocFailedHook	1

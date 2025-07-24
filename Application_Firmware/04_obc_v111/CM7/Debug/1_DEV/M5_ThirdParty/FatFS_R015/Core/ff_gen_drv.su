@@ -1,0 +1,6 @@
+../1_DEV/M5_ThirdParty/FatFS_R015/Core/ff_gen_drv.c:32:18:FATFS_GetDisk	4	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Core/ff_gen_drv.c:48:9:FATFS_LinkDriverEx	32	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Core/ff_gen_drv.c:77:9:FATFS_LinkDriver	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Core/ff_gen_drv.c:89:9:FATFS_UnLinkDriverEx	24	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Core/ff_gen_drv.c:115:9:FATFS_UnLinkDriver	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Core/ff_gen_drv.c:125:9:FATFS_GetAttachedDriversNbr	4	static

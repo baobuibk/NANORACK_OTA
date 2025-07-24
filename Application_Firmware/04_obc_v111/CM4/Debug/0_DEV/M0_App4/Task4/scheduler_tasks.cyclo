@@ -1,0 +1,10 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:884:22:LL_GPIO_SetOutputPin	1
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:913:22:LL_GPIO_ResetOutputPin	1
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:49:13:BlinkLed1_Task	2
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:64:13:BlinkLed2_Task	1
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:79:13:CDC_RxPoll_Task	3
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:91:13:CDC_TxPoll_Task	5
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:116:13:USB_Check_Task	3
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:130:13:UART_Port_RxPoll_Task	2
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:147:6:SchedulerTasks_Create	3
+../0_DEV/M0_App4/Task4/scheduler_tasks.c:159:12:SchedulerTasks_RegisterTask	3

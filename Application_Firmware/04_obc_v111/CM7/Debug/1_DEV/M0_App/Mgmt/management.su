@@ -1,0 +1,7 @@
+../1_DEV/M0_App/Mgmt/management.c:33:16:Mgmt_HardwareSystemPreparing	16	static
+../1_DEV/M0_App/Mgmt/management.c:57:6:Mgmt_SystemStart	8	static
+../1_DEV/M0_App/Mgmt/management.c:68:16:Mgmt_SystemInitStepZero	48	static
+../1_DEV/M0_App/Mgmt/management.c:100:16:Mgmt_SystemInitStepOne	16	static
+../1_DEV/M0_App/Mgmt/management.c:129:16:Mgmt_SystemInitStepTwo	16	static
+../1_DEV/M0_App/Mgmt/management.c:156:16:Mgmt_SystemInitFinal	8	static
+../1_DEV/M0_App/Mgmt/management.c:164:16:Mgmt_GetSystemStatus	16	static

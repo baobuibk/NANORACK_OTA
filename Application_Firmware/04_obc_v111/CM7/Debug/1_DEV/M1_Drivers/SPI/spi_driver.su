@@ -1,0 +1,12 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:578:26:LL_SPI_IsEnabled	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:1698:26:LL_SPI_IsActiveFlag_RXP	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:1830:26:LL_SPI_IsActiveFlag_TXC	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:1841:26:LL_SPI_IsActiveFlag_RXWNE	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:2450:25:LL_SPI_ReceiveData8	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:2461:26:LL_SPI_ReceiveData16	24	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:2489:22:LL_SPI_TransmitData8	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:2501:22:LL_SPI_TransmitData16	24	static
+../1_DEV/M1_Drivers/SPI/spi_driver.c:13:16:SPI_Driver_Transmit8	32	static
+../1_DEV/M1_Drivers/SPI/spi_driver.c:39:16:SPI_Driver_Transmit16	32	static
+../1_DEV/M1_Drivers/SPI/spi_driver.c:65:16:SPI_Driver_Write	24	static
+../1_DEV/M1_Drivers/SPI/spi_driver.c:81:16:SPI_Driver_TransmitArray	32	static

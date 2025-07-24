@@ -28,7 +28,6 @@ Common/Src \
 Core/Src \
 Core/Startup \
 Drivers/STM32H7xx_HAL_Driver \
-Source/Flash \
 Source/UART \
 Source/bootloader \
 Source/scheduler \

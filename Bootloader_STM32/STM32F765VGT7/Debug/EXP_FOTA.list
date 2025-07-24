@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 0000002e  00000000  00000000  00006054  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000aeb7  00000000  00000000  00006082  2**0
+ 12 .debug_info   0000ae58  00000000  00000000  00006082  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002b1d  00000000  00000000  00010f39  2**0
+ 13 .debug_abbrev 00002b02  00000000  00000000  00010eda  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000c60  00000000  00000000  00013a58  2**3
+ 14 .debug_aranges 00000c58  00000000  00000000  000139e0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000918  00000000  00000000  000146b8  2**0
+ 15 .debug_rnglists 00000912  00000000  00000000  00014638  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0002997b  00000000  00000000  00014fd0  2**0
+ 16 .debug_macro  0002997b  00000000  00000000  00014f4a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000efe9  00000000  00000000  0003e94b  2**0
+ 17 .debug_line   0000efab  00000000  00000000  0003e8c5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000f8c87  00000000  00000000  0004d934  2**0
+ 18 .debug_str    000f8c65  00000000  00000000  0004d870  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001465bb  2**0
+ 19 .comment      00000043  00000000  00000000  001464d5  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003108  00000000  00000000  00146600  2**2
+ 20 .debug_frame  000030e0  00000000  00000000  00146518  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004e  00000000  00000000  00149708  2**0
+ 21 .debug_line_str 0000004e  00000000  00000000  001495f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -12042,7 +12042,6 @@ static uint8_t Bootloader_CRC_Verify(uint8_t *pData, uint32_t Data_Len, uint32_t
  80047ac:	40023000 	.word	0x40023000
 
 080047b0 <Bootloader_Send_NACK>:
-}
 
 /**
  * Gửi NACK về host

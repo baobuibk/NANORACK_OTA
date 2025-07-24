@@ -1,0 +1,7 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usart.h:3009:26:LL_USART_IsActiveFlag_TC	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usart.h:3024:26:LL_USART_IsActiveFlag_TXE_TXFNF	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usart.h:4275:22:LL_USART_TransmitData8	1
+../1_DEV/M2_System/SysLog/syslog.c:17:20:syslog_level_to_str	7
+../1_DEV/M2_System/SysLog/syslog.c:30:6:Sys_Boardcast	9
+../1_DEV/M2_System/SysLog/syslog.c:76:6:Sys_Debugcast	6
+../1_DEV/M2_System/SysLog/syslog.c:118:6:syslog_log	2

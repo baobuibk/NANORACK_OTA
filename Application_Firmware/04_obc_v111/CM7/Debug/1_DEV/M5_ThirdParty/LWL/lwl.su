@@ -1,0 +1,5 @@
+../1_DEV/M5_ThirdParty/LWL/lwl.c:32:16:calculate_crc8	24	static
+../1_DEV/M5_ThirdParty/LWL/lwl.c:96:6:LWL_Init	4	static
+../1_DEV/M5_ThirdParty/LWL/lwl.c:100:6:LWL_Log	128	dynamic
+../1_DEV/M5_ThirdParty/LWL/lwl.c:151:6:LWL_Enable	16	static
+../1_DEV/M5_ThirdParty/LWL/lwl.c:159:9:LWL_TestLogs	8	static

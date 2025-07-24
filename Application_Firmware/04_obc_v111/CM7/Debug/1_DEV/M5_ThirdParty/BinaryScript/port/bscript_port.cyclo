@@ -1,0 +1,2 @@
+../1_DEV/M5_ThirdParty/BinaryScript/port/bscript_port.c:6:10:BScript_GetTick	1
+../1_DEV/M5_ThirdParty/BinaryScript/port/bscript_port.c:10:6:BScript_Delayms	1

@@ -1,0 +1,5 @@
+../1_DEV/M5_ThirdParty/ModFSP/modfsp_port.c:12:6:MODFSP_SendByte	16	static
+../1_DEV/M5_ThirdParty/ModFSP/modfsp_port.c:18:5:MODFSP_ReadByte	24	static
+../1_DEV/M5_ThirdParty/ModFSP/modfsp_port.c:33:10:MODFSP_GetSpaceForTx	8	static
+../1_DEV/M5_ThirdParty/ModFSP/modfsp_port.c:38:10:MODFSP_GetTick	8	static
+../1_DEV/M5_ThirdParty/ModFSP/modfsp_port.c:49:6:MODFSP_Log	272	static

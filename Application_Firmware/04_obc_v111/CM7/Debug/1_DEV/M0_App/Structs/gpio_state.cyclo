@@ -1,0 +1,3 @@
+../1_DEV/M0_App/Structs/gpio_state.c:13:6:toCM4_Init	1
+../1_DEV/M0_App/Structs/gpio_state.c:19:6:toCM4_SetState	1
+../1_DEV/M0_App/Structs/gpio_state.c:44:15:toCM4_GetState	1

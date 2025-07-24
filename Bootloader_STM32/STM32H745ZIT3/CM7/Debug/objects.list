@@ -29,7 +29,6 @@
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_rcc.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_usart.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_ll_utils.o"
-"./Source/Flash/flash.o"
 "./Source/UART/RingBuffer.o"
 "./Source/UART/UART.o"
 "./Source/bootloader/bootloader.o"

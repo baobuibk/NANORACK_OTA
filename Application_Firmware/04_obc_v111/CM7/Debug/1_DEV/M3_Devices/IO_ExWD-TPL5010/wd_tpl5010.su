@@ -1,0 +1,5 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:884:22:LL_GPIO_SetOutputPin	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:913:22:LL_GPIO_ResetOutputPin	16	static
+../1_DEV/M3_Devices/IO_ExWD-TPL5010/wd_tpl5010.c:14:16:Watchdog_Device_Init	8	static
+../1_DEV/M3_Devices/IO_ExWD-TPL5010/wd_tpl5010.c:21:6:Watchdog_Device_Update	8	static
+../1_DEV/M3_Devices/IO_ExWD-TPL5010/wd_tpl5010.c:35:20:Watchdog_Device_GetState	4	static

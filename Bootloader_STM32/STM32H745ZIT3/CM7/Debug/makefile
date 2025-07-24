@@ -12,7 +12,6 @@ RM := rm -rf
 -include Source/scheduler/subdir.mk
 -include Source/bootloader/subdir.mk
 -include Source/UART/subdir.mk
--include Source/Flash/subdir.mk
 -include Drivers/STM32H7xx_HAL_Driver/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk

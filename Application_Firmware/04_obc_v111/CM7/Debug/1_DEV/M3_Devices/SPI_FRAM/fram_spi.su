@@ -1,0 +1,9 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:884:22:LL_GPIO_SetOutputPin	16	static
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:913:22:LL_GPIO_ResetOutputPin	16	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:22:25:FRAM_SPI_GetHandle	4	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:27:6:FRAM_SPI_Driver_Init	24	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:36:16:FRAM_SPI_WriteEnable	24	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:47:16:FRAM_SPI_WriteDisable	24	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:58:16:FRAM_SPI_WriteMem	40	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:103:16:FRAM_SPI_ReadMem	40	static
+../1_DEV/M3_Devices/SPI_FRAM/fram_spi.c:143:16:FRAM_SPI_ReadID	32	static

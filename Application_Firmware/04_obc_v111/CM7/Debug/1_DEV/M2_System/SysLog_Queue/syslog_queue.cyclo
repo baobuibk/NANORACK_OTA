@@ -1,0 +1,4 @@
+../1_DEV/M2_System/SysLog_Queue/syslog_queue.c:30:20:syslog_level_to_str	7
+../1_DEV/M2_System/SysLog_Queue/syslog_queue.c:43:6:SysLogQueue_Init	1
+../1_DEV/M2_System/SysLog_Queue/syslog_queue.c:48:6:SysLog_Enqueue	2
+../1_DEV/M2_System/SysLog_Queue/syslog_queue.c:60:6:SysLog_Task	3

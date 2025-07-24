@@ -1,0 +1,4 @@
+../1_DEV/M5_ThirdParty/FatFS_R015/Option/syscall.c:79:5:ff_mutex_create	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Option/syscall.c:120:6:ff_mutex_delete	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Option/syscall.c:152:5:ff_mutex_take	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Option/syscall.c:185:6:ff_mutex_give	16	static

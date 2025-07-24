@@ -35,7 +35,7 @@ void
 SchedulerSysTickIntHandler(void)
 {
     g_ui32SchedulerTickCount++;
-    if(!check_connection)	boot_timeout++;
+    if(boot_timeout)	boot_timeout--;
 }
 
 //*****************************************************************************

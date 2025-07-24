@@ -70,6 +70,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define WD_DONE_Pin GPIO_PIN_7
+#define WD_DONE_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

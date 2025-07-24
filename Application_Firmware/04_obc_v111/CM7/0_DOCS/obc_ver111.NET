@@ -1,0 +1,2558 @@
+Wire List
+
+<<< Component List >>>
+0.22uF/10V                      C1             CAP_C_1005X60
+10uF/6.3V                       C2             CAP_MP_2012X170
+10uF/10V                        C3             CAP_MP_2012X170
+0.22uF/10V                      C4             CAP_C_1005X60
+0.22uF/10V                      C5             CAP_C_1005X60
+10uF/10V                        C6             CAP_MP_2012X170
+10uF/6.3V                       C7             CAP_MP_2012X170
+0.22uF/10V                      C8             CAP_C_1005X60
+0.22uF/10V                      C9             CAP_C_1005X60
+10uF/10V                        C10            CAP_MP_2012X170
+0.22uF/10V                      C11            CAP_C_1005X60
+10uF/6.3V                       C12            CAP_MP_2012X170
+0.22uF/6.3V                     C13            CAP_C_1005X60
+0.22uF/6.3V                     C14            CAP_C_1005X60
+0.22uF/6.3V                     C15            CAP_C_1005X60
+1uF/6.3V                        C16            CAP_MP_1608X90
+0.22uF/6.3V                     C17            CAP_C_1005X60
+0.22uF/6.3V                     C18            CAP_C_1005X60
+0.22uF/6.3V                     C19            CAP_C_1005X60
+0.22uF/6.3V                     C20            CAP_C_1005X60
+0.22uF/6.3V                     C21            CAP_C_1005X60
+0.22uF/6.3V                     C22            CAP_C_1005X60
+0.22uF/6.3V                     C23            CAP_C_1005X60
+0.22uF/6.3V                     C24            CAP_C_1005X60
+0.22uF/6.3V                     C25            CAP_C_1005X60
+0.22uF/6.3V                     C26            CAP_C_1005X60
+0.22uF/6.3V                     C27            CAP_C_1005X60
+4.7uF/6.3V                      C28            CAP_MP_1608X90
+4.7uF/6.3V                      C29            CAP_MP_1608X90
+0.22uF/6.3V                     C30            CAP_C_1005X60
+0.22uF/6.3V                     C31            CAP_C_1005X60
+0.22uF/6.3V                     C32            CAP_C_1005X60
+0.22uF/6.3V                     C33            CAP_C_1005X60
+0.22uF/6.3V                     C34            CAP_C_1005X60
+0.22uF/6.3V                     C35            CAP_C_1005X60
+0.22uF/6.3V                     C36            CAP_C_1005X60
+0.22uF/6.3V                     C37            CAP_C_1005X60
+0.22uF/6.3V                     C38            CAP_C_1005X60
+1uF/6.3V                        C39            CAP_MP_1608X90
+0.22uF/6.3V                     C40            CAP_C_1005X60
+0.22uF/6.3V                     C41            CAP_C_1005X60
+0.22uF/6.3V                     C42            CAP_C_1005X60
+0.22uF/6.3V                     C43            CAP_C_1005X60
+0.22uF/6.3V                     C44            CAP_C_1005X60
+0.22uF/6.3V                     C45            CAP_C_1005X60
+0.22uF/6.3V                     C46            CAP_C_1005X60
+0.22uF/6.3V                     C47            CAP_C_1005X60
+0.22uF/6.3V                     C48            CAP_C_1005X60
+4.7uF/6.3V                      C49            CAP_MP_1608X90
+4.7uF/6.3V                      C50            CAP_MP_1608X90
+0.22uF/6.3V                     C51            CAP_C_1005X60
+0.22uF/6.3V                     C52            CAP_C_1005X60
+0.22uF/6.3V                     C53            CAP_C_1005X60
+0.22uF/6.3V                     C54            CAP_C_1005X60
+0.22uF/6.3V                     C55            CAP_C_1005X60
+0.22uF/6.3V                     C56            CAP_C_1005X60
+0.22uF/6.3V                     C57            CAP_C_1005X60
+0.22uF/6.3V                     C58            CAP_C_1005X60
+0.22uF/6.3V                     C59            CAP_C_1005X60
+0.22uF/6.3V                     C60            CAP_C_1005X60
+0.22uF/6.3V                     C61            CAP_C_1005X60
+0.22uF/6.3V                     C62            CAP_C_1005X60
+0.22uF/6.3V                     C63            CAP_C_1005X60
+0.22uF/6.3V                     C64            CAP_C_1005X60
+0.22uF/6.3V                     C65            CAP_C_1005X60
+0.22uF/6.3V                     C66            CAP_C_1005X60
+0.22uF/6.3V                     C67            CAP_C_1005X60
+0.22uF/6.3V                     C68            CAP_C_1005X60
+0.22uF/6.3V                     C69            CAP_C_1005X60
+0.22uF/6.3V                     C70            CAP_C_1005X60
+0.22uF/6.3V                     C71            CAP_C_1005X60
+1uF/6.3V                        C72            CAP_MP_1608X90
+0.22uF/6.3V                     C73            CAP_C_1005X60
+0.22uF/6.3V                     C74            CAP_C_1005X60
+0.22uF/6.3V                     C75            CAP_C_1005X60
+0.22uF/6.3V                     C76            CAP_C_1005X60
+0.22uF/6.3V                     C77            CAP_C_1005X60
+1uF/6.3V                        C78            CAP_MP_1608X90
+0.22uF/6.3V                     C79            CAP_C_1005X60
+0.22uF/6.3V                     C80            CAP_C_1005X60
+0.22uF/6.3V                     C81            CAP_C_1005X60
+0.22uF/6.3V                     C82            CAP_C_1005X60
+0.22uF/6.3V                     C83            CAP_C_1005X60
+20pF/6.3V                       C84            CAP_C_1005X60
+20pF/6.3V                       C85            CAP_C_1005X60
+0.22uF/6.3V                     C86            CAP_C_1005X60
+0.22uF/6.3V                     C87            CAP_C_1005X60
+0.22uF/6.3V                     C88            CAP_C_1005X60
+0.22uF/6.3V                     C89            CAP_C_1005X60
+0.22uF/6.3V                     C90            CAP_C_1005X60
+0.22uF/6.3V                     C91            CAP_C_1005X60
+0.22uF/6.3V                     C92            CAP_C_1005X60
+0.22uF/6.3V                     C93            CAP_C_1005X60
+4.7uF/6.3V                      C94            CAP_MP_1608X90
+4.7uF/6.3V                      C95            CAP_MP_1608X90
+0.22uF/6.3V                     C96            CAP_C_1005X60
+0.22uF/6.3V                     C97            CAP_C_1005X60
+0.22uF/6.3V                     C98            CAP_C_1005X60
+0.22uF/6.3V                     C99            CAP_C_1005X60
+0.22uF/6.3V                     C100           CAP_C_1005X60
+0.22uF/6.3V                     C101           CAP_C_1005X60
+0.22uF/6.3V                     C102           CAP_C_1005X60
+0.22uF/6.3V                     C103           CAP_C_1005X60
+0.22uF/6.3V                     C104           CAP_C_1005X60
+0.22uF/10V                      C105           CAP_C_1005X60
+0.22uF/6.3V                     C106           CAP_C_1005X60
+0.22uF/10V                      C107           CAP_C_1005X60
+0.22uF/6.3V                     C108           CAP_C_1005X60
+0.22uF/10V                      C109           CAP_C_1005X60
+0.22uF/6.3V                     C110           CAP_C_1005X60
+0.22uF/10V                      C111           CAP_C_1005X60
+0.22uF/6.3V                     C112           CAP_C_1005X60
+0.22uF/6.3V                     C113           CAP_C_1005X60
+0.22uF/6.3V                     C114           CAP_C_1005X60
+0.22uF/6.3V                     C115           CAP_C_1005X60
+0.22uF/6.3V                     C116           CAP_C_1005X60
+0.22uF/6.3V                     C117           CAP_C_1005X60
+0.22uF/6.3V                     C118           CAP_C_1005X60
+0.22uF/6.3V                     C119           CAP_C_1005X60
+0.22uF/6.3V                     C124           CAP_C_1005X60
+0.22uF/6.3V                     C125           CAP_C_1005X60
+0.22uF/6.3V                     C126           CAP_C_1005X60
+0.22uF/6.3V                     C127           CAP_C_1005X60
+0.22uF/6.3V                     C128           CAP_C_1005X60
+0.22uF/6.3V                     C129           CAP_C_1005X60
+0.22uF/6.3V                     C130           CAP_C_1005X60
+0.22uF/6.3V                     C131           CAP_C_1005X60
+0.22uF/6.3V                     C132           CAP_C_1005X60
+0.22uF/6.3V                     C133           CAP_C_1005X60
+0.22uF/6.3V                     C134           CAP_C_1005X60
+0.22uF/6.3V                     C135           CAP_C_1005X60
+0.22uF/6.3V                     C136           CAP_C_1005X60
+0.22uF/6.3V                     C137           CAP_C_1005X60
+0.22uF/6.3V                     C138           CAP_C_1005X60
+0.22uF/6.3V                     C139           CAP_C_1005X60
+0.22uF/6.3V                     C140           CAP_C_1005X60
+0.22uF/6.3V                     C141           CAP_C_1005X60
+0.22uF/6.3V                     C142           CAP_C_1005X60
+0.22uF/6.3V                     C143           CAP_C_1005X60
+0.22uF/6.3V                     C144           CAP_C_1005X60
+0.22uF/6.3V                     C145           CAP_C_1005X60
+0.22uF/6.3V                     C146           CAP_C_1005X60
+0.22uF/6.3V                     C147           CAP_C_1005X60
+0.22uF/6.3V                     C148           CAP_C_1005X60
+0.22uF/6.3V                     C149           CAP_C_1005X60
+0.22uF/6.3V                     C150           CAP_C_1005X60
+0.22uF/6.3V                     C151           CAP_C_1005X60
+0.22uF/6.3V                     C152           CAP_C_1005X60
+0.22uF/6.3V                     C153           CAP_C_1005X60
+0.22uF/6.3V                     C154           CAP_C_1005X60
+0.22uF/6.3V                     C155           CAP_C_1005X60
+0.22uF/6.3V                     C156           CAP_C_1005X60
+0.22uF/6.3V                     C157           CAP_C_1005X60
+0.22uF/6.3V                     C158           CAP_C_1005X60
+0.22uF/6.3V                     C159           CAP_C_1005X60
+0.22uF/10V                      C160           CAP_C_1005X60
+0.22uF/10V                      C161           CAP_C_1005X60
+0.22uF/10V                      C162           CAP_C_1005X60
+0.22uF/10V                      C163           CAP_C_1005X60
+0.22uF/10V                      C164           CAP_C_1005X60
+0.22uF/10V                      C165           CAP_C_1005X60
+0.22uF/10V                      C166           CAP_C_1005X60
+0.22uF/10V                      C167           CAP_C_1005X60
+0.22uF/10V                      C168           CAP_C_1005X60
+0.22uF/10V                      C169           CAP_C_1005X60
+0.22uF/10V                      C170           CAP_C_1005X60
+0.22uF/10V                      C171           CAP_C_1005X60
+10uF/10V                        C172           CAP_MP_2012X170
+10uF/10V                        C173           CAP_MP_2012X170
+0.22uF/10V                      C174           CAP_C_1005X60
+0.22uF/10V                      C175           CAP_C_1005X60
+0.22uF/10V                      C176           CAP_C_1005X60
+0.22uF/10V                      C177           CAP_C_1005X60
+0.22uF/10V                      C178           CAP_C_1005X60
+0.22uF/10V                      C179           CAP_C_1005X60
+4.7uF/6.3V                      C180           CAP_C_1005X60
+4.7uF/6.3V                      C181           CAP_C_1005X60
+4.7uF/6.3V                      C182           CAP_C_1005X60
+0.22uF/6.3V                     C183           CAP_C_1005X60
+0.22uF/6.3V                     C184           CAP_C_1005X60
+0.22uF/6.3V                     C185           CAP_C_1005X60
+4.7uF/6.3V                      C186           CAP_MP_1608X90
+4.7uF/6.3V                      C187           CAP_MP_1608X90
+4.7uF/6.3V                      C188           CAP_C_1005X60
+4.7uF/6.3V                      C189           CAP_C_1005X60
+4.7uF/6.3V                      C190           CAP_C_1005X60
+0.22uF/6.3V                     C191           CAP_C_1005X60
+0.22uF/6.3V                     C192           CAP_C_1005X60
+0.22uF/6.3V                     C193           CAP_C_1005X60
+0.22uF/6.3V                     C194           CAP_C_1005X60
+0.22uF/6.3V                     C195           CAP_C_1005X60
+0.22uF/6.3V                     C196           CAP_C_1005X60
+0.22uF/6.3V                     C197           CAP_C_1005X60
+0.22uF/6.3V                     C198           CAP_C_1005X60
+0.22uF/6.3V                     C199           CAP_C_1005X60
+0.22uF/6.3V                     C200           CAP_C_1005X60
+0.22uF/6.3V                     C201           CAP_C_1005X60
+0.22uF/6.3V                     C202           CAP_C_1005X60
+0.22uF/6.3V                     C203           CAP_C_1005X60
+0.22uF/6.3V                     C204           CAP_C_1005X60
+0.22uF/6.3V                     C205           CAP_C_1005X60
+0.22uF/6.3V                     C206           CAP_C_1005X60
+10uF/6.3V                       C207           CAP_MP_2012X170
+0.22uF/6.3V                     C208           CAP_C_1005X60
+0.22uF/6.3V                     C209           CAP_C_1005X60
+0.22uF/6.3V                     C210           CAP_C_1005X60
+0.22uF/6.3V                     C211           CAP_C_1005X60
+0.22uF/6.3V                     C212           CAP_C_1005X60
+0.22uF/6.3V                     C213           CAP_C_1005X60
+0.22uF/6.3V                     C214           CAP_C_1005X60
+0.22uF/6.3V                     C215           CAP_C_1005X60
+0.22uF/6.3V                     C216           CAP_C_1005X60
+0.22uF/6.3V                     C217           CAP_C_1005X60
+0.22uF/6.3V                     C218           CAP_C_1005X60
+0.22uF/6.3V                     C219           CAP_C_1005X60
+0.22uF/6.3V                     C220           CAP_C_1005X60
+0.22uF/6.3V                     C221           CAP_C_1005X60
+0.22uF/6.3V                     C222           CAP_C_1005X60
+16pF/6.3V                       C223           CAP_C_1005X60
+16pF/6.3V                       C224           CAP_C_1005X60
+Raspberry Pi Compute Module 4   CM4            CM4-DF40HC(3.0)-100DS-0.4v_3m
+150060YS75000                   D1             WL-SMCW_0603_150060xx75000
+150060YS75000                   D2             WL-SMCW_0603_150060xx75000
+150060YS75000                   D3             WL-SMCW_0603_150060xx75000
+USBLC6-2SC6                     D5             SOT95P280X145-6N
+150060GS75000                   D6             WL-SMCW_0603_150060xx75000
+150060GS75000                   D7             WL-SMCW_0603_150060xx75000
+150060GS75000                   D8             WL-SMCW_0603_150060xx75000
+150060GS75000                   D9             WL-SMCW_0603_150060xx75000
+150060YS75000                   D10            WL-SMCW_0603_150060xx75000
+150060YS75000                   D11            WL-SMCW_0603_150060xx75000
+150060YS75000                   D12            WL-SMCW_0603_150060xx75000
+150060YS75000                   D13            WL-SMCW_0603_150060xx75000
+150060YS75000                   D14            WL-SMCW_0603_150060xx75000
+150060YS75000                   D15            WL-SMCW_0603_150060xx75000
+150060YS75000                   D16            WL-SMCW_0603_150060xx75000
+150060YS75000                   D17            WL-SMCW_0603_150060xx75000
+150060YS75000                   D18            WL-SMCW_0603_150060xx75000
+M3                              H1             HEX-M3
+M3                              H2             HEX-M3
+M3                              H3             HEX-M3
+M3                              H4             HEX-M3
+53261-0271                      J1             MOLX-53261-0271_V
+JP1/DNP                         J2             JP1-D1T
+M80-5114242                     J3             HARWIN_M80-5114242 - duplicat
+0473460001/DNP                  J4             47346-0001_MOL
+Jumper_1-1                      J5             Jumper_1-1
+JP8/DNP                         J6             JP8-C1T
+JP7/DNP                         J7             JP7-C1T
+JP4/DNP                         J8             JP4-C1T
+0473460001/DNP                  J9             47346-0001_MOL
+JP4/DNP                         J10            JP4-C1T
+1727010                         J11            CONN_1727010
+1727010                         J12            CONN_1727010
+JP2/DNP                         J13            JP2-D1T
+JP2/DNP                         J14            JP2-D1T
+Bus_M.2_Socket_M                J16            M.2 M Key socket
+JP1/DNP                         J17            JP1-D1T
+77313-101-14LF                  J18            AMPHENOL_77313-101-14LF
+JP4/DNP                         J19            JP4-C1T
+JP2/DNP                         J20            JP2-D1T
+JP2/DNP                         J22            JP2-D1T
+JP2/DNP                         J23            JP2-D1T
+JP2/DNP                         J24            JP2-D1T
+JP2/DNP                         J25            JP2-D1T
+JP2/DNP                         J26            JP2-D1T
+JP2/DNP                         J27            JP2-D1T
+9774015151R                     MP1            9774015151
+9774015151R                     MP2            9774015151
+9774015151R                     MP3            9774015151
+9774015151R                     MP4            9774015151
+MMBT2222A                       Q1             SOT95P240X120-3N
+1k                              R1             RES_C_1608X60
+1k                              R2             RES_C_1608X60
+1k                              R3             RES_C_1608X60
+4.7k                            R4             RES_C_1608X60
+4.7k                            R5             RES_C_1608X60
+4.7k                            R6             RES_C_1608X60
+4.7k                            R7             RES_C_1608X60
+4.7k                            R8             RES_C_1608X60
+4.7k                            R9             RES_C_1608X60
+4.7k                            R10            RES_C_1608X60
+4.7k                            R11            RES_C_1608X60
+4.7k                            R12            RES_C_1608X60
+4.7k                            R13            RES_C_1608X60
+4.7k                            R14            RES_C_1608X60
+10k/DNP                         R15            RES_C_1608X60
+4.7k                            R16            RES_C_1608X60
+0R/1%                           R17            RES_C_1608X60
+16.5k/1%                        R18            RES_C_1608X60
+16.5k/1%                        R19            RES_C_1608X60
+4.7k                            R20            RES_C_1608X60
+4.7k                            R21            RES_C_1608X60
+4.7k                            R22            RES_C_1608X60
+4.7k                            R23            RES_C_1608X60
+1k                              R24            RES_C_1608X60
+1k                              R25            RES_C_1608X60
+1k                              R26            RES_C_1608X60
+1k                              R27            RES_C_1608X60
+4.7k/DNP                        R28            RES_C_1608X60
+4.7k/DNP                        R29            RES_C_1608X60
+4.7k                            R30            RES_C_1608X60
+1k                              R31            RES_C_1608X60
+12k                             R32            RES_C_1608X60
+4.7k                            R33            RES_C_1608X60
+4.7k                            R34            RES_C_1608X60
+4.7k                            R35            RES_C_1608X60
+4.7k                            R36            RES_C_1608X60
+1M                              R37            RES_C_1608X60
+4.7k                            R38            RES_C_1608X60
+4.7k                            R39            RES_C_1608X60
+4.7k                            R40            RES_C_1608X60
+4.7k                            R41            RES_C_1608X60
+4.7k                            R42            RES_C_1608X60
+4.7k                            R43            RES_C_1608X60
+1k                              R44            RES_C_1608X60
+4.7k                            R45            RES_C_1608X60
+4.7k                            R46            RES_C_1608X60
+4.7k                            R47            RES_C_1608X60
+4.7k                            R48            RES_C_1608X60
+4.7k                            R49            RES_C_1608X60
+4.7k                            R50            RES_C_1608X60
+4.7k/DNP                        R51            RES_C_1608X60
+4.7k                            R52            RES_C_1608X60
+4.7k                            R53            RES_C_1608X60
+4.7k                            R54            RES_C_1608X60
+1k                              R55            RES_C_1608X60
+1k                              R60            RES_C_1608X60
+0R/1%                           R61            RES_C_1608X60
+1k                              R62            RES_C_1608X60
+0R/1%                           R63            RES_C_1608X60
+1k                              R64            RES_C_1608X60
+1k                              R65            RES_C_1608X60
+1k                              R66            RES_C_1608X60
+4.7k                            R67            RES_C_1608X60
+1k                              R68            RES_C_1608X60
+1k                              R69            RES_C_1608X60
+4.7k                            R70            RES_C_1608X60
+4.7k                            R71            RES_C_1608X60
+4.7k                            R72            RES_C_1608X60
+4.7k                            R73            RES_C_1608X60
+4.7k                            R74            RES_C_1608X60
+4.7k                            R75            RES_C_1608X60
+4.7k                            R76            RES_C_1608X60
+4.7k                            R77            RES_C_1608X60
+4.7k                            R78            RES_C_1608X60
+4.7k                            R79            RES_C_1608X60
+4.7k                            R80            RES_C_1608X60
+4.7k                            R81            RES_C_1608X60
+1k                              R82            RES_C_1608X60
+1k                              R83            RES_C_1608X60
+0R/1%                           R84            RES_C_1608X60
+4.7k                            R85            RES_C_1608X60
+4.7k                            R86            RES_C_1608X60
+1k                              R87            RES_C_1608X60
+4.7k                            R88            RES_C_1608X60
+4.7k                            R89            RES_C_1608X60
+10k                             R90            RES_C_1608X60
+10k                             R91            RES_C_1608X60
+10k                             R92            RES_C_1608X60
+10k                             R93            RES_C_1608X60
+10k                             R94            RES_C_1608X60
+10k                             R95            RES_C_1608X60
+10k                             R96            RES_C_1608X60
+10k                             R97            RES_C_1608X60
+10k                             R98            RES_C_1608X60
+10k                             R99            RES_C_1608X60
+10k                             R100           RES_C_1608X60
+10k                             R101           RES_C_1608X60
+10k                             R102           RES_C_1608X60
+10k                             R103           RES_C_1608X60
+10k                             R104           RES_C_1608X60
+0R/DNP                          R105           RES_C_1608X60
+10k                             R106           RES_C_1608X60
+0R/DNP                          R107           RES_C_1608X60
+0R/1%                           R108           RES_C_1608X60
+1k                              R109           RES_C_1608X60
+10k                             R110           RES_C_1608X60
+10k                             R111           RES_C_1608X60
+4.7k                            R112           RES_C_1608X60
+                                TP1            Test Point 1 Side
+                                TP2            Test Point 1 Side
+5006                            TP3            FP-5006-MFG
+                                TP4            Test Point 1 Side
+                                TP5            Test Point 1 Side
+                                TP6            Test Point 1 Side
+                                TP7            Test Point 1 Side
+                                TP8            Test Point 1 Side
+TPS7A4533DCQR                   U1             DCQ0006A_M
+LMS1585AIS-3.3/NOPB             U2             TS3B_L
+TPS7A4533DCQR                   U3             DCQ0006A_M
+MTFC32GAZAQDW-AAT               U4             BGA_100_C_100P_10X17_1400X180
+TS3A27518ETRTWRQ1               U5             FP-RTW0024B-IPC_A
+TS3A27518ETRTWRQ1               U6             FP-RTW0024B-IPC_A
+MTFC32GAZAQDW-AAT               U7             BGA_100_C_100P_10X17_1400X180
+RV-3129-C3-32.768KHZ-OPTION-A-TB-QAU8             IC_RV-3129-C3_32.768KHZ_OPTIO
+TPL5010QDDCTQ1                  U9             SOT95P280X110-6N
+MB85RS2MTAPNF-G-BDERE1          U10            SOIC127P602X173-8N
+MX25L8006EM1I-12G               U11            SOIC127P602X173-8N
+MX25L8006EM1I-12G/DNP           U12            SOIC127P602X173-8N
+USB2642-I/ML                    U13            FP-48QFN-5304-7x7B-IPC_A
+24LC04BT-E/SN                   U14            SOIC-SN8_L
+ADUM1250WSRZ                    U15            SOIC127P602X173-8N
+ADUM1250WSRZ                    U16            SOIC127P602X173-8N
+MAX14431CAEE+                   U17            21-0055Q_E16MS+1F_MXM
+ISO7721DR                       U18            SOIC127P602X173-8N
+ISOUSB211                       U20            BSSOP_65P_750W_28
+FSUSB42MUX                      U21            FP-846AP-MFG
+MAX14431CAEE+                   U22            21-0055Q_E16MS+1F_MXM
+ISO7721DR                       U23            SOIC127P602X173-8N
+ADUM1250WSRZ                    U24            SOIC127P602X173-8N
+ADUM1250WSRZ                    U25            SOIC127P602X173-8N
+STM32H745ZIT3                   U26            FP-LQFP144-1A-MFG
+ADUM1250WSRZ                    U27            SOIC127P602X173-8N
+ECS-240-12-37B-CKY-TR           Y1             XTAL_ECS-240-12-37B-CKY-TR
+ECS-327ATQMV-AS-TR              Y2             FP-327ATQMV-MFG
+ECS-327ATQMV-AS-TR              Y3             FP-327ATQMV-MFG
+ECS-250-12-33Q-JES-TR           Y4             XTAL_ECS-250-12-33Q-JES-TR
+
+<<< Wire List >>>
+
+  NODE  REFERENCE  PIN #   PIN NAME       PIN TYPE    PART VALUE
+
+[00625] WIFI_OFF
+        CM4        89      WL_nDisable    INPUT       Raspberry Pi Compute Module 4
+        J26        1       1              PASSIVE     JP2/DNP
+
+[00624] VUSB
+        D15        2       A              PASSIVE     150060YS75000
+        J9         1       VBUS           PASSIVE     0473460001/DNP
+        J20        1       1              PASSIVE     JP2/DNP
+        R68        1       1              PASSIVE     1k
+
+[00623] USB_BOOT
+        CM4        93      nRPIBOOT       INPUT       Raspberry Pi Compute Module 4
+        J25        1       1              PASSIVE     JP2/DNP
+
+[00622] USB_2.0_D_P
+        D5         1       I/O1_IN        PASSIVE     USBLC6-2SC6
+        J18        01      01             I/O         77313-101-14LF
+        R107       2       2              PASSIVE     0R/DNP
+
+[00621] USB_2.0_D_N
+        D5         3       I/O2_IN        PASSIVE     USBLC6-2SC6
+        J18        02      02             I/O         77313-101-14LF
+        R105       2       2              PASSIVE     0R/DNP
+
+[00620] USB_2.0_CONN_P
+        J4         3       D+             PASSIVE     0473460001/DNP
+        R107       1       1              PASSIVE     0R/DNP
+
+[00619] USB_2.0_CONN_N
+        J4         2       D-             PASSIVE     0473460001/DNP
+        R105       1       1              PASSIVE     0R/DNP
+
+[00618] UART-ISO_CONN_TX
+        J3         26      26             PASSIVE     M80-5114242
+        U18        7       INA            INPUT       ISO7721DR
+
+[00617] UART-ISO_CONN_RX
+        J3         5       5              PASSIVE     M80-5114242
+        U18        6       OUTB           OUTPUT      ISO7721DR
+
+[00616] SPI-ISO_CONN_SCK
+        J3         6       6              PASSIVE     M80-5114242
+        U17        12      OUT3           OUTPUT      MAX14431CAEE+
+
+[00615] SPI-ISO_CONN_MOSI
+        J3         27      27             PASSIVE     M80-5114242
+        U17        13      OUT2           OUTPUT      MAX14431CAEE+
+
+[00614] SPI-ISO_CONN_MISO
+        J3         28      28             PASSIVE     M80-5114242
+        U17        11      IN4            INPUT       MAX14431CAEE+
+
+[00613] SPI-ISO_CONN_CS
+        J3         7       7              PASSIVE     M80-5114242
+        U17        14      OUT1           OUTPUT      MAX14431CAEE+
+
+[00612] RTC_BAT
+        J1         1       1              PASSIVE     53261-0271
+        U8         9       VBACKUP        POWER       RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+
+[00449] NetR109_2
+        R109       2       2              PASSIVE     1k
+        Y3         1       Tri-state or NCINPUT       ECS-327ATQMV-AS-TR
+
+[00448] NetR108_2
+        R108       2       2              PASSIVE     0R/1%
+        Y3         3       Output         OUTPUT      ECS-327ATQMV-AS-TR
+
+[00447] NetR68_2
+        R68        2       2              PASSIVE     1k
+        R69        1       1              PASSIVE     1k
+        U21        2       Sel            PASSIVE     FSUSB42MUX
+
+[00446] NetR62_2
+        R62        2       2              PASSIVE     1k
+        Y2         1       Tri-state or NCINPUT       ECS-327ATQMV-AS-TR
+
+[00445] NetR61_2
+        R61        2       2              PASSIVE     0R/1%
+        Y2         3       Output         OUTPUT      ECS-327ATQMV-AS-TR
+
+[00444] NetR50_1
+        R50        1       1              PASSIVE     4.7k
+        R55        1       1              PASSIVE     1k
+        U25        2       SDA1           I/O         ADUM1250WSRZ
+
+[00443] NetR34_2
+        R34        2       2              PASSIVE     4.7k
+        U13        13      SD WP          PASSIVE     USB2642-I/ML
+
+[00442] NetR32_1
+        R32        1       1              PASSIVE     12k
+        U13        47      RBIAS          PASSIVE     USB2642-I/ML
+
+[00441] NetR31_2
+        R31        2       2              PASSIVE     1k
+        U13        35      CRD PWR        PASSIVE     USB2642-I/ML
+
+[00440] NetR28_1
+        R28        1       1              PASSIVE     4.7k/DNP
+        U12        3       W\P\\          INPUT       MX25L8006EM1I-12G/DNP
+        U12        7       H\O\L\D\\      INPUT       MX25L8006EM1I-12G/DNP
+
+[00439] NetR22_1
+        R22        1       1              PASSIVE     4.7k
+        U11        3       W\P\\          INPUT       MX25L8006EM1I-12G
+        U11        7       H\O\L\D\\      INPUT       MX25L8006EM1I-12G
+
+[00438] NetR21_1
+        R21        1       1              PASSIVE     4.7k
+        U10        3       W\P\\          INPUT       MB85RS2MTAPNF-G-BDERE1
+        U10        7       H\O\L\D\\      INPUT       MB85RS2MTAPNF-G-BDERE1
+
+[00437] NetR15_1
+        R15        1       1              PASSIVE     10k/DNP
+        R17        2       2              PASSIVE     0R/1%
+        U9         6       RSTN           OUTPUT      TPL5010QDDCTQ1
+
+[00436] NetR14_1
+        R14        1       1              PASSIVE     4.7k
+        U8         1       CLKOE          INPUT       RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+
+[00435] NetR8_1
+        R8         1       1              PASSIVE     4.7k
+        U6         17      E\N\           INPUT       TS3A27518ETRTWRQ1
+
+[00434] NetR6_1
+        R6         1       1              PASSIVE     4.7k
+        U5         17      E\N\           INPUT       TS3A27518ETRTWRQ1
+
+[00433] NetQ1_1
+        Q1         1       B              PASSIVE     MMBT2222A
+        R81        1       1              PASSIVE     4.7k
+        R112       1       1              PASSIVE     4.7k
+
+[00428] NetJ16_54
+        J16        54      {\P\E\W\A\K\E\}PASSIVE     Bus_M.2_Socket_M
+        J17        1       1              PASSIVE     JP1/DNP
+
+[00402] NetJ16_10
+        J16        10      DAS/{\D\S\S\}\/PASSIVE     Bus_M.2_Socket_M
+        R60        2       2              PASSIVE     1k
+
+[00395] NetJ5_2
+        J5         2                      PASSIVE     Jumper_1-1
+        R19        2       2              PASSIVE     16.5k/1%
+        U9         3       DELAY/M_RST    INPUT       TPL5010QDDCTQ1
+
+[00394] NetJ5_1
+        J5         1                      PASSIVE     Jumper_1-1
+        R18        2       2              PASSIVE     16.5k/1%
+
+[00391] NetJ3_29
+        J3         29      29             PASSIVE     M80-5114242
+        R41        1       1              PASSIVE     4.7k
+        U15        6       SCL2           I/O         ADUM1250WSRZ
+
+[00390] NetJ3_25
+        J3         25      25             PASSIVE     M80-5114242
+        R48        1       1              PASSIVE     4.7k
+        U16        7       SDA2           I/O         ADUM1250WSRZ
+
+[00389] NetJ3_8
+        J3         8       8              PASSIVE     M80-5114242
+        R43        1       1              PASSIVE     4.7k
+        U15        7       SDA2           I/O         ADUM1250WSRZ
+
+[00388] NetJ3_4
+        J3         4       4              PASSIVE     M80-5114242
+        R46        1       1              PASSIVE     4.7k
+        U16        6       SCL2           I/O         ADUM1250WSRZ
+
+[00387] NetD18_2
+        D18        2       A              PASSIVE     150060YS75000
+        R87        1       1              PASSIVE     1k
+
+[00386] NetD17_1
+        D17        1       K              PASSIVE     150060YS75000
+        R83        1       1              PASSIVE     1k
+
+[00385] NetD16_1
+        D16        1       K              PASSIVE     150060YS75000
+        R82        1       1              PASSIVE     1k
+
+[00384] NetD15_1
+        D15        1       K              PASSIVE     150060YS75000
+        R66        1       1              PASSIVE     1k
+
+[00383] NetD14_1
+        D14        1       K              PASSIVE     150060YS75000
+        R65        1       1              PASSIVE     1k
+
+[00382] NetD13_1
+        D13        1       K              PASSIVE     150060YS75000
+        R64        1       1              PASSIVE     1k
+
+[00381] NetD12_1
+        D12        1       K              PASSIVE     150060YS75000
+        R60        1       1              PASSIVE     1k
+
+[00380] NetD11_2
+        D11        2       A              PASSIVE     150060YS75000
+        R44        1       1              PASSIVE     1k
+
+[00379] NetD10_2
+        D10        2       A              PASSIVE     150060YS75000
+        R31        1       1              PASSIVE     1k
+
+[00378] NetD9_2
+        D9         2       A              PASSIVE     150060GS75000
+        R27        1       1              PASSIVE     1k
+
+[00377] NetD8_2
+        D8         2       A              PASSIVE     150060GS75000
+        R26        1       1              PASSIVE     1k
+
+[00376] NetD7_2
+        D7         2       A              PASSIVE     150060GS75000
+        R25        1       1              PASSIVE     1k
+
+[00375] NetD6_2
+        D6         2       A              PASSIVE     150060GS75000
+        R24        1       1              PASSIVE     1k
+
+[00374] NetD3_2
+        D3         2       A              PASSIVE     150060YS75000
+        R3         1       1              PASSIVE     1k
+
+[00373] NetD2_1
+        D2         1       K              PASSIVE     150060YS75000
+        R2         1       1              PASSIVE     1k
+
+[00372] NetD1_2
+        D1         2       A              PASSIVE     150060YS75000
+        R1         1       1              PASSIVE     1k
+
+[00318] NetCM4_101
+        CM4        101     USB_OTG_ID     INPUT       Raspberry Pi Compute Module 4
+        J22        1       1              PASSIVE     JP2/DNP
+        R67        2       2              PASSIVE     4.7k
+
+[00317] NetCM4_100
+        CM4        100     nEXTRST        OUTPUT      Raspberry Pi Compute Module 4
+        R83        2       2              PASSIVE     1k
+
+[00316] NetCM4_99
+        CM4        99      GLOBAL_EN      INPUT       Raspberry Pi Compute Module 4
+        Q1         3       C              PASSIVE     MMBT2222A
+
+[00314] NetCM4_95
+        CM4        95      PI_LED_nPWR    OUTPUT      Raspberry Pi Compute Module 4
+        TP6        0       0              PASSIVE     
+
+[00312] NetCM4_92
+        CM4        92      RUN_PG         PASSIVE     Raspberry Pi Compute Module 4
+        R84        1       1              PASSIVE     0R/1%
+
+[00311] NetCM4_88
+        CM4        88      CM4_1.8V (OutpuPOWER       Raspberry Pi Compute Module 4
+        CM4        90      CM4_1.8V (OutpuPOWER       Raspberry Pi Compute Module 4
+        TP8        0       0              PASSIVE     
+
+[00308] NetCM4_78
+        CM4        78      GPIO_VREF      POWER       Raspberry Pi Compute Module 4
+        R63        2       2              PASSIVE     0R/1%
+
+[00291] NetCM4_48
+        CM4        48      GPIO27         PASSIVE     Raspberry Pi Compute Module 4
+        R65        2       2              PASSIVE     1k
+
+[00290] NetCM4_47
+        CM4        47      GPIO23         PASSIVE     Raspberry Pi Compute Module 4
+        R64        2       2              PASSIVE     1k
+
+[00283] NetCM4_21
+        CM4        21      Pi_nLED_ActivitOPEN COLLECTORRaspberry Pi Compute Module 4
+        R82        2       2              PASSIVE     1k
+
+[00268] NetC221_2
+        C221       2       2              PASSIVE     0.22uF/6.3V
+        C222       1       1              PASSIVE     0.22uF/6.3V
+
+[00267] NetC206_2
+        C206       2       2              PASSIVE     0.22uF/6.3V
+        C220       1       1              PASSIVE     0.22uF/6.3V
+
+[00266] NetC205_2
+        C205       2       2              PASSIVE     0.22uF/6.3V
+        C219       1       1              PASSIVE     0.22uF/6.3V
+
+[00265] NetC204_2
+        C204       2       2              PASSIVE     0.22uF/6.3V
+        C218       1       1              PASSIVE     0.22uF/6.3V
+
+[00264] NetC203_2
+        C203       2       2              PASSIVE     0.22uF/6.3V
+        C217       1       1              PASSIVE     0.22uF/6.3V
+
+[00263] NetC202_2
+        C202       2       2              PASSIVE     0.22uF/6.3V
+        C216       1       1              PASSIVE     0.22uF/6.3V
+
+[00262] NetC201_2
+        C201       2       2              PASSIVE     0.22uF/6.3V
+        C215       1       1              PASSIVE     0.22uF/6.3V
+
+[00261] NetC200_2
+        C200       2       2              PASSIVE     0.22uF/6.3V
+        C214       1       1              PASSIVE     0.22uF/6.3V
+
+[00260] NetC199_2
+        C199       2       2              PASSIVE     0.22uF/6.3V
+        C213       1       1              PASSIVE     0.22uF/6.3V
+
+[00259] NetC198_2
+        C198       2       2              PASSIVE     0.22uF/6.3V
+        C212       1       1              PASSIVE     0.22uF/6.3V
+
+[00258] NetC197_2
+        C197       2       2              PASSIVE     0.22uF/6.3V
+        C211       1       1              PASSIVE     0.22uF/6.3V
+
+[00257] NetC196_2
+        C196       2       2              PASSIVE     0.22uF/6.3V
+        C210       1       1              PASSIVE     0.22uF/6.3V
+
+[00256] NetC195_2
+        C195       2       2              PASSIVE     0.22uF/6.3V
+        C209       1       1              PASSIVE     0.22uF/6.3V
+
+[00255] NetC194_2
+        C194       2       2              PASSIVE     0.22uF/6.3V
+        C208       1       1              PASSIVE     0.22uF/6.3V
+
+[00254] NetC185_2
+        C185       2       2              PASSIVE     0.22uF/6.3V
+        C193       1       1              PASSIVE     0.22uF/6.3V
+
+[00253] NetC184_2
+        C184       2       2              PASSIVE     0.22uF/6.3V
+        C192       1       1              PASSIVE     0.22uF/6.3V
+
+[00252] NetC183_2
+        C183       2       2              PASSIVE     0.22uF/6.3V
+        C191       1       1              PASSIVE     0.22uF/6.3V
+
+[00251] NetC182_2
+        C182       2       2              PASSIVE     4.7uF/6.3V
+        C190       1       1              PASSIVE     4.7uF/6.3V
+
+[00250] NetC181_2
+        C181       2       2              PASSIVE     4.7uF/6.3V
+        C189       1       1              PASSIVE     4.7uF/6.3V
+
+[00249] NetC180_2
+        C180       2       2              PASSIVE     4.7uF/6.3V
+        C188       1       1              PASSIVE     4.7uF/6.3V
+
+[00248] NetC171_2
+        C171       2       2              PASSIVE     0.22uF/10V
+        C179       1       1              PASSIVE     0.22uF/10V
+
+[00247] NetC170_2
+        C170       2       2              PASSIVE     0.22uF/10V
+        C178       1       1              PASSIVE     0.22uF/10V
+
+[00246] NetC169_2
+        C169       2       2              PASSIVE     0.22uF/10V
+        C177       1       1              PASSIVE     0.22uF/10V
+
+[00245] NetC168_2
+        C168       2       2              PASSIVE     0.22uF/10V
+        C176       1       1              PASSIVE     0.22uF/10V
+
+[00244] NetC167_2
+        C167       2       2              PASSIVE     0.22uF/10V
+        C175       1       1              PASSIVE     0.22uF/10V
+
+[00243] NetC166_2
+        C166       2       2              PASSIVE     0.22uF/10V
+        C174       1       1              PASSIVE     0.22uF/10V
+
+[00242] NetC162_2
+        C162       2       2              PASSIVE     0.22uF/10V
+        C165       1       1              PASSIVE     0.22uF/10V
+
+[00241] NetC161_2
+        C161       2       2              PASSIVE     0.22uF/10V
+        C164       1       1              PASSIVE     0.22uF/10V
+
+[00240] NetC160_2
+        C160       2       2              PASSIVE     0.22uF/10V
+        C163       1       1              PASSIVE     0.22uF/10V
+
+[00239] NetC157_2
+        C157       2       2              PASSIVE     0.22uF/6.3V
+        C159       1       1              PASSIVE     0.22uF/6.3V
+
+[00238] NetC156_2
+        C156       2       2              PASSIVE     0.22uF/6.3V
+        C158       1       1              PASSIVE     0.22uF/6.3V
+
+[00237] NetC153_2
+        C153       2       2              PASSIVE     0.22uF/6.3V
+        C155       1       1              PASSIVE     0.22uF/6.3V
+
+[00236] NetC152_2
+        C152       2       2              PASSIVE     0.22uF/6.3V
+        C154       1       1              PASSIVE     0.22uF/6.3V
+
+[00235] NetC149_2
+        C149       2       2              PASSIVE     0.22uF/6.3V
+        C151       1       1              PASSIVE     0.22uF/6.3V
+
+[00234] NetC148_2
+        C148       2       2              PASSIVE     0.22uF/6.3V
+        C150       1       1              PASSIVE     0.22uF/6.3V
+
+[00233] NetC146_2
+        C146       2       2              PASSIVE     0.22uF/6.3V
+        C147       1       1              PASSIVE     0.22uF/6.3V
+
+[00232] NetC144_1
+        C144       1       1              PASSIVE     0.22uF/6.3V
+        C145       2       2              PASSIVE     0.22uF/6.3V
+
+[00231] NetC142_2
+        C142       2       2              PASSIVE     0.22uF/6.3V
+        C143       1       1              PASSIVE     0.22uF/6.3V
+
+[00230] NetC140_1
+        C140       1       1              PASSIVE     0.22uF/6.3V
+        C141       2       2              PASSIVE     0.22uF/6.3V
+
+[00229] NetC138_2
+        C138       2       2              PASSIVE     0.22uF/6.3V
+        C139       1       1              PASSIVE     0.22uF/6.3V
+
+[00228] NetC135_2
+        C135       2       2              PASSIVE     0.22uF/6.3V
+        C137       1       1              PASSIVE     0.22uF/6.3V
+
+[00227] NetC134_2
+        C134       2       2              PASSIVE     0.22uF/6.3V
+        C136       1       1              PASSIVE     0.22uF/6.3V
+
+[00226] NetC129_2
+        C129       2       2              PASSIVE     0.22uF/6.3V
+        C133       1       1              PASSIVE     0.22uF/6.3V
+
+[00225] NetC128_2
+        C128       2       2              PASSIVE     0.22uF/6.3V
+        C132       1       1              PASSIVE     0.22uF/6.3V
+
+[00224] NetC127_2
+        C127       2       2              PASSIVE     0.22uF/6.3V
+        C131       1       1              PASSIVE     0.22uF/6.3V
+
+[00223] NetC127_1
+        C127       1       1              PASSIVE     0.22uF/6.3V
+        C135       1       1              PASSIVE     0.22uF/6.3V
+        U20        4       V1P8V1         PASSIVE     ISOUSB211
+        U20        11      V1P8V1         PASSIVE     ISOUSB211
+
+[00222] NetC126_2
+        C126       2       2              PASSIVE     0.22uF/6.3V
+        C130       1       1              PASSIVE     0.22uF/6.3V
+
+[00221] NetC126_1
+        C126       1       1              PASSIVE     0.22uF/6.3V
+        C134       1       1              PASSIVE     0.22uF/6.3V
+        U20        18      V1P8V2         PASSIVE     ISOUSB211
+        U20        25      V1P8V2         PASSIVE     ISOUSB211
+
+[00220] NetC124_2
+        C124       2       2              PASSIVE     0.22uF/6.3V
+        C125       1       1              PASSIVE     0.22uF/6.3V
+
+[00219] NetC117_2
+        C117       2       2              PASSIVE     0.22uF/6.3V
+        C119       1       1              PASSIVE     0.22uF/6.3V
+
+[00218] NetC116_1
+        C116       1       1              PASSIVE     0.22uF/6.3V
+        C118       2       2              PASSIVE     0.22uF/6.3V
+
+[00217] NetC114_1
+        C114       1       1              PASSIVE     0.22uF/6.3V
+        C115       2       2              PASSIVE     0.22uF/6.3V
+
+[00216] NetC112_2
+        C112       2       2              PASSIVE     0.22uF/6.3V
+        C113       1       1              PASSIVE     0.22uF/6.3V
+
+[00215] NetC109_2
+        C109       2       2              PASSIVE     0.22uF/10V
+        C111       1       1              PASSIVE     0.22uF/10V
+
+[00214] NetC108_2
+        C108       2       2              PASSIVE     0.22uF/6.3V
+        C110       1       1              PASSIVE     0.22uF/6.3V
+
+[00213] NetC105_2
+        C105       2       2              PASSIVE     0.22uF/10V
+        C107       1       1              PASSIVE     0.22uF/10V
+
+[00212] NetC104_2
+        C104       2       2              PASSIVE     0.22uF/6.3V
+        C106       1       1              PASSIVE     0.22uF/6.3V
+
+[00211] NetC93_2
+        C93        2       2              PASSIVE     0.22uF/6.3V
+        C103       1       1              PASSIVE     0.22uF/6.3V
+
+[00210] NetC92_2
+        C92        2       2              PASSIVE     0.22uF/6.3V
+        C102       1       1              PASSIVE     0.22uF/6.3V
+
+[00209] NetC91_2
+        C91        2       2              PASSIVE     0.22uF/6.3V
+        C101       1       1              PASSIVE     0.22uF/6.3V
+
+[00208] NetC90_2
+        C90        2       2              PASSIVE     0.22uF/6.3V
+        C100       1       1              PASSIVE     0.22uF/6.3V
+
+[00207] NetC89_2
+        C89        2       2              PASSIVE     0.22uF/6.3V
+        C99        1       1              PASSIVE     0.22uF/6.3V
+
+[00206] NetC88_2
+        C88        2       2              PASSIVE     0.22uF/6.3V
+        C98        1       1              PASSIVE     0.22uF/6.3V
+
+[00205] NetC87_2
+        C87        2       2              PASSIVE     0.22uF/6.3V
+        C97        1       1              PASSIVE     0.22uF/6.3V
+
+[00204] NetC86_2
+        C86        2       2              PASSIVE     0.22uF/6.3V
+        C96        1       1              PASSIVE     0.22uF/6.3V
+
+[00203] NetC82_2
+        C82        2       2              PASSIVE     0.22uF/6.3V
+        C83        1       1              PASSIVE     0.22uF/6.3V
+
+[00202] NetC80_2
+        C80        2       2              PASSIVE     0.22uF/6.3V
+        C81        1       1              PASSIVE     0.22uF/6.3V
+
+[00201] NetC77_2
+        C77        2       2              PASSIVE     0.22uF/6.3V
+        C78        1       1              PASSIVE     1uF/6.3V
+        U13        46      VDD18PLL       POWER       USB2642-I/ML
+
+[00200] NetC77_1
+        C77        1       1              PASSIVE     0.22uF/6.3V
+        C79        2       2              PASSIVE     0.22uF/6.3V
+
+[00199] NetC74_2
+        C74        2       2              PASSIVE     0.22uF/6.3V
+        C75        1       1              PASSIVE     0.22uF/6.3V
+
+[00198] NetC71_2
+        C71        2       2              PASSIVE     0.22uF/6.3V
+        C72        1       1              PASSIVE     1uF/6.3V
+        TP4        0       0              PASSIVE     
+        U13        15      VDD18          POWER       USB2642-I/ML
+
+[00197] NetC71_1
+        C71        1       1              PASSIVE     0.22uF/6.3V
+        C73        2       2              PASSIVE     0.22uF/6.3V
+
+[00196] NetC69_1
+        C69        1       1              PASSIVE     0.22uF/6.3V
+        C70        2       2              PASSIVE     0.22uF/6.3V
+
+[00195] NetC67_2
+        C67        2       2              PASSIVE     0.22uF/6.3V
+        C68        2       2              PASSIVE     0.22uF/6.3V
+
+[00194] NetC65_1
+        C65        1       1              PASSIVE     0.22uF/6.3V
+        C66        2       2              PASSIVE     0.22uF/6.3V
+
+[00193] NetC63_1
+        C63        1       1              PASSIVE     0.22uF/6.3V
+        C64        2       2              PASSIVE     0.22uF/6.3V
+
+[00192] NetC61_1
+        C61        1       1              PASSIVE     0.22uF/6.3V
+        C62        2       2              PASSIVE     0.22uF/6.3V
+
+[00191] NetC59_1
+        C59        1       1              PASSIVE     0.22uF/6.3V
+        C60        2       2              PASSIVE     0.22uF/6.3V
+
+[00190] NetC48_2
+        C48        2       2              PASSIVE     0.22uF/6.3V
+        C58        1       1              PASSIVE     0.22uF/6.3V
+
+[00189] NetC47_2
+        C47        2       2              PASSIVE     0.22uF/6.3V
+        C57        1       1              PASSIVE     0.22uF/6.3V
+
+[00188] NetC46_2
+        C46        2       2              PASSIVE     0.22uF/6.3V
+        C56        1       1              PASSIVE     0.22uF/6.3V
+
+[00187] NetC45_2
+        C45        2       2              PASSIVE     0.22uF/6.3V
+        C55        1       1              PASSIVE     0.22uF/6.3V
+
+[00186] NetC44_2
+        C44        2       2              PASSIVE     0.22uF/6.3V
+        C54        1       1              PASSIVE     0.22uF/6.3V
+
+[00185] NetC43_2
+        C43        2       2              PASSIVE     0.22uF/6.3V
+        C53        1       1              PASSIVE     0.22uF/6.3V
+
+[00184] NetC42_2
+        C42        2       2              PASSIVE     0.22uF/6.3V
+        C52        1       1              PASSIVE     0.22uF/6.3V
+
+[00183] NetC41_2
+        C41        2       2              PASSIVE     0.22uF/6.3V
+        C51        1       1              PASSIVE     0.22uF/6.3V
+
+[00182] NetC38_2
+        C38        2       2              PASSIVE     0.22uF/6.3V
+        C40        1       1              PASSIVE     0.22uF/6.3V
+
+[00181] NetC38_1
+        C38        1       1              PASSIVE     0.22uF/6.3V
+        C39        1       1              PASSIVE     1uF/6.3V
+        U7         E4      VDDIM          PASSIVE     MTFC32GAZAQDW-AAT
+
+[00180] NetC27_2
+        C27        2       2              PASSIVE     0.22uF/6.3V
+        C37        1       1              PASSIVE     0.22uF/6.3V
+
+[00179] NetC26_2
+        C26        2       2              PASSIVE     0.22uF/6.3V
+        C36        1       1              PASSIVE     0.22uF/6.3V
+
+[00178] NetC25_2
+        C25        2       2              PASSIVE     0.22uF/6.3V
+        C35        1       1              PASSIVE     0.22uF/6.3V
+
+[00177] NetC24_2
+        C24        2       2              PASSIVE     0.22uF/6.3V
+        C34        1       1              PASSIVE     0.22uF/6.3V
+
+[00176] NetC23_2
+        C23        2       2              PASSIVE     0.22uF/6.3V
+        C33        1       1              PASSIVE     0.22uF/6.3V
+
+[00175] NetC22_2
+        C22        2       2              PASSIVE     0.22uF/6.3V
+        C32        1       1              PASSIVE     0.22uF/6.3V
+
+[00174] NetC21_2
+        C21        2       2              PASSIVE     0.22uF/6.3V
+        C31        1       1              PASSIVE     0.22uF/6.3V
+
+[00173] NetC20_2
+        C20        2       2              PASSIVE     0.22uF/6.3V
+        C30        1       1              PASSIVE     0.22uF/6.3V
+
+[00172] NetC18_1
+        C18        1       1              PASSIVE     0.22uF/6.3V
+        C19        2       2              PASSIVE     0.22uF/6.3V
+
+[00171] NetC15_2
+        C15        2       2              PASSIVE     0.22uF/6.3V
+        C17        1       1              PASSIVE     0.22uF/6.3V
+
+[00170] NetC15_1
+        C15        1       1              PASSIVE     0.22uF/6.3V
+        C16        1       1              PASSIVE     1uF/6.3V
+        U4         E4      VDDIM          PASSIVE     MTFC32GAZAQDW-AAT
+
+[00169] NetC13_1
+        C13        1       1              PASSIVE     0.22uF/6.3V
+        C14        2       2              PASSIVE     0.22uF/6.3V
+
+[00168] NetC9_2
+        C9         2       2              PASSIVE     0.22uF/10V
+        C11        1       1              PASSIVE     0.22uF/10V
+
+[00167] NetC5_2
+        C5         2       2              PASSIVE     0.22uF/10V
+        C8         1       1              PASSIVE     0.22uF/10V
+
+[00166] NetC1_2
+        C1         2       2              PASSIVE     0.22uF/10V
+        C4         1       1              PASSIVE     0.22uF/10V
+
+[00165] MCU_WD_WAKE
+        U9         5       WAKE           OUTPUT      TPL5010QDDCTQ1
+        U26        9       PC13           I/O         STM32H745ZIT3
+
+[00164] MCU_WD_DONE
+        U9         4       DONE           INPUT       TPL5010QDDCTQ1
+        U26        121     PD7            I/O         STM32H745ZIT3
+
+[00163] MCU_VCAP3
+        C181       1       1              PASSIVE     4.7uF/6.3V
+        U26        140     VCAP           PASSIVE     STM32H745ZIT3
+
+[00162] MCU_VCAP2
+        C180       1       1              PASSIVE     4.7uF/6.3V
+        U26        103     VCAP           PASSIVE     STM32H745ZIT3
+
+[00161] MCU_VCAP1
+        C182       1       1              PASSIVE     4.7uF/6.3V
+        U26        68      VCAP           PASSIVE     STM32H745ZIT3
+
+[00160] MCU_USB-FS_HUB_D_P
+        U13        2       USBDN DP2      I/O         USB2642-I/ML
+        U26        101     PA12           I/O         STM32H745ZIT3
+
+[00159] MCU_USB-FS_HUB_D_N
+        U13        1       USBDN DM2      I/O         USB2642-I/ML
+        U26        100     PA11           I/O         STM32H745ZIT3
+
+[00158] MCU_USART6_DEBUG_TX
+        J10        2       2              PASSIVE     JP4/DNP
+        U26        127     PG14           I/O         STM32H745ZIT3
+
+[00157] MCU_USART6_DEBUG_RX
+        J10        3       3              PASSIVE     JP4/DNP
+        U26        122     PG9            I/O         STM32H745ZIT3
+
+[00156] MCU_USART2_CM4_TX
+        U23        7       INA            INPUT       ISO7721DR
+        U26        39      PA2            I/O         STM32H745ZIT3
+
+[00155] MCU_USART2_CM4_RX
+        U23        6       OUTB           OUTPUT      ISO7721DR
+        U26        40      PA3            I/O         STM32H745ZIT3
+
+[00154] MCU_USART1_DEBUG_TX
+        J8         2       2              PASSIVE     JP4/DNP
+        U26        98      PA9            I/O         STM32H745ZIT3
+
+[00153] MCU_USART1_DEBUG_RX
+        J8         3       3              PASSIVE     JP4/DNP
+        U26        99      PA10           I/O         STM32H745ZIT3
+
+[00152] MCU_UART-ISO_UART7_TX
+        U18        3       INB            INPUT       ISO7721DR
+        U26        58      PE8            I/O         STM32H745ZIT3
+
+[00151] MCU_UART-ISO_UART7_RX
+        U18        2       OUTA           OUTPUT      ISO7721DR
+        U26        57      PE7            I/O         STM32H745ZIT3
+
+[00150] MCU_SPI6_DEBUG_SCK
+        U17        5       IN3            INPUT       MAX14431CAEE+
+        U26        44      PA5            I/O         STM32H745ZIT3
+
+[00149] MCU_SPI6_DEBUG_MOSI
+        U17        4       IN2            INPUT       MAX14431CAEE+
+        U26        46      PA7            I/O         STM32H745ZIT3
+
+[00148] MCU_SPI6_DEBUG_MISO
+        R53        1       1              PASSIVE     4.7k
+        U17        6       OUT4           I/O         MAX14431CAEE+
+        U26        45      PA6            I/O         STM32H745ZIT3
+
+[00147] MCU_SPI6_DEBUG_CS
+        R49        1       1              PASSIVE     4.7k
+        U17        3       IN1            INPUT       MAX14431CAEE+
+        U26        43      PA4            I/O         STM32H745ZIT3
+
+[00146] MCU_SPI5_CM4_SCK
+        U22        14      OUT1           OUTPUT      MAX14431CAEE+
+        U26        21      PF7            I/O         STM32H745ZIT3
+
+[00145] MCU_SPI5_CM4_MOSI
+        R54        1       1              PASSIVE     4.7k
+        U22        13      OUT2           OUTPUT      MAX14431CAEE+
+        U26        23      PF9            I/O         STM32H745ZIT3
+
+[00144] MCU_SPI5_CM4_MISO
+        U22        11      IN4            INPUT       MAX14431CAEE+
+        U26        22      PF8            I/O         STM32H745ZIT3
+
+[00143] MCU_SPI5_CM4_CS
+        U22        12      OUT3           OUTPUT      MAX14431CAEE+
+        U26        20      PF6            I/O         STM32H745ZIT3
+
+[00142] MCU_SPI4_MEM_SCK
+        U10        6       SCK            INPUT       MB85RS2MTAPNF-G-BDERE1
+        U11        6       SCLK           INPUT       MX25L8006EM1I-12G
+        U26        1       PE2            I/O         STM32H745ZIT3
+
+[00141] MCU_SPI4_MEM_MOSI
+        U10        5       SI             INPUT       MB85RS2MTAPNF-G-BDERE1
+        U11        5       SI/SIO0        I/O         MX25L8006EM1I-12G
+        U26        5       PE6            I/O         STM32H745ZIT3
+
+[00140] MCU_SPI4_MEM_MISO
+        U10        2       SO             OUTPUT      MB85RS2MTAPNF-G-BDERE1
+        U11        2       SO/SIO1        I/O         MX25L8006EM1I-12G
+        U26        4       PE5            I/O         STM32H745ZIT3
+
+[00139] MCU_SPI4_MEM_FRAM_CS
+        R20        1       1              PASSIVE     4.7k
+        U10        1       C\S\\          INPUT       MB85RS2MTAPNF-G-BDERE1
+        U26        3       PE4            I/O         STM32H745ZIT3
+
+[00138] MCU_SPI4_MEM_FLASH_CS
+        R23        1       1              PASSIVE     4.7k
+        U11        1       C\S\\          INPUT       MX25L8006EM1I-12G
+        U26        2       PE3            I/O         STM32H745ZIT3
+
+[00137] MCU_SDMMC_SEL(HUB/MCU)
+        R4         2       2              PASSIVE     4.7k
+        R7         2       2              PASSIVE     4.7k
+        U5         11      IN2            INPUT       TS3A27518ETRTWRQ1
+        U5         21      IN1            INPUT       TS3A27518ETRTWRQ1
+        U6         11      IN2            INPUT       TS3A27518ETRTWRQ1
+        U6         21      IN1            INPUT       TS3A27518ETRTWRQ1
+        U26        65      PE15           I/O         STM32H745ZIT3
+
+[00136] MCU_SDMMC1_OUT_D7
+        R102       1       1              PASSIVE     10k
+        U5         14      NO4            PASSIVE     TS3A27518ETRTWRQ1
+        U26        94      PC7            I/O         STM32H745ZIT3
+
+[00135] MCU_SDMMC1_OUT_D6
+        R104       1       1              PASSIVE     10k
+        U5         12      NO3            PASSIVE     TS3A27518ETRTWRQ1
+        U26        93      PC6            I/O         STM32H745ZIT3
+
+[00134] MCU_SDMMC1_OUT_D5
+        R91        1       1              PASSIVE     10k
+        U5         10      NO2            PASSIVE     TS3A27518ETRTWRQ1
+        U26        137     PB9            I/O         STM32H745ZIT3
+
+[00133] MCU_SDMMC1_OUT_D4
+        R92        1       1              PASSIVE     10k
+        U5         8       NO1            PASSIVE     TS3A27518ETRTWRQ1
+        U26        136     PB8            I/O         STM32H745ZIT3
+
+[00132] MCU_SDMMC1_OUT_D3
+        R94        1       1              PASSIVE     10k
+        U6         10      NO2            PASSIVE     TS3A27518ETRTWRQ1
+        U26        110     PC11           I/O         STM32H745ZIT3
+
+[00131] MCU_SDMMC1_OUT_D2
+        R96        1       1              PASSIVE     10k
+        U6         12      NO3            PASSIVE     TS3A27518ETRTWRQ1
+        U26        109     PC10           I/O         STM32H745ZIT3
+
+[00130] MCU_SDMMC1_OUT_D1
+        R98        1       1              PASSIVE     10k
+        U6         15      NO5            PASSIVE     TS3A27518ETRTWRQ1
+        U26        96      PC9            I/O         STM32H745ZIT3
+
+[00129] MCU_SDMMC1_OUT_D0
+        R100       1       1              PASSIVE     10k
+        U6         14      NO4            PASSIVE     TS3A27518ETRTWRQ1
+        U26        95      PC8            I/O         STM32H745ZIT3
+
+[00128] MCU_SDMMC1_OUT_CMD
+        R90        1       1              PASSIVE     10k
+        U6         8       NO1            PASSIVE     TS3A27518ETRTWRQ1
+        U26        114     PD2            I/O         STM32H745ZIT3
+
+[00127] MCU_SDMMC1_OUT_CK
+        R93        1       1              PASSIVE     10k
+        U6         13      NO6            PASSIVE     TS3A27518ETRTWRQ1
+        U26        111     PC12           I/O         STM32H745ZIT3
+
+[00126] MCU_R\S\T\\
+        C64        1       1              PASSIVE     0.22uF/6.3V
+        J6         8       8              PASSIVE     JP8/DNP
+        J7         3       3              PASSIVE     JP7/DNP
+        R16        1       1              PASSIVE     4.7k
+        R17        1       1              PASSIVE     0R/1%
+        TP3        1       1              PASSIVE     5006
+        U26        27      R\S\T\         INPUT       STM32H745ZIT3
+
+[00125] MCU_PDR
+        R89        2       2              PASSIVE     4.7k
+        U26        142     PDR ON         PASSIVE     STM32H745ZIT3
+
+[00124] MCU_OSCOUT
+        C224       2       2              PASSIVE     16pF/6.3V
+        U26        26      PH1-OSC OUT    I/O         STM32H745ZIT3
+        Y4         3       OUT/IN         I/O         ECS-250-12-33Q-JES-TR
+
+[00123] MCU_OSCIN
+        C223       2       2              PASSIVE     16pF/6.3V
+        U26        25      PH0-OSC IN     I/O         STM32H745ZIT3
+        Y4         1       IN/OUT         I/O         ECS-250-12-33Q-JES-TR
+
+[00122] MCU_OSC32K-IN
+        R108       1       1              PASSIVE     0R/1%
+        U26        10      PC14-OSC32 IN  I/O         STM32H745ZIT3
+
+[00121] MCU_IO_RTC_INT
+        R10        1       1              PASSIVE     4.7k
+        U8         7       I\N\T\\        OUTPUT      RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+        U26        48      PC5            I/O         STM32H745ZIT3
+
+[00120] MCU_IO_RTC_CLKOUT
+        R11        1       1              PASSIVE     4.7k
+        U8         3       CLKOUT         OUTPUT      RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+        U26        47      PC4            I/O         STM32H745ZIT3
+
+[00119] MCU_IO_RESET_CM4
+        R79        1       1              PASSIVE     4.7k
+        U25        6       SCL2           I/O         ADUM1250WSRZ
+        U26        87      PG7            I/O         STM32H745ZIT3
+
+[00118] MCU_IO_IRQ-EXP_D1
+        R42        1       1              PASSIVE     4.7k
+        U15        2       SDA1           I/O         ADUM1250WSRZ
+        U26        63      PE13           I/O         STM32H745ZIT3
+
+[00117] MCU_IO_IRQ-EXP_D0
+        R40        1       1              PASSIVE     4.7k
+        U15        3       SCL1           I/O         ADUM1250WSRZ
+        U26        64      PE14           I/O         STM32H745ZIT3
+
+[00116] MCU_IO_IRQ-CM4_D1
+        R76        1       1              PASSIVE     4.7k
+        U24        6       SCL2           I/O         ADUM1250WSRZ
+        U26        60      PE10           I/O         STM32H745ZIT3
+
+[00115] MCU_IO_IRQ-CM4_D0
+        R78        1       1              PASSIVE     4.7k
+        U24        7       SDA2           I/O         ADUM1250WSRZ
+        U26        61      PE11           I/O         STM32H745ZIT3
+
+[00114] MCU_IO_HUB_RESET
+        C76        1       1              PASSIVE     0.22uF/6.3V
+        R30        2       2              PASSIVE     4.7k
+        TP5        0       0              PASSIVE     
+        U13        38      R\E\S\E\T\     INPUT       USB2642-I/ML
+        U26        115     PD3            I/O         STM32H745ZIT3
+
+[00113] MCU_IO_GLOBAL_EN_CM4
+        R80        1       1              PASSIVE     4.7k
+        U25        7       SDA2           I/O         ADUM1250WSRZ
+        U26        88      PG8            I/O         STM32H745ZIT3
+
+[00112] MCU_IO_DEBUG_LED3
+        R27        2       2              PASSIVE     1k
+        U26        85      PD15           I/O         STM32H745ZIT3
+
+[00111] MCU_IO_DEBUG_LED2
+        R26        2       2              PASSIVE     1k
+        U26        84      PD14           I/O         STM32H745ZIT3
+
+[00110] MCU_IO_DEBUG_LED1
+        R25        2       2              PASSIVE     1k
+        U26        77      PD9            I/O         STM32H745ZIT3
+
+[00109] MCU_IO_DEBUG_LED0
+        R24        2       2              PASSIVE     1k
+        U26        76      PD8            I/O         STM32H745ZIT3
+
+[00108] MCU_I2C4_CM4_SDA
+        R74        1       1              PASSIVE     4.7k
+        U26        54      PF15           I/O         STM32H745ZIT3
+        U27        7       SDA2           I/O         ADUM1250WSRZ
+
+[00107] MCU_I2C4_CM4_SCL
+        R72        1       1              PASSIVE     4.7k
+        U26        53      PF14           I/O         STM32H745ZIT3
+        U27        6       SCL2           I/O         ADUM1250WSRZ
+
+[00106] MCU_I2C2_RTC_SDA
+        R12        1       1              PASSIVE     4.7k
+        U8         5       SDA            I/O         RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+        U26        67      PB11           I/O         STM32H745ZIT3
+
+[00105] MCU_I2C2_RTC_SCL
+        R13        1       1              PASSIVE     4.7k
+        U8         4       SCL            INPUT       RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+        U26        66      PB10           I/O         STM32H745ZIT3
+
+[00104] MCU_I2C1_EXP_SDA
+        R47        1       1              PASSIVE     4.7k
+        U16        2       SDA1           I/O         ADUM1250WSRZ
+        U26        134     PB7            I/O         STM32H745ZIT3
+
+[00103] MCU_I2C1_EXP_SCL
+        R45        1       1              PASSIVE     4.7k
+        U16        3       SCL1           I/O         ADUM1250WSRZ
+        U26        133     PB6            I/O         STM32H745ZIT3
+
+[00102] MCU_DETECT_SD
+        R33        2       2              PASSIVE     4.7k
+        U13        14      SD C\D\        PASSIVE     USB2642-I/ML
+        U26        116     PD4            I/O         STM32H745ZIT3
+
+[00101] MCU_DEBUG_JTMS-SWDIO
+        J6         4       4              PASSIVE     JP8/DNP
+        J7         5       5              PASSIVE     JP7/DNP
+        U26        102     PA13           I/O         STM32H745ZIT3
+
+[00100] MCU_DEBUG_JTDO-SWO
+        J6         6       6              PASSIVE     JP8/DNP
+        U26        130     PB3            I/O         STM32H745ZIT3
+
+[00099] MCU_DEBUG_JTDI
+        J6         3       3              PASSIVE     JP8/DNP
+        U26        108     PA15           I/O         STM32H745ZIT3
+
+[00098] MCU_DEBUG_JTCK-SWCLK
+        J6         5       5              PASSIVE     JP8/DNP
+        J7         4       4              PASSIVE     JP7/DNP
+        U26        107     PA14           I/O         STM32H745ZIT3
+
+[00097] MCU_BOOT0
+        J7         1       1              PASSIVE     JP7/DNP
+        R88        2       2              PASSIVE     4.7k
+        U26        135     BOOT0          INPUT       STM32H745ZIT3
+
+[00096] M2_OSC32K-IN
+        J16        68      SUSCLK         PASSIVE     Bus_M.2_Socket_M
+        R61        1       1              PASSIVE     0R/1%
+
+[00095] HUB_XTAL2
+        C84        2       2              PASSIVE     20pF/6.3V
+        R37        1       1              PASSIVE     1M
+        U13        44      XTAL2          OUTPUT      USB2642-I/ML
+        Y1         1       IN/OUT         I/O         ECS-240-12-37B-CKY-TR
+
+[00094] HUB_XTAL1
+        C85        2       2              PASSIVE     20pF/6.3V
+        R37        2       2              PASSIVE     1M
+        U13        45      XTAL1(CLKIN)   INPUT       USB2642-I/ML
+        Y1         3       OUT/IN         I/O         ECS-240-12-37B-CKY-TR
+
+[00093] HUB_USB-FS_D_P
+        D5         6       I/O1_OUT       PASSIVE     USBLC6-2SC6
+        U13        42      USBUP DP       PASSIVE     USB2642-I/ML
+
+[00092] HUB_USB-FS_D_N
+        D5         4       I/O2_OUT       PASSIVE     USBLC6-2SC6
+        U13        43      USBUP DM       PASSIVE     USB2642-I/ML
+
+[00091] HUB_SDMMC1_D7
+        U5         18      NC4            PASSIVE     TS3A27518ETRTWRQ1
+        U13        19      SD D7          I/O         USB2642-I/ML
+
+[00090] HUB_SDMMC1_D6
+        U5         20      NC3            PASSIVE     TS3A27518ETRTWRQ1
+        U13        20      SD D6          I/O         USB2642-I/ML
+
+[00089] HUB_SDMMC1_D5
+        U5         22      NC2            PASSIVE     TS3A27518ETRTWRQ1
+        U13        23      SD D5          I/O         USB2642-I/ML
+
+[00088] HUB_SDMMC1_D4
+        U5         23      NC1            PASSIVE     TS3A27518ETRTWRQ1
+        U13        30      SD D4          I/O         USB2642-I/ML
+
+[00087] HUB_SDMMC1_D3
+        U6         22      NC2            PASSIVE     TS3A27518ETRTWRQ1
+        U13        32      SD D3          I/O         USB2642-I/ML
+
+[00086] HUB_SDMMC1_D2
+        U6         20      NC3            PASSIVE     TS3A27518ETRTWRQ1
+        U13        33      SD D2          I/O         USB2642-I/ML
+
+[00085] HUB_SDMMC1_D1
+        U6         16      NC5            PASSIVE     TS3A27518ETRTWRQ1
+        U13        17      SD D1          I/O         USB2642-I/ML
+
+[00084] HUB_SDMMC1_D0
+        U6         18      NC4            PASSIVE     TS3A27518ETRTWRQ1
+        U13        18      SD D0          I/O         USB2642-I/ML
+
+[00083] HUB_SDMMC1_CMD
+        U6         23      NC1            PASSIVE     TS3A27518ETRTWRQ1
+        U13        24      SD CMD         PASSIVE     USB2642-I/ML
+
+[00082] HUB_SDMMC1_CLK
+        TP2        0       0              PASSIVE     
+        U6         19      NC6            PASSIVE     TS3A27518ETRTWRQ1
+        U13        21      SD CLK         I/O         USB2642-I/ML
+
+[00081] HUB_PRTCTL3
+        R39        2       2              PASSIVE     4.7k
+        U13        7       PRTCTL3        PASSIVE     USB2642-I/ML
+
+[00080] HUB_PRTCTL2
+        R38        2       2              PASSIVE     4.7k
+        U13        6       PRTCTL2        PASSIVE     USB2642-I/ML
+
+[00079] HUB_EEPROM_SDA
+        R35        1       1              PASSIVE     4.7k
+        U12        5       SI/SIO0        I/O         MX25L8006EM1I-12G/DNP
+        U13        10      SPI DO/SDA EP/SINPUT       USB2642-I/ML
+        U14        5       SDA            I/O         24LC04BT-E/SN
+
+[00078] HUB_EEPROM_SCL
+        R36        1       1              PASSIVE     4.7k
+        U12        6       SCLK           INPUT       MX25L8006EM1I-12G/DNP
+        U13        9       SPI CLK/SCL EP INPUT       USB2642-I/ML
+        U14        6       SCL            INPUT       24LC04BT-E/SN
+
+[00077] HUB_EEPROM_MISO
+        U12        2       SO/SIO1        I/O         MX25L8006EM1I-12G/DNP
+        U13        11      SPI DI         INPUT       USB2642-I/ML
+
+[00076] HUB_EEPROM_CS
+        R29        1       1              PASSIVE     4.7k/DNP
+        U12        1       C\S\\          INPUT       MX25L8006EM1I-12G/DNP
+        U13        8       SPI C\E\       INPUT       USB2642-I/ML
+
+[00075] GND_EXP
+        C107       2       2              PASSIVE     0.22uF/10V
+        C111       2       2              PASSIVE     0.22uF/10V
+        C115       1       1              PASSIVE     0.22uF/6.3V
+        C118       1       1              PASSIVE     0.22uF/6.3V
+        D11        1       K              PASSIVE     150060YS75000
+        J3         22      22             PASSIVE     M80-5114242
+        J3         23      23             PASSIVE     M80-5114242
+        J3         24      24             PASSIVE     M80-5114242
+        J3         30      30             PASSIVE     M80-5114242
+        J14        1       1              PASSIVE     JP2/DNP
+        J18        12      12             PASSIVE     77313-101-14LF
+        J18        14      14             PASSIVE     77313-101-14LF
+        U15        5       GND2           POWER       ADUM1250WSRZ
+        U16        5       GND2           POWER       ADUM1250WSRZ
+        U17        9       GNDB           POWER       MAX14431CAEE+
+        U17        15      GNDB           POWER       MAX14431CAEE+
+        U18        5       GND2           POWER       ISO7721DR
+
+[00074] GND_CM4
+        C6         2       2              PASSIVE     10uF/10V
+        C7         2       2              PASSIVE     10uF/6.3V
+        C8         2       2              PASSIVE     0.22uF/10V
+        C10        2       2              PASSIVE     10uF/10V
+        C11        2       2              PASSIVE     0.22uF/10V
+        C12        2       2              PASSIVE     10uF/6.3V
+        C125       2       2              PASSIVE     0.22uF/6.3V
+        C130       2       2              PASSIVE     0.22uF/6.3V
+        C133       2       2              PASSIVE     0.22uF/6.3V
+        C136       2       2              PASSIVE     0.22uF/6.3V
+        C139       2       2              PASSIVE     0.22uF/6.3V
+        C143       2       2              PASSIVE     0.22uF/6.3V
+        C147       2       2              PASSIVE     0.22uF/6.3V
+        C151       2       2              PASSIVE     0.22uF/6.3V
+        C154       2       2              PASSIVE     0.22uF/6.3V
+        C158       2       2              PASSIVE     0.22uF/6.3V
+        C163       2       2              PASSIVE     0.22uF/10V
+        C164       2       2              PASSIVE     0.22uF/10V
+        C165       2       2              PASSIVE     0.22uF/10V
+        C172       2       2              PASSIVE     10uF/10V
+        C173       2       2              PASSIVE     10uF/10V
+        C174       2       2              PASSIVE     0.22uF/10V
+        C175       2       2              PASSIVE     0.22uF/10V
+        C176       2       2              PASSIVE     0.22uF/10V
+        C177       2       2              PASSIVE     0.22uF/10V
+        C178       2       2              PASSIVE     0.22uF/10V
+        C179       2       2              PASSIVE     0.22uF/10V
+        CM4        1       GND            POWER       Raspberry Pi Compute Module 4
+        CM4        2       GND            POWER       Raspberry Pi Compute Module 4
+        CM4        7       GND            POWER       Raspberry Pi Compute Module 4
+        CM4        8       GND            POWER       Raspberry Pi Compute Module 4
+        CM4        13      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        14      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        22      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        23      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        32      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        33      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        42      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        43      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        52      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        53      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        59      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        60      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        65      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        66      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        71      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        74      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        98      GND            POWER       Raspberry Pi Compute Module 4
+        CM4        107     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        108     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        113     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        114     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        119     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        120     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        125     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        126     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        131     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        132     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        137     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        138     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        144     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        150     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        155     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        156     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        161     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        162     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        167     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        168     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        173     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        174     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        179     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        180     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        185     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        186     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        191     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        192     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        197     GND            POWER       Raspberry Pi Compute Module 4
+        CM4        198     GND            POWER       Raspberry Pi Compute Module 4
+        D3         1       K              PASSIVE     150060YS75000
+        D18        1       K              PASSIVE     150060YS75000
+        J3         10      10             PASSIVE     M80-5114242
+        J3         12      12             PASSIVE     M80-5114242
+        J3         14      14             PASSIVE     M80-5114242
+        J3         18      18             PASSIVE     M80-5114242
+        J3         31      31             PASSIVE     M80-5114242
+        J3         33      33             PASSIVE     M80-5114242
+        J3         35      35             PASSIVE     M80-5114242
+        J3         39      39             PASSIVE     M80-5114242
+        J3         42      42             PASSIVE     M80-5114242
+        J9         5       GND            POWER       0473460001/DNP
+        J12        2       2              PASSIVE     1727010
+        J16        1       GND            PASSIVE     Bus_M.2_Socket_M
+        J16        3       GND            PASSIVE     Bus_M.2_Socket_M
+        J16        9       GND            PASSIVE     Bus_M.2_Socket_M
+        J16        15      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        21      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        27      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        33      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        39      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        45      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        51      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        57      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        71      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        73      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        75      GND            PASSIVE     Bus_M.2_Socket_M
+        J16        M1      GND2230        PASSIVE     Bus_M.2_Socket_M
+        J16        M2      GND2242        PASSIVE     Bus_M.2_Socket_M
+        J16        S1      S1             PASSIVE     Bus_M.2_Socket_M
+        J16        S2      S2             PASSIVE     Bus_M.2_Socket_M
+        J18        06      06             PASSIVE     77313-101-14LF
+        J18        08      08             PASSIVE     77313-101-14LF
+        J19        1       1              PASSIVE     JP4/DNP
+        J19        4       4              PASSIVE     JP4/DNP
+        J22        2       2              PASSIVE     JP2/DNP
+        J23        2       2              PASSIVE     JP2/DNP
+        J24        2       2              PASSIVE     JP2/DNP
+        J25        2       2              PASSIVE     JP2/DNP
+        J26        2       2              PASSIVE     JP2/DNP
+        J27        2       2              PASSIVE     JP2/DNP
+        MP1        1       1              PASSIVE     9774015151R
+        MP2        1       1              PASSIVE     9774015151R
+        MP3        1       1              PASSIVE     9774015151R
+        MP4        1       1              PASSIVE     9774015151R
+        Q1         2       E              PASSIVE     MMBT2222A
+        R2         2       2              PASSIVE     1k
+        R66        2       2              PASSIVE     1k
+        R69        2       2              PASSIVE     1k
+        R112       2       2              PASSIVE     4.7k
+        U2         1       GND            POWER       LMS1585AIS-3.3/NOPB
+        U3         3       GND            POWER       TPS7A4533DCQR
+        U3         6       GND            POWER       TPS7A4533DCQR
+        U20        17      GND2           PASSIVE     ISOUSB211
+        U20        26      GND2           PASSIVE     ISOUSB211
+        U21        5       GND            POWER       FSUSB42MUX
+        U21        10      O\E\           INPUT       FSUSB42MUX
+        U22        2       GNDA           POWER       MAX14431CAEE+
+        U22        8       GNDA           POWER       MAX14431CAEE+
+        U23        4       GND1           POWER       ISO7721DR
+        U24        4       GND1           POWER       ADUM1250WSRZ
+        U25        4       GND1           POWER       ADUM1250WSRZ
+        U27        4       GND1           POWER       ADUM1250WSRZ
+        Y2         2       Gnd            POWER       ECS-327ATQMV-AS-TR
+
+[00073] GND
+        C2         2       2              PASSIVE     10uF/6.3V
+        C3         2       2              PASSIVE     10uF/10V
+        C4         2       2              PASSIVE     0.22uF/10V
+        C14        1       1              PASSIVE     0.22uF/6.3V
+        C16        2       2              PASSIVE     1uF/6.3V
+        C17        2       2              PASSIVE     0.22uF/6.3V
+        C19        1       1              PASSIVE     0.22uF/6.3V
+        C28        2       2              PASSIVE     4.7uF/6.3V
+        C29        2       2              PASSIVE     4.7uF/6.3V
+        C30        2       2              PASSIVE     0.22uF/6.3V
+        C31        2       2              PASSIVE     0.22uF/6.3V
+        C32        2       2              PASSIVE     0.22uF/6.3V
+        C33        2       2              PASSIVE     0.22uF/6.3V
+        C34        2       2              PASSIVE     0.22uF/6.3V
+        C35        2       2              PASSIVE     0.22uF/6.3V
+        C36        2       2              PASSIVE     0.22uF/6.3V
+        C37        2       2              PASSIVE     0.22uF/6.3V
+        C39        2       2              PASSIVE     1uF/6.3V
+        C40        2       2              PASSIVE     0.22uF/6.3V
+        C49        2       2              PASSIVE     4.7uF/6.3V
+        C50        2       2              PASSIVE     4.7uF/6.3V
+        C51        2       2              PASSIVE     0.22uF/6.3V
+        C52        2       2              PASSIVE     0.22uF/6.3V
+        C53        2       2              PASSIVE     0.22uF/6.3V
+        C54        2       2              PASSIVE     0.22uF/6.3V
+        C55        2       2              PASSIVE     0.22uF/6.3V
+        C56        2       2              PASSIVE     0.22uF/6.3V
+        C57        2       2              PASSIVE     0.22uF/6.3V
+        C58        2       2              PASSIVE     0.22uF/6.3V
+        C60        1       1              PASSIVE     0.22uF/6.3V
+        C61        2       2              PASSIVE     0.22uF/6.3V
+        C63        2       2              PASSIVE     0.22uF/6.3V
+        C65        2       2              PASSIVE     0.22uF/6.3V
+        C68        1       1              PASSIVE     0.22uF/6.3V
+        C70        1       1              PASSIVE     0.22uF/6.3V
+        C72        2       2              PASSIVE     1uF/6.3V
+        C73        1       1              PASSIVE     0.22uF/6.3V
+        C75        2       2              PASSIVE     0.22uF/6.3V
+        C76        2       2              PASSIVE     0.22uF/6.3V
+        C78        2       2              PASSIVE     1uF/6.3V
+        C79        1       1              PASSIVE     0.22uF/6.3V
+        C81        2       2              PASSIVE     0.22uF/6.3V
+        C83        2       2              PASSIVE     0.22uF/6.3V
+        C84        1       1              PASSIVE     20pF/6.3V
+        C85        1       1              PASSIVE     20pF/6.3V
+        C94        2       2              PASSIVE     4.7uF/6.3V
+        C95        2       2              PASSIVE     4.7uF/6.3V
+        C96        2       2              PASSIVE     0.22uF/6.3V
+        C97        2       2              PASSIVE     0.22uF/6.3V
+        C98        2       2              PASSIVE     0.22uF/6.3V
+        C99        2       2              PASSIVE     0.22uF/6.3V
+        C100       2       2              PASSIVE     0.22uF/6.3V
+        C101       2       2              PASSIVE     0.22uF/6.3V
+        C102       2       2              PASSIVE     0.22uF/6.3V
+        C103       2       2              PASSIVE     0.22uF/6.3V
+        C106       2       2              PASSIVE     0.22uF/6.3V
+        C110       2       2              PASSIVE     0.22uF/6.3V
+        C113       2       2              PASSIVE     0.22uF/6.3V
+        C119       2       2              PASSIVE     0.22uF/6.3V
+        C131       2       2              PASSIVE     0.22uF/6.3V
+        C132       2       2              PASSIVE     0.22uF/6.3V
+        C137       2       2              PASSIVE     0.22uF/6.3V
+        C141       1       1              PASSIVE     0.22uF/6.3V
+        C145       1       1              PASSIVE     0.22uF/6.3V
+        C150       2       2              PASSIVE     0.22uF/6.3V
+        C155       2       2              PASSIVE     0.22uF/6.3V
+        C159       2       2              PASSIVE     0.22uF/6.3V
+        C186       2       2              PASSIVE     4.7uF/6.3V
+        C187       2       2              PASSIVE     4.7uF/6.3V
+        C188       2       2              PASSIVE     4.7uF/6.3V
+        C189       2       2              PASSIVE     4.7uF/6.3V
+        C190       2       2              PASSIVE     4.7uF/6.3V
+        C191       2       2              PASSIVE     0.22uF/6.3V
+        C192       2       2              PASSIVE     0.22uF/6.3V
+        C193       2       2              PASSIVE     0.22uF/6.3V
+        C207       2       2              PASSIVE     10uF/6.3V
+        C208       2       2              PASSIVE     0.22uF/6.3V
+        C209       2       2              PASSIVE     0.22uF/6.3V
+        C210       2       2              PASSIVE     0.22uF/6.3V
+        C211       2       2              PASSIVE     0.22uF/6.3V
+        C212       2       2              PASSIVE     0.22uF/6.3V
+        C213       2       2              PASSIVE     0.22uF/6.3V
+        C214       2       2              PASSIVE     0.22uF/6.3V
+        C215       2       2              PASSIVE     0.22uF/6.3V
+        C216       2       2              PASSIVE     0.22uF/6.3V
+        C217       2       2              PASSIVE     0.22uF/6.3V
+        C218       2       2              PASSIVE     0.22uF/6.3V
+        C219       2       2              PASSIVE     0.22uF/6.3V
+        C220       2       2              PASSIVE     0.22uF/6.3V
+        C222       2       2              PASSIVE     0.22uF/6.3V
+        C223       1       1              PASSIVE     16pF/6.3V
+        C224       1       1              PASSIVE     16pF/6.3V
+        D1         1       K              PASSIVE     150060YS75000
+        D5         2       GND            POWER       USBLC6-2SC6
+        D6         1       K              PASSIVE     150060GS75000
+        D7         1       K              PASSIVE     150060GS75000
+        D8         1       K              PASSIVE     150060GS75000
+        D9         1       K              PASSIVE     150060GS75000
+        D10        1       K              PASSIVE     150060YS75000
+        J1         2       2              PASSIVE     53261-0271
+        J1         MP1     MP1            PASSIVE     53261-0271
+        J1         MP2     MP2            PASSIVE     53261-0271
+        J2         1       1              PASSIVE     JP1/DNP
+        J4         5       GND            POWER       0473460001/DNP
+        J6         2       2              PASSIVE     JP8/DNP
+        J6         7       7              PASSIVE     JP8/DNP
+        J7         2       2              PASSIVE     JP7/DNP
+        J7         6       6              PASSIVE     JP7/DNP
+        J8         1       1              PASSIVE     JP4/DNP
+        J8         4       4              PASSIVE     JP4/DNP
+        J10        1       1              PASSIVE     JP4/DNP
+        J10        4       4              PASSIVE     JP4/DNP
+        J11        2       2              PASSIVE     1727010
+        J14        2       2              PASSIVE     JP2/DNP
+        J18        04      04             PASSIVE     77313-101-14LF
+        R4         1       1              PASSIVE     4.7k
+        R6         2       2              PASSIVE     4.7k
+        R7         1       1              PASSIVE     4.7k
+        R8         2       2              PASSIVE     4.7k
+        R18        1       1              PASSIVE     16.5k/1%
+        R19        1       1              PASSIVE     16.5k/1%
+        R32        2       2              PASSIVE     12k
+        R33        1       1              PASSIVE     4.7k
+        R34        1       1              PASSIVE     4.7k
+        R88        1       1              PASSIVE     4.7k
+        R110       1       1              PASSIVE     10k
+        U1         3       GND            POWER       TPS7A4533DCQR
+        U1         6       GND            POWER       TPS7A4533DCQR
+        U4         G2      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G3      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G4      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G5      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G6      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G7      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G8      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         G9      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         H2      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         H9      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         J5      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         L3      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         L8      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         M4      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         M7      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         P2      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         P9      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U5         2       GND            POWER       TS3A27518ETRTWRQ1
+        U5         25      Thermal Pad    POWER       TS3A27518ETRTWRQ1
+        U6         2       GND            POWER       TS3A27518ETRTWRQ1
+        U6         25      Thermal Pad    POWER       TS3A27518ETRTWRQ1
+        U7         G2      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G3      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G4      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G5      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G6      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G7      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G8      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         G9      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         H2      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         H9      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         J5      VSS            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         L3      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         L8      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         M4      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         M7      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         P2      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         P9      VSSQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U8         6       VSS            POWER       RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+        U9         2       GND            POWER       TPL5010QDDCTQ1
+        U10        4       VSS            POWER       MB85RS2MTAPNF-G-BDERE1
+        U11        4       GND            POWER       MX25L8006EM1I-12G
+        U12        4       GND            POWER       MX25L8006EM1I-12G/DNP
+        U13        27      TEST1          PASSIVE     USB2642-I/ML
+        U13        28      TEST2          PASSIVE     USB2642-I/ML
+        U13        40      TEST0          PASSIVE     USB2642-I/ML
+        U13        49      EP             POWER       USB2642-I/ML
+        U14        1       A0             INPUT       24LC04BT-E/SN
+        U14        2       A1             INPUT       24LC04BT-E/SN
+        U14        3       A2             INPUT       24LC04BT-E/SN
+        U14        4       VSS            POWER       24LC04BT-E/SN
+        U14        7       WP             INPUT       24LC04BT-E/SN
+        U15        4       GND1           POWER       ADUM1250WSRZ
+        U16        4       GND1           POWER       ADUM1250WSRZ
+        U17        2       GNDA           POWER       MAX14431CAEE+
+        U17        8       GNDA           POWER       MAX14431CAEE+
+        U18        4       GND1           POWER       ISO7721DR
+        U20        3       GND1           PASSIVE     ISOUSB211
+        U20        12      GND1           PASSIVE     ISOUSB211
+        U22        9       GNDB           POWER       MAX14431CAEE+
+        U22        15      GNDB           POWER       MAX14431CAEE+
+        U23        5       GND2           POWER       ISO7721DR
+        U24        5       GND2           POWER       ADUM1250WSRZ
+        U25        5       GND2           POWER       ADUM1250WSRZ
+        U26        6       VSS            POWER       STM32H745ZIT3
+        U26        12      VSS            POWER       STM32H745ZIT3
+        U26        14      VSSSMPS        POWER       STM32H745ZIT3
+        U26        16      VDDSMPS        POWER       STM32H745ZIT3
+        U26        17      VFBSMPS        POWER       STM32H745ZIT3
+        U26        18      VSS            POWER       STM32H745ZIT3
+        U26        33      VSS            POWER       STM32H745ZIT3
+        U26        34      VSSA           POWER       STM32H745ZIT3
+        U26        41      VSS            POWER       STM32H745ZIT3
+        U26        55      VSS            POWER       STM32H745ZIT3
+        U26        69      VSS            POWER       STM32H745ZIT3
+        U26        80      VSS            POWER       STM32H745ZIT3
+        U26        89      VSS            POWER       STM32H745ZIT3
+        U26        104     VSS            POWER       STM32H745ZIT3
+        U26        118     VSS            POWER       STM32H745ZIT3
+        U26        128     VSS            POWER       STM32H745ZIT3
+        U26        141     VSS            POWER       STM32H745ZIT3
+        U27        5       GND2           POWER       ADUM1250WSRZ
+        Y1         2       GND            POWER       ECS-240-12-37B-CKY-TR
+        Y1         4       GND            POWER       ECS-240-12-37B-CKY-TR
+        Y3         2       Gnd            POWER       ECS-327ATQMV-AS-TR
+        Y4         2       GND            POWER       ECS-250-12-33Q-JES-TR
+        Y4         4       GND            POWER       ECS-250-12-33Q-JES-TR
+
+[00072] EMMC2_RST
+        R9         2       2              PASSIVE     4.7k
+        U7         M5      RST_n          PASSIVE     MTFC32GAZAQDW-AAT
+        U26        139     PE1            I/O         STM32H745ZIT3
+
+[00071] EMMC2_DAT3
+        R101       1       1              PASSIVE     10k
+        U7         N3      DAT3           PASSIVE     MTFC32GAZAQDW-AAT
+        U26        131     PB4            I/O         STM32H745ZIT3
+
+[00070] EMMC2_DAT2
+        R106       1       1              PASSIVE     10k
+        U7         K3      DAT2           PASSIVE     MTFC32GAZAQDW-AAT
+        U26        124     PG11           I/O         STM32H745ZIT3
+
+[00069] EMMC2_DAT1
+        R97        1       1              PASSIVE     10k
+        U7         N2      DAT1           PASSIVE     MTFC32GAZAQDW-AAT
+        U26        75      PB15           I/O         STM32H745ZIT3
+
+[00068] EMMC2_DAT0
+        R99        1       1              PASSIVE     10k
+        U7         K2      DAT0           PASSIVE     MTFC32GAZAQDW-AAT
+        U26        74      PB14           I/O         STM32H745ZIT3
+
+[00067] EMMC2_CMD
+        R103       1       1              PASSIVE     10k
+        U7         P5      CMD            PASSIVE     MTFC32GAZAQDW-AAT
+        U26        37      PA0            I/O         STM32H745ZIT3
+
+[00066] EMMC2_CLK
+        R95        1       1              PASSIVE     10k
+        U7         P6      CLK            PASSIVE     MTFC32GAZAQDW-AAT
+        U26        29      PC1            I/O         STM32H745ZIT3
+
+[00065] EMMC1_RST
+        R5         2       2              PASSIVE     4.7k
+        U4         M5      RST_n          PASSIVE     MTFC32GAZAQDW-AAT
+        U26        138     PE0            I/O         STM32H745ZIT3
+
+[00064] EMMC1_DAT7
+        U4         K9      DAT7           PASSIVE     MTFC32GAZAQDW-AAT
+        U5         6       COM4           PASSIVE     TS3A27518ETRTWRQ1
+
+[00063] EMMC1_DAT6
+        U4         N9      DAT6           PASSIVE     MTFC32GAZAQDW-AAT
+        U5         4       COM3           PASSIVE     TS3A27518ETRTWRQ1
+
+[00062] EMMC1_DAT5
+        U4         K8      DAT5           PASSIVE     MTFC32GAZAQDW-AAT
+        U5         3       COM2           PASSIVE     TS3A27518ETRTWRQ1
+
+[00061] EMMC1_DAT4
+        U4         N8      DAT4           PASSIVE     MTFC32GAZAQDW-AAT
+        U5         1       COM1           PASSIVE     TS3A27518ETRTWRQ1
+
+[00060] EMMC1_DAT3
+        U4         N3      DAT3           PASSIVE     MTFC32GAZAQDW-AAT
+        U6         3       COM2           PASSIVE     TS3A27518ETRTWRQ1
+
+[00059] EMMC1_DAT2
+        U4         K3      DAT2           PASSIVE     MTFC32GAZAQDW-AAT
+        U6         4       COM3           PASSIVE     TS3A27518ETRTWRQ1
+
+[00058] EMMC1_DAT1
+        U4         N2      DAT1           PASSIVE     MTFC32GAZAQDW-AAT
+        U6         7       COM5           PASSIVE     TS3A27518ETRTWRQ1
+
+[00057] EMMC1_DAT0
+        U4         K2      DAT0           PASSIVE     MTFC32GAZAQDW-AAT
+        U6         6       COM4           PASSIVE     TS3A27518ETRTWRQ1
+
+[00056] EMMC1_CMD
+        U4         P5      CMD            PASSIVE     MTFC32GAZAQDW-AAT
+        U6         1       COM1           PASSIVE     TS3A27518ETRTWRQ1
+
+[00055] EMMC1_CLK
+        U4         P6      CLK            PASSIVE     MTFC32GAZAQDW-AAT
+        U6         9       COM6           PASSIVE     TS3A27518ETRTWRQ1
+
+[00054] EDGE-PLATING
+        H1         1       1              POWER       M3
+        H2         1       1              POWER       M3
+        H3         1       1              POWER       M3
+        H4         1       1              POWER       M3
+        J3         19      19             PASSIVE     M80-5114242
+        J3         40      40             PASSIVE     M80-5114242
+        J18        09      09             PASSIVE     77313-101-14LF
+        J18        10      10             PASSIVE     77313-101-14LF
+
+[00053] CM4_USB_D_P
+        CM4        105     USB_P          PASSIVE     Raspberry Pi Compute Module 4
+        U21        3       D+             I/O         FSUSB42MUX
+
+[00052] CM4_USB_D_N
+        CM4        103     USB_N          PASSIVE     Raspberry Pi Compute Module 4
+        U21        4       D-             I/O         FSUSB42MUX
+
+[00051] CM4_USB-ISO_D_P
+        U20        21      DD+            PASSIVE     ISOUSB211
+        U21        7       HSD1+          I/O         FSUSB42MUX
+
+[00050] CM4_USB-ISO_D_N
+        U20        22      DD-            PASSIVE     ISOUSB211
+        U21        6       HSD1-          I/O         FSUSB42MUX
+
+[00049] CM4_USB-FS_HUB_D_P
+        U13        4       USBDN DP3      I/O         USB2642-I/ML
+        U20        8       UD+            PASSIVE     ISOUSB211
+
+[00048] CM4_USB-FS_HUB_D_N
+        U13        3       USBDN DM3      I/O         USB2642-I/ML
+        U20        7       UD-            PASSIVE     ISOUSB211
+
+[00047] CM4_UART3_ToOBC_TX
+        CM4        54      GPIO4          PASSIVE     Raspberry Pi Compute Module 4
+        U23        3       INB            INPUT       ISO7721DR
+
+[00046] CM4_UART3_ToOBC_RX
+        CM4        34      GPIO5          PASSIVE     Raspberry Pi Compute Module 4
+        U23        2       OUTA           OUTPUT      ISO7721DR
+
+[00045] CM4_UART0_DEBUG_TX
+        CM4        55      GPIO14         PASSIVE     Raspberry Pi Compute Module 4
+        J19        2       2              PASSIVE     JP4/DNP
+
+[00044] CM4_UART0_DEBUG_RX
+        CM4        51      GPIO15         PASSIVE     Raspberry Pi Compute Module 4
+        J19        3       3              PASSIVE     JP4/DNP
+
+[00043] CM4_SPI1_ISO_SCK
+        CM4        25      GPIO21         PASSIVE     Raspberry Pi Compute Module 4
+        U22        3       IN1            INPUT       MAX14431CAEE+
+
+[00042] CM4_SPI1_ISO_MOSI
+        CM4        27      GPIO20         PASSIVE     Raspberry Pi Compute Module 4
+        U22        4       IN2            INPUT       MAX14431CAEE+
+
+[00041] CM4_SPI1_ISO_MISO
+        CM4        26      GPIO19         PASSIVE     Raspberry Pi Compute Module 4
+        R52        1       1              PASSIVE     4.7k
+        U22        6       OUT4           I/O         MAX14431CAEE+
+
+[00040] CM4_SPI1_ISO_CS
+        CM4        49      GPIO18         PASSIVE     Raspberry Pi Compute Module 4
+        R70        1       1              PASSIVE     4.7k
+        U22        5       IN3            INPUT       MAX14431CAEE+
+
+[00039] CM4_RESET
+        J27        1       1              PASSIVE     JP2/DNP
+        R51        1       1              PASSIVE     4.7k/DNP
+        R84        2       2              PASSIVE     0R/1%
+        U25        3       SCL1           I/O         ADUM1250WSRZ
+
+[00038] CM4_PCIe_TX_P
+        CM4        122     PCIe_TX_P      OUTPUT      Raspberry Pi Compute Module 4
+        J16        49      PERp0          PASSIVE     Bus_M.2_Socket_M
+
+[00037] CM4_PCIe_TX_N
+        CM4        124     PCIe_TX_N      OUTPUT      Raspberry Pi Compute Module 4
+        J16        47      PERn0          PASSIVE     Bus_M.2_Socket_M
+
+[00036] CM4_PCIe_RX_P
+        CM4        116     PCIe_RX_P      INPUT       Raspberry Pi Compute Module 4
+        J16        43      PETp0          PASSIVE     Bus_M.2_Socket_M
+
+[00035] CM4_PCIe_RX_N
+        CM4        118     PCIe_RX_N      INPUT       Raspberry Pi Compute Module 4
+        J16        41      PETn0          PASSIVE     Bus_M.2_Socket_M
+
+[00034] CM4_PCIe_nRST
+        CM4        109     PCIe_nRST      OUTPUT      Raspberry Pi Compute Module 4
+        J16        50      {\P\E\R\S\T\}\ PASSIVE     Bus_M.2_Socket_M
+
+[00033] CM4_PCIe_CLK_P
+        CM4        110     PCIe_CLK_P     OUTPUT      Raspberry Pi Compute Module 4
+        J16        55      REFCLKp        PASSIVE     Bus_M.2_Socket_M
+
+[00032] CM4_PCIe_CLK_nREQ
+        CM4        102     PCIe_CLK_nREQ  INPUT       Raspberry Pi Compute Module 4
+        J16        52      {\C\L\K\R\E\Q\}PASSIVE     Bus_M.2_Socket_M
+
+[00031] CM4_PCIe_CLK_N
+        CM4        112     PCIe_CLK_N     OUTPUT      Raspberry Pi Compute Module 4
+        J16        53      REFCLKn        PASSIVE     Bus_M.2_Socket_M
+
+[00030] CM4_IO_ToOBC_IRQ1
+        CM4        40      GPIO9          PASSIVE     Raspberry Pi Compute Module 4
+        R75        1       1              PASSIVE     4.7k
+        U24        3       SCL1           I/O         ADUM1250WSRZ
+
+[00029] CM4_IO_ToOBC_IRQ0
+        CM4        45      GPIO24         PASSIVE     Raspberry Pi Compute Module 4
+        R77        1       1              PASSIVE     4.7k
+        U24        2       SDA1           I/O         ADUM1250WSRZ
+
+[00028] CM4_IO_ToCAM_CAMIO1
+        CM4        24      GPIO26         PASSIVE     Raspberry Pi Compute Module 4
+        J3         16      16             PASSIVE     M80-5114242
+
+[00027] CM4_IO_ToCAM_CAMIO0
+        CM4        97      Camera_GPIO    PASSIVE     Raspberry Pi Compute Module 4
+        J3         37      37             PASSIVE     M80-5114242
+
+[00026] CM4_I2CSlave_ToOBC_SDA
+        CM4        44      GPIO10         PASSIVE     Raspberry Pi Compute Module 4
+        R73        1       1              PASSIVE     4.7k
+        U27        2       SDA1           I/O         ADUM1250WSRZ
+
+[00025] CM4_I2CSlave_ToOBC_SCL
+        CM4        38      GPIO11         PASSIVE     Raspberry Pi Compute Module 4
+        R71        1       1              PASSIVE     4.7k
+        U27        3       SCL1           I/O         ADUM1250WSRZ
+
+[00024] CM4_I2C_ToCAM_SDA
+        CM4        36      ID_SD          PASSIVE     Raspberry Pi Compute Module 4
+        J3         38      38             PASSIVE     M80-5114242
+        R85        2       2              PASSIVE     4.7k
+
+[00023] CM4_I2C_ToCAM_SCL
+        CM4        35      ID_SC          PASSIVE     Raspberry Pi Compute Module 4
+        J3         17      17             PASSIVE     M80-5114242
+        R86        2       2              PASSIVE     4.7k
+
+[00022] CM4_I2C4_ToCAM_SDA
+        CM4        30      GPIO6          PASSIVE     Raspberry Pi Compute Module 4
+        J3         41      41             PASSIVE     M80-5114242
+
+[00021] CM4_I2C4_ToCAM_SCL
+        CM4        37      GPIO7          PASSIVE     Raspberry Pi Compute Module 4
+        J3         20      20             PASSIVE     M80-5114242
+
+[00020] CM4_ENABLE
+        J23        1       1              PASSIVE     JP2/DNP
+        R55        2       2              PASSIVE     1k
+        R81        2       2              PASSIVE     4.7k
+
+[00019] CAM0_D1_P
+        CM4        136     CAM0_D1_P      INPUT       Raspberry Pi Compute Module 4
+        J3         34      34             PASSIVE     M80-5114242
+
+[00018] CAM0_D1_N
+        CM4        134     CAM0_D1_N      INPUT       Raspberry Pi Compute Module 4
+        J3         13      13             PASSIVE     M80-5114242
+
+[00017] CAM0_D0_P
+        CM4        130     CAM0_D0_P      INPUT       Raspberry Pi Compute Module 4
+        J3         32      32             PASSIVE     M80-5114242
+
+[00016] CAM0_D0_N
+        CM4        128     CAM0_D0_N      INPUT       Raspberry Pi Compute Module 4
+        J3         11      11             PASSIVE     M80-5114242
+
+[00015] CAM0_CK_P
+        CM4        142     CAM0_C_P       INPUT       Raspberry Pi Compute Module 4
+        J3         36      36             PASSIVE     M80-5114242
+
+[00014] CAM0_CK_N
+        CM4        140     CAM0_C_N       INPUT       Raspberry Pi Compute Module 4
+        J3         15      15             PASSIVE     M80-5114242
+
+[00013] BT_OFF
+        CM4        91      BT_nDisable    INPUT       Raspberry Pi Compute Module 4
+        J24        1       1              PASSIVE     JP2/DNP
+
+[00012] Bootloader_DETECT_UP
+        R111       1       1              PASSIVE     10k
+        U26        83      PD13           I/O         STM32H745ZIT3
+        U26        86      PG6            I/O         STM32H745ZIT3
+
+[00011] Bootloader_DETECT_DOWN
+        R110       2       2              PASSIVE     10k
+        U26        51      PB2            I/O         STM32H745ZIT3
+        U26        81      PD11           I/O         STM32H745ZIT3
+
+[00010] BOOT_USB_D_P
+        J9         3       D+             PASSIVE     0473460001/DNP
+        U21        9       HSD2+          I/O         FSUSB42MUX
+
+[00009] BOOT_USB_D_N
+        J9         2       D-             PASSIVE     0473460001/DNP
+        U21        8       HSD2-          I/O         FSUSB42MUX
+
+[00008] +12V_EXP-Adaptor
+        J3         1       1              PASSIVE     M80-5114242
+        J3         2       2              PASSIVE     M80-5114242
+        J3         3       3              PASSIVE     M80-5114242
+        J18        11      11             PASSIVE     77313-101-14LF
+        J18        13      13             PASSIVE     77313-101-14LF
+
+[00007] +5V_USB-Adaptor
+        C1         1       1              PASSIVE     0.22uF/10V
+        C3         1       1              PASSIVE     10uF/10V
+        C69        2       2              PASSIVE     0.22uF/6.3V
+        D5         5       VBUS           POWER       USBLC6-2SC6
+        J4         1       VBUS           PASSIVE     0473460001/DNP
+        J11        1       1              PASSIVE     1727010
+        J18        03      03             PASSIVE     77313-101-14LF
+        U1         1       S\H\D\N\       INPUT       TPS7A4533DCQR
+        U1         2       IN             POWER       TPS7A4533DCQR
+
+[00006] +5V_AUX-Adaptor
+        C5         1       1              PASSIVE     0.22uF/10V
+        C6         1       1              PASSIVE     10uF/10V
+        C9         1       1              PASSIVE     0.22uF/10V
+        C10        1       1              PASSIVE     10uF/10V
+        C166       1       1              PASSIVE     0.22uF/10V
+        C167       1       1              PASSIVE     0.22uF/10V
+        C168       1       1              PASSIVE     0.22uF/10V
+        C169       1       1              PASSIVE     0.22uF/10V
+        C170       1       1              PASSIVE     0.22uF/10V
+        C171       1       1              PASSIVE     0.22uF/10V
+        C172       1       1              PASSIVE     10uF/10V
+        C173       1       1              PASSIVE     10uF/10V
+        CM4        77      +5V (Input)    POWER       Raspberry Pi Compute Module 4
+        CM4        79      +5V (Input)    POWER       Raspberry Pi Compute Module 4
+        CM4        81      +5V (Input)    POWER       Raspberry Pi Compute Module 4
+        CM4        83      +5V (Input)    POWER       Raspberry Pi Compute Module 4
+        CM4        85      +5V (Input)    POWER       Raspberry Pi Compute Module 4
+        CM4        87      +5V (Input)    POWER       Raspberry Pi Compute Module 4
+        J3         21      21             PASSIVE     M80-5114242
+        J12        1       1              PASSIVE     1727010
+        J18        05      05             PASSIVE     77313-101-14LF
+        J18        07      07             PASSIVE     77313-101-14LF
+        J20        2       2              PASSIVE     JP2/DNP
+        U2         3       IN             POWER       LMS1585AIS-3.3/NOPB
+        U3         1       S\H\D\N\       INPUT       TPS7A4533DCQR
+        U3         2       IN             POWER       TPS7A4533DCQR
+
+[00005] +3V3_OBC
+        C2         1       1              PASSIVE     10uF/6.3V
+        C13        2       2              PASSIVE     0.22uF/6.3V
+        C18        2       2              PASSIVE     0.22uF/6.3V
+        C20        1       1              PASSIVE     0.22uF/6.3V
+        C21        1       1              PASSIVE     0.22uF/6.3V
+        C22        1       1              PASSIVE     0.22uF/6.3V
+        C23        1       1              PASSIVE     0.22uF/6.3V
+        C24        1       1              PASSIVE     0.22uF/6.3V
+        C25        1       1              PASSIVE     0.22uF/6.3V
+        C26        1       1              PASSIVE     0.22uF/6.3V
+        C27        1       1              PASSIVE     0.22uF/6.3V
+        C28        1       1              PASSIVE     4.7uF/6.3V
+        C29        1       1              PASSIVE     4.7uF/6.3V
+        C41        1       1              PASSIVE     0.22uF/6.3V
+        C42        1       1              PASSIVE     0.22uF/6.3V
+        C43        1       1              PASSIVE     0.22uF/6.3V
+        C44        1       1              PASSIVE     0.22uF/6.3V
+        C45        1       1              PASSIVE     0.22uF/6.3V
+        C46        1       1              PASSIVE     0.22uF/6.3V
+        C47        1       1              PASSIVE     0.22uF/6.3V
+        C48        1       1              PASSIVE     0.22uF/6.3V
+        C49        1       1              PASSIVE     4.7uF/6.3V
+        C50        1       1              PASSIVE     4.7uF/6.3V
+        C59        2       2              PASSIVE     0.22uF/6.3V
+        C62        1       1              PASSIVE     0.22uF/6.3V
+        C66        1       1              PASSIVE     0.22uF/6.3V
+        C67        1       1              PASSIVE     0.22uF/6.3V
+        C74        1       1              PASSIVE     0.22uF/6.3V
+        C80        1       1              PASSIVE     0.22uF/6.3V
+        C82        1       1              PASSIVE     0.22uF/6.3V
+        C86        1       1              PASSIVE     0.22uF/6.3V
+        C87        1       1              PASSIVE     0.22uF/6.3V
+        C88        1       1              PASSIVE     0.22uF/6.3V
+        C89        1       1              PASSIVE     0.22uF/6.3V
+        C90        1       1              PASSIVE     0.22uF/6.3V
+        C91        1       1              PASSIVE     0.22uF/6.3V
+        C92        1       1              PASSIVE     0.22uF/6.3V
+        C93        1       1              PASSIVE     0.22uF/6.3V
+        C94        1       1              PASSIVE     4.7uF/6.3V
+        C95        1       1              PASSIVE     4.7uF/6.3V
+        C104       1       1              PASSIVE     0.22uF/6.3V
+        C108       1       1              PASSIVE     0.22uF/6.3V
+        C112       1       1              PASSIVE     0.22uF/6.3V
+        C117       1       1              PASSIVE     0.22uF/6.3V
+        C128       1       1              PASSIVE     0.22uF/6.3V
+        C140       2       2              PASSIVE     0.22uF/6.3V
+        C144       2       2              PASSIVE     0.22uF/6.3V
+        C148       1       1              PASSIVE     0.22uF/6.3V
+        C153       1       1              PASSIVE     0.22uF/6.3V
+        C157       1       1              PASSIVE     0.22uF/6.3V
+        C183       1       1              PASSIVE     0.22uF/6.3V
+        C184       1       1              PASSIVE     0.22uF/6.3V
+        C185       1       1              PASSIVE     0.22uF/6.3V
+        C186       1       1              PASSIVE     4.7uF/6.3V
+        C187       1       1              PASSIVE     4.7uF/6.3V
+        C194       1       1              PASSIVE     0.22uF/6.3V
+        C195       1       1              PASSIVE     0.22uF/6.3V
+        C196       1       1              PASSIVE     0.22uF/6.3V
+        C197       1       1              PASSIVE     0.22uF/6.3V
+        C198       1       1              PASSIVE     0.22uF/6.3V
+        C199       1       1              PASSIVE     0.22uF/6.3V
+        C200       1       1              PASSIVE     0.22uF/6.3V
+        C201       1       1              PASSIVE     0.22uF/6.3V
+        C202       1       1              PASSIVE     0.22uF/6.3V
+        C203       1       1              PASSIVE     0.22uF/6.3V
+        C204       1       1              PASSIVE     0.22uF/6.3V
+        C205       1       1              PASSIVE     0.22uF/6.3V
+        C206       1       1              PASSIVE     0.22uF/6.3V
+        C207       1       1              PASSIVE     10uF/6.3V
+        C221       1       1              PASSIVE     0.22uF/6.3V
+        J6         1       1              PASSIVE     JP8/DNP
+        J7         7       7              PASSIVE     JP7/DNP
+        J13        2       2              PASSIVE     JP2/DNP
+        R1         2       2              PASSIVE     1k
+        R5         1       1              PASSIVE     4.7k
+        R9         1       1              PASSIVE     4.7k
+        R10        2       2              PASSIVE     4.7k
+        R11        2       2              PASSIVE     4.7k
+        R12        2       2              PASSIVE     4.7k
+        R13        2       2              PASSIVE     4.7k
+        R14        2       2              PASSIVE     4.7k
+        R15        2       2              PASSIVE     10k/DNP
+        R16        2       2              PASSIVE     4.7k
+        R20        2       2              PASSIVE     4.7k
+        R21        2       2              PASSIVE     4.7k
+        R22        2       2              PASSIVE     4.7k
+        R23        2       2              PASSIVE     4.7k
+        R28        2       2              PASSIVE     4.7k/DNP
+        R29        2       2              PASSIVE     4.7k/DNP
+        R30        1       1              PASSIVE     4.7k
+        R35        2       2              PASSIVE     4.7k
+        R36        2       2              PASSIVE     4.7k
+        R38        1       1              PASSIVE     4.7k
+        R39        1       1              PASSIVE     4.7k
+        R40        2       2              PASSIVE     4.7k
+        R42        2       2              PASSIVE     4.7k
+        R45        2       2              PASSIVE     4.7k
+        R47        2       2              PASSIVE     4.7k
+        R49        2       2              PASSIVE     4.7k
+        R53        2       2              PASSIVE     4.7k
+        R54        2       2              PASSIVE     4.7k
+        R72        2       2              PASSIVE     4.7k
+        R74        2       2              PASSIVE     4.7k
+        R76        2       2              PASSIVE     4.7k
+        R78        2       2              PASSIVE     4.7k
+        R79        2       2              PASSIVE     4.7k
+        R80        2       2              PASSIVE     4.7k
+        R89        1       1              PASSIVE     4.7k
+        R90        2       2              PASSIVE     10k
+        R91        2       2              PASSIVE     10k
+        R92        2       2              PASSIVE     10k
+        R93        2       2              PASSIVE     10k
+        R94        2       2              PASSIVE     10k
+        R95        2       2              PASSIVE     10k
+        R96        2       2              PASSIVE     10k
+        R97        2       2              PASSIVE     10k
+        R98        2       2              PASSIVE     10k
+        R99        2       2              PASSIVE     10k
+        R100       2       2              PASSIVE     10k
+        R101       2       2              PASSIVE     10k
+        R102       2       2              PASSIVE     10k
+        R103       2       2              PASSIVE     10k
+        R104       2       2              PASSIVE     10k
+        R106       2       2              PASSIVE     10k
+        R109       1       1              PASSIVE     1k
+        R111       2       2              PASSIVE     10k
+        TP1        0       0              PASSIVE     
+        U1         4       OUT            POWER       TPS7A4533DCQR
+        U1         5       SENSE          INPUT       TPS7A4533DCQR
+        U4         F2      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F3      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F4      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F5      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F6      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F7      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F8      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         F9      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U4         H3      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         H8      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         L2      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         L4      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         L7      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         L9      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         P3      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U4         P8      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U5         5       VCC            POWER       TS3A27518ETRTWRQ1
+        U6         5       VCC            POWER       TS3A27518ETRTWRQ1
+        U7         F2      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F3      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F4      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F5      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F6      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F7      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F8      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         F9      VCC            PASSIVE     MTFC32GAZAQDW-AAT
+        U7         H3      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         H8      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         L2      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         L4      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         L7      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         L9      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         P3      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U7         P8      VCCQ           PASSIVE     MTFC32GAZAQDW-AAT
+        U8         2       VDD            POWER       RV-3129-C3-32.768KHZ-OPTION-A-TB-QA
+        U9         1       VDD            POWER       TPL5010QDDCTQ1
+        U10        8       VDD            POWER       MB85RS2MTAPNF-G-BDERE1
+        U11        8       VCC            POWER       MX25L8006EM1I-12G
+        U12        8       VCC            POWER       MX25L8006EM1I-12G/DNP
+        U13        5       VDDA33         POWER       USB2642-I/ML
+        U13        12      VDD33          POWER       USB2642-I/ML
+        U13        16      VDD33          POWER       USB2642-I/ML
+        U13        25      VDD33          POWER       USB2642-I/ML
+        U13        26      VDD33(OTP)     POWER       USB2642-I/ML
+        U13        34      VDD33          POWER       USB2642-I/ML
+        U13        39      VBUS DET       POWER       USB2642-I/ML
+        U13        41      VDDA33         POWER       USB2642-I/ML
+        U13        48      VDDA33         POWER       USB2642-I/ML
+        U14        8       VCC            POWER       24LC04BT-E/SN
+        U15        1       VDD1           POWER       ADUM1250WSRZ
+        U16        1       VDD1           POWER       ADUM1250WSRZ
+        U17        1       VDDA           POWER       MAX14431CAEE+
+        U17        7       ENA            PASSIVE     MAX14431CAEE+
+        U18        1       VCC1           POWER       ISO7721DR
+        U20        1       VBUS1          PASSIVE     ISOUSB211
+        U20        2       V3P3V1         PASSIVE     ISOUSB211
+        U20        5       VCC1           PASSIVE     ISOUSB211
+        U20        13      CDPENZ1        PASSIVE     ISOUSB211
+        U22        10      ENB            PASSIVE     MAX14431CAEE+
+        U22        16      VDDB           POWER       MAX14431CAEE+
+        U23        8       VCC2           POWER       ISO7721DR
+        U24        8       VDD2           POWER       ADUM1250WSRZ
+        U25        8       VDD2           POWER       ADUM1250WSRZ
+        U26        7       VDD            POWER       STM32H745ZIT3
+        U26        8       VBAT           POWER       STM32H745ZIT3
+        U26        13      VDD            POWER       STM32H745ZIT3
+        U26        19      VDD            POWER       STM32H745ZIT3
+        U26        32      VDD            POWER       STM32H745ZIT3
+        U26        35      VREF+          POWER       STM32H745ZIT3
+        U26        36      VDDA           POWER       STM32H745ZIT3
+        U26        42      VDD            POWER       STM32H745ZIT3
+        U26        56      VDD            POWER       STM32H745ZIT3
+        U26        70      VDDLDO         POWER       STM32H745ZIT3
+        U26        71      VDD            POWER       STM32H745ZIT3
+        U26        79      VDD            POWER       STM32H745ZIT3
+        U26        90      VDD50USB       POWER       STM32H745ZIT3
+        U26        91      VDD33USB       POWER       STM32H745ZIT3
+        U26        92      VDD            POWER       STM32H745ZIT3
+        U26        105     VDDLDO         POWER       STM32H745ZIT3
+        U26        106     VDD            POWER       STM32H745ZIT3
+        U26        119     VDD            POWER       STM32H745ZIT3
+        U26        129     VDD            POWER       STM32H745ZIT3
+        U26        143     VDDLDO         POWER       STM32H745ZIT3
+        U26        144     VDD            POWER       STM32H745ZIT3
+        U27        8       VDD2           POWER       ADUM1250WSRZ
+        Y3         4       Vdd            POWER       ECS-327ATQMV-AS-TR
+
+[00004] +3V3_M2
+        C7         1       1              PASSIVE     10uF/6.3V
+        C124       1       1              PASSIVE     0.22uF/6.3V
+        C160       1       1              PASSIVE     0.22uF/10V
+        C161       1       1              PASSIVE     0.22uF/10V
+        C162       1       1              PASSIVE     0.22uF/10V
+        D2         2       A              PASSIVE     150060YS75000
+        D12        2       A              PASSIVE     150060YS75000
+        J16        2       3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        4       3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        12      3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        14      3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        16      3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        18      3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        70      3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        72      3.3V           PASSIVE     Bus_M.2_Socket_M
+        J16        74      3.3V           PASSIVE     Bus_M.2_Socket_M
+        R62        1       1              PASSIVE     1k
+        U2         2       OUT            POWER       LMS1585AIS-3.3/NOPB
+        U2         4       TAB            POWER       LMS1585AIS-3.3/NOPB
+        Y2         4       Vdd            POWER       ECS-327ATQMV-AS-TR
+
+[00003] +3V3_CM4-OUT
+        CM4        84      CM4_3.3V (OutpuPOWER       Raspberry Pi Compute Module 4
+        CM4        86      CM4_3.3V (OutpuPOWER       Raspberry Pi Compute Module 4
+        R63        1       1              PASSIVE     0R/1%
+        R87        2       2              PASSIVE     1k
+        TP7        0       0              PASSIVE     
+
+[00002] +3V3_CM4
+        C12        1       1              PASSIVE     10uF/6.3V
+        C129       1       1              PASSIVE     0.22uF/6.3V
+        C138       1       1              PASSIVE     0.22uF/6.3V
+        C142       1       1              PASSIVE     0.22uF/6.3V
+        C146       1       1              PASSIVE     0.22uF/6.3V
+        C149       1       1              PASSIVE     0.22uF/6.3V
+        C152       1       1              PASSIVE     0.22uF/6.3V
+        C156       1       1              PASSIVE     0.22uF/6.3V
+        D13        2       A              PASSIVE     150060YS75000
+        D14        2       A              PASSIVE     150060YS75000
+        D16        2       A              PASSIVE     150060YS75000
+        D17        2       A              PASSIVE     150060YS75000
+        R3         2       2              PASSIVE     1k
+        R50        2       2              PASSIVE     4.7k
+        R51        2       2              PASSIVE     4.7k/DNP
+        R52        2       2              PASSIVE     4.7k
+        R67        1       1              PASSIVE     4.7k
+        R70        2       2              PASSIVE     4.7k
+        R71        2       2              PASSIVE     4.7k
+        R73        2       2              PASSIVE     4.7k
+        R75        2       2              PASSIVE     4.7k
+        R77        2       2              PASSIVE     4.7k
+        R85        1       1              PASSIVE     4.7k
+        R86        1       1              PASSIVE     4.7k
+        U3         4       OUT            POWER       TPS7A4533DCQR
+        U3         5       SENSE          INPUT       TPS7A4533DCQR
+        U20        16      CDPENZ2        PASSIVE     ISOUSB211
+        U20        24      VCC2           PASSIVE     ISOUSB211
+        U20        27      V3P3V2         PASSIVE     ISOUSB211
+        U20        28      VBUS2          PASSIVE     ISOUSB211
+        U21        1       VCC            POWER       FSUSB42MUX
+        U22        1       VDDA           POWER       MAX14431CAEE+
+        U22        7       ENA            PASSIVE     MAX14431CAEE+
+        U23        1       VCC1           POWER       ISO7721DR
+        U24        1       VDD1           POWER       ADUM1250WSRZ
+        U25        1       VDD1           POWER       ADUM1250WSRZ
+        U27        1       VDD1           POWER       ADUM1250WSRZ
+
+[00001] +3.3V_EXP-ISO
+        C105       1       1              PASSIVE     0.22uF/10V
+        C109       1       1              PASSIVE     0.22uF/10V
+        C114       2       2              PASSIVE     0.22uF/6.3V
+        C116       2       2              PASSIVE     0.22uF/6.3V
+        J3         9       9              PASSIVE     M80-5114242
+        J13        1       1              PASSIVE     JP2/DNP
+        R41        2       2              PASSIVE     4.7k
+        R43        2       2              PASSIVE     4.7k
+        R44        2       2              PASSIVE     1k
+        R46        2       2              PASSIVE     4.7k
+        R48        2       2              PASSIVE     4.7k
+        U15        8       VDD2           POWER       ADUM1250WSRZ
+        U16        8       VDD2           POWER       ADUM1250WSRZ
+        U17        10      ENB            PASSIVE     MAX14431CAEE+
+        U17        16      VDDB           POWER       MAX14431CAEE+
+        U18        8       VCC2           POWER       ISO7721DR
+

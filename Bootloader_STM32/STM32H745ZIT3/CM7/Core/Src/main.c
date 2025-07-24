@@ -55,32 +55,46 @@ void SystemClock_Config(void);
 static void MPU_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_CRC_Init(void);
-static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#define         SCHEDULER_TASK_COUNT  2
+static void watchdog_handler(void*);
+
+#define         SCHEDULER_TASK_COUNT  3
 uint32_t g_ui32SchedulerNumTasks = SCHEDULER_TASK_COUNT;
 tSchedulerTask g_psSchedulerTable[SCHEDULER_TASK_COUNT] =
 {
     {
-        .pfnFunction = Bootloader_Check_Available,           // Hàm điều khiển LED trạng thái
-        .pvParam = (void*)0,                 // Không có tham số
-        .ui32FrequencyTicks = 500,           // Gọi mỗi 500ms (500 tick, giả sử 1 tick = 1ms)
-        .ui32LastCall = 0,                   // Khởi tạo thời điểm gọi lần cuối
-        .bActive = true                      // Kích hoạt
+        .pfnFunction = watchdog_handler,     		// Hàm xử lí watchdog
+        .pvParam = (void*)0,                 		// Không có tham số
+        .ui32FrequencyTicks = 500,           		// Gọi mỗi 500ms (500 tick, giả sử 1 tick = 1ms)
+        .ui32LastCall = 0,                   		// Khởi tạo thời điểm gọi lần cuối
+		.bActive = true                      		// Kích hoạt
     },
     {
-        .pfnFunction = BL_UART_Fetch_Host_Command, // Hàm xử lý lệnh UART
-        .pvParam = (void*)0,                 // Không có tham số
-        .ui32FrequencyTicks = 10,             // Gọi mỗi 10ms (10 tick, giả sử 1 tick = 1ms)
-        .ui32LastCall = 0,                   // Khởi tạo thời điểm gọi lần cuối
-        .bActive = true                      // Kích hoạt
+        .pfnFunction = BL_UART_Fetch_Host_Command, 	// Hàm xử lý lệnh UART
+        .pvParam = (void*)0,                 		// Không có tham số
+        .ui32FrequencyTicks = 10,             		// Gọi mỗi 10ms (10 tick, giả sử 1 tick = 1ms)
+        .ui32LastCall = 0,                   		// Khởi tạo thời điểm gọi lần cuối
+        .bActive = true                      		// Kích hoạt
+    },
+    {
+        .pfnFunction = Bootloader_Check_Timeout, 	// Hàm xử lý lệnh UART
+        .pvParam = (void*)0,                 		// Không có tham số
+        .ui32FrequencyTicks = 10,             		// Gọi mỗi 10ms (10 tick, giả sử 1 tick = 1ms)
+        .ui32LastCall = 0,                   		// Khởi tạo thời điểm gọi lần cuối
+        .bActive = true                      		// Kích hoạt
     }
 };
+
+static void watchdog_handler(void*)
+{
+	HAL_GPIO_TogglePin(WD_DONE_GPIO_Port, WD_DONE_Pin);
+}
 
 /* USER CODE END 0 */
 
@@ -126,10 +140,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CRC_Init();
-  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   SchedulerInit(1000);
-  USART1_init();
+  USART2_init();
+  Bootloader_Check_Reset_Reason();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -172,7 +187,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 16;
+  RCC_OscInitStruct.PLL.PLLN = 12;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
@@ -190,14 +205,14 @@ void SystemClock_Config(void)
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
                               |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -235,16 +250,16 @@ static void MX_CRC_Init(void)
 }
 
 /**
-  * @brief USART1 Initialization Function
+  * @brief USART2 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_USART1_UART_Init(void)
+static void MX_USART2_UART_Init(void)
 {
 
-  /* USER CODE BEGIN USART1_Init 0 */
+  /* USER CODE BEGIN USART2_Init 0 */
 
-  /* USER CODE END USART1_Init 0 */
+  /* USER CODE END USART2_Init 0 */
 
   LL_USART_InitTypeDef USART_InitStruct = {0};
 
@@ -253,22 +268,22 @@ static void MX_USART1_UART_Init(void)
 
   /** Initializes the peripherals clock
   */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART1;
-  PeriphClkInitStruct.Usart16ClockSelection = RCC_USART16CLKSOURCE_D2PCLK2;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+  PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
 
   /* Peripheral clock enable */
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1);
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2);
 
   LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOA);
-  /**USART1 GPIO Configuration
-  PA9   ------> USART1_TX
-  PA10   ------> USART1_RX
+  /**USART2 GPIO Configuration
+  PA2   ------> USART2_TX
+  PA3   ------> USART2_RX
   */
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_9|LL_GPIO_PIN_10;
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_2|LL_GPIO_PIN_3;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -276,13 +291,13 @@ static void MX_USART1_UART_Init(void)
   GPIO_InitStruct.Alternate = LL_GPIO_AF_7;
   LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /* USART1 interrupt Init */
-  NVIC_SetPriority(USART1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
-  NVIC_EnableIRQ(USART1_IRQn);
+  /* USART2 interrupt Init */
+  NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
+  NVIC_EnableIRQ(USART2_IRQn);
 
-  /* USER CODE BEGIN USART1_Init 1 */
+  /* USER CODE BEGIN USART2_Init 1 */
 
-  /* USER CODE END USART1_Init 1 */
+  /* USER CODE END USART2_Init 1 */
   USART_InitStruct.PrescalerValue = LL_USART_PRESCALER_DIV1;
   USART_InitStruct.BaudRate = 115200;
   USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
@@ -291,25 +306,25 @@ static void MX_USART1_UART_Init(void)
   USART_InitStruct.TransferDirection = LL_USART_DIRECTION_TX_RX;
   USART_InitStruct.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
   USART_InitStruct.OverSampling = LL_USART_OVERSAMPLING_16;
-  LL_USART_Init(USART1, &USART_InitStruct);
-  LL_USART_SetTXFIFOThreshold(USART1, LL_USART_FIFOTHRESHOLD_1_8);
-  LL_USART_SetRXFIFOThreshold(USART1, LL_USART_FIFOTHRESHOLD_1_8);
-  LL_USART_DisableFIFO(USART1);
-  LL_USART_ConfigAsyncMode(USART1);
+  LL_USART_Init(USART2, &USART_InitStruct);
+  LL_USART_SetTXFIFOThreshold(USART2, LL_USART_FIFOTHRESHOLD_1_8);
+  LL_USART_SetRXFIFOThreshold(USART2, LL_USART_FIFOTHRESHOLD_1_8);
+  LL_USART_DisableFIFO(USART2);
+  LL_USART_ConfigAsyncMode(USART2);
 
-  /* USER CODE BEGIN WKUPType USART1 */
+  /* USER CODE BEGIN WKUPType USART2 */
 
-  /* USER CODE END WKUPType USART1 */
+  /* USER CODE END WKUPType USART2 */
 
-  LL_USART_Enable(USART1);
+  LL_USART_Enable(USART2);
 
-  /* Polling USART1 initialisation */
-  while((!(LL_USART_IsActiveFlag_TEACK(USART1))) || (!(LL_USART_IsActiveFlag_REACK(USART1))))
+  /* Polling USART2 initialisation */
+  while((!(LL_USART_IsActiveFlag_TEACK(USART2))) || (!(LL_USART_IsActiveFlag_REACK(USART2))))
   {
   }
-  /* USER CODE BEGIN USART1_Init 2 */
+  /* USER CODE BEGIN USART2_Init 2 */
 
-  /* USER CODE END USART1_Init 2 */
+  /* USER CODE END USART2_Init 2 */
 
 }
 
@@ -320,12 +335,24 @@ static void MX_USART1_UART_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
 
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(WD_DONE_GPIO_Port, WD_DONE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : WD_DONE_Pin */
+  GPIO_InitStruct.Pin = WD_DONE_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(WD_DONE_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

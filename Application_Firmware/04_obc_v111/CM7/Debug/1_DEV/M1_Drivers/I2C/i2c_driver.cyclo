@@ -1,0 +1,11 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:1552:26:LL_I2C_IsActiveFlag_TXE	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:1565:26:LL_I2C_IsActiveFlag_TXIS	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:1578:26:LL_I2C_IsActiveFlag_RXNE	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:1604:26:LL_I2C_IsActiveFlag_NACK	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:1741:26:LL_I2C_IsActiveFlag_BUSY	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:1977:22:LL_I2C_AcknowledgeNextData	1
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:2133:22:LL_I2C_HandleTransfer	1
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:2225:25:LL_I2C_ReceiveData8	1
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_i2c.h:2237:22:LL_I2C_TransmitData8	1
+../1_DEV/M1_Drivers/I2C/i2c_driver.c:13:16:I2C_Write	12
+../1_DEV/M1_Drivers/I2C/i2c_driver.c:67:16:I2C_Read	13

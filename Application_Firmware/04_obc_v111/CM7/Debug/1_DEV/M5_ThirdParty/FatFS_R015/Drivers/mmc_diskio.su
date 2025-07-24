@@ -1,0 +1,13 @@
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:63:16:MMC_CheckStatus	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:71:16:MMC_Initialize	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:114:16:MMC_Read	40	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:167:16:MMC_Write	40	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:221:16:MMC_Ioctl	56	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:254:6:BSP_MMC_WriteCpltCallback	24	static,ignoring_inline_asm
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:272:6:BSP_MMC_ReadCpltCallback	24	static,ignoring_inline_asm
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:292:16:MMC1_initialize	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:293:16:MMC1_status	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:294:16:MMC1_read	24	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:296:16:MMC1_write	24	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:299:16:MMC1_ioctl	16	static
+../1_DEV/M5_ThirdParty/FatFS_R015/Drivers/mmc_diskio.c:314:26:MMC1_GetDriver	4	static

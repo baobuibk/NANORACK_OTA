@@ -1,0 +1,5 @@
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:803:26:LL_GPIO_IsInputPinSet	2
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:884:22:LL_GPIO_SetOutputPin	1
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:913:22:LL_GPIO_ResetOutputPin	1
+../1_DEV/M2_System/AliveCM4/alive_cm4.c:28:6:CM4_KeepAliveTask	8
+../1_DEV/M2_System/AliveCM4/alive_cm4.c:75:10:CM4_GetMissCount	1

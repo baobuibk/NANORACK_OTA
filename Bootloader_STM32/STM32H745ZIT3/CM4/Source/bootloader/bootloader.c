@@ -8,7 +8,7 @@
 
 bool Jump_To_App(void)
 {
-	 uint32_t app_address = FIRMWARE_BANK2_BASE;
+	 uint32_t app_address = FIRMWARE1_CORE2_MEM_BASE;
 	__disable_irq();
 
 	for (uint8_t i = 0; i < 8; i++)

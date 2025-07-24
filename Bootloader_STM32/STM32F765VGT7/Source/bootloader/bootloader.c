@@ -13,9 +13,7 @@ static void Bootloader_Get_Chip_Identification_Number(uint8_t *Host_Buffer);
 static void Bootloader_Jump_To_User_App(void);
 static void Bootloader_Erase_Flash(uint8_t *Host_Buffer);
 static void Bootloader_Memory_Write(uint8_t *Host_Buffer);
-//static void RESET_CHIP(void);
 static uint8_t Firmware_Check_Available(void);
-void Bootloader_CRC_Verify_Seq(uint8_t *pData, uint32_t Data_Len, uint32_t *InitVal);
 static uint8_t Bootloader_CRC_Verify(uint8_t *pData, uint32_t Data_Len, uint32_t Host_CRC);
 static void Bootloader_Send_NACK(void);
 static void Bootloader_Send_Data_To_Host(uint8_t *Host_Buffer, uint32_t Data_Len);
@@ -469,22 +467,6 @@ static uint8_t Bootloader_CRC_Verify(uint8_t *pData, uint32_t Data_Len, uint32_t
 }
 
 /**
- * Tính CRC tuần tự cho dữ liệu
- * @param pData: Dữ liệu cần tính
- * @param Data_Len: Độ dài dữ liệu
- * @param InitVal: Giá trị CRC tính được
- */
-void Bootloader_CRC_Verify_Seq(uint8_t *pData, uint32_t Data_Len, uint32_t *InitVal)
-{
-    CRC->CR = CRC_CR_RESET;
-    for (unsigned int i = 0; i < Data_Len; i++)
-    {
-        CRC->DR = (uint32_t) pData[i];
-    }
-    *InitVal = CRC->DR;
-}
-
-/**
  * Gửi NACK về host
  */
 static void Bootloader_Send_NACK(void) {
@@ -501,23 +483,6 @@ static void Bootloader_Send_Data_To_Host(uint8_t *Host_Buffer, uint32_t Data_Len
     UART7_send_array((const char*) Host_Buffer, (uint8_t) Data_Len);
 }
 
-/**
- * Reset chip
- */
-/*static void RESET_CHIP(void) {
-    uint8_t appExists = 1;
-    Bootloader_Send_Data_To_Host((uint8_t*)&appExists, 1);
-    HAL_Delay(1);
-
-    while (!rbuffer_empty(&p_UART7_meta->rb_tx));
-
-    __disable_irq();
-
-    SysTick->CTRL = 0;
-    SysTick->LOAD = 0;
-
-    NVIC_SystemReset();
-}*/
 
 /**
  * Tính CRC cho firmware
