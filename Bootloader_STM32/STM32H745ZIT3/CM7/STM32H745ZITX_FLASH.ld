@@ -50,6 +50,7 @@ MEMORY
   RAM_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 288K
   RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K
   ITCMRAM (xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
+  BKPRAM (xrw)  : ORIGIN = 0x38800000, LENGTH = 4K
 }
 
 /* Sections */
@@ -177,6 +178,12 @@ SECTIONS
     . = ALIGN(8);
   } >RAM_D1
 
+  .bkpram (NOLOAD) :
+  {
+    *(.bkpram .bkpram.*)
+    . = ALIGN(4);
+  } > BKPRAM
+  
   /* Remove information from the compiler libraries */
   /DISCARD/ :
   {

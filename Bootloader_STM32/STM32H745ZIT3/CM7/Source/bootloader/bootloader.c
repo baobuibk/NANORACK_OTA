@@ -1,6 +1,7 @@
 /************************************             Includes               ************************************/
 #include "bootloader.h"
 
+wdg_no_init_vars no_init_vars __attribute__((section (".bkpram")));
 
 extern usart_meta_t USART2_meta;
 extern usart_meta_t *p_USART2_meta;
@@ -25,6 +26,9 @@ static uint8_t Flash_Read_Metadata(s_firmware_info* fw_info, uint8_t fw_number);
 static uint8_t Flash_Write_Metadata(s_firmware_info* fw_info, uint8_t fw_number);
 static uint8_t Flash_CopyData(uint32_t src_addr, uint32_t dst_addr, uint32_t length);
 static void Bootloader_check_connection(void);
+
+static void EnableBackupRAM(void);
+static void DisableBackupRAM(void);
 /************************************    Global Variables Definitions     ************************************/
 static uint8_t BL_Host_Buffer[150];
 uint8_t frame_index = 0;
@@ -124,23 +128,23 @@ static void Bootloader_check_connection(void)
 	Bootloader_Send_Data_To_Host((uint8_t*)status, 3);
 }
 
-void Bootloader_Check_Reset_Reason(void)
-{
-	s_firmware_info fw_info;
-	if(Flash_Read_Metadata(&fw_info, 1) != FOTA_SUCCESS)	return;
-	if(fw_info.fota_rqt == false)		// reset due to hw, ...
-	{
-		Bootloader_Jump_To_User_App();
-	}
-	else	// else: reset due to host request to bootloader mode
-	{
-		// send frame to host: reset to bootloader done
-		uint8_t status[3] = {FOTA_SUCCESS, 'O', 'K'};
-		Bootloader_Send_Data_To_Host((uint8_t*)status, 3);
-		boot_timeout = BLD_TIMEOUT;
-	}
-
-}
+//void Bootloader_Check_Reset_Reason(void)
+//{
+//	s_firmware_info fw_info;
+//	if(Flash_Read_Metadata(&fw_info, 1) != FOTA_SUCCESS)	return;
+//	if(fw_info.fota_rqt == false)		// reset due to hw, ...
+//	{
+//		Bootloader_Jump_To_User_App();
+//	}
+//	else	// else: reset due to host request to bootloader mode
+//	{
+//		// send frame to host: reset to bootloader done
+//		uint8_t status[3] = {FOTA_SUCCESS, 'O', 'K'};
+//		Bootloader_Send_Data_To_Host((uint8_t*)status, 3);
+//		boot_timeout = BLD_TIMEOUT;
+//	}
+//
+//}
 
 void Bootloader_Check_Timeout(void*)
 {
@@ -293,7 +297,6 @@ static void Bootloader_Erase_Flash(uint8_t *Host_Buffer)
 {
     uint8_t Erase_Status;
     s_firmware_info fw_info;
-	fw_info.fota_rqt = false;
 	fw_info.address = 0;
 	fw_info.length = 0;
 	fw_info.crc = 0;
@@ -389,6 +392,12 @@ static void Bootloader_Memory_Write(uint8_t *Host_Buffer)
 	if(!Frame_Index)
 	{
 		Address_to_write = (fw_number == 1) ? FIRMWARE1_CORE1_MEM_BASE : FIRMWARE1_CORE2_MEM_BASE;
+		Status = Flash_Read_Metadata(&Temp_Firmware, fw_number);
+		if(Status != FOTA_SUCCESS)
+		{
+			Bootloader_Send_Data_To_Host((uint8_t*) &Status, 1);
+			return;
+		}
 		Temp_Firmware.address = Address_to_write;
 		Temp_Firmware.crc = 0;
 		Temp_Firmware.length = 0;
@@ -405,8 +414,12 @@ static void Bootloader_Memory_Write(uint8_t *Host_Buffer)
 		if (Frame_Index == (Total_Frame - 1))
 		{
 			Temp_Firmware.crc = Firmware_CRC_Verification(Temp_Firmware.address, Temp_Firmware.length);
-			Temp_Firmware.fota_rqt = false;
-			Flash_Write_Metadata(&Temp_Firmware, fw_number);
+			Status = Flash_Write_Metadata(&Temp_Firmware, fw_number);
+			if(Status != FOTA_SUCCESS)
+			{
+				Bootloader_Send_Data_To_Host((uint8_t*) &Status, 1);
+				return;
+			}
 		}
 	}
 
@@ -653,47 +666,48 @@ static uint8_t Flash_Read_Metadata(s_firmware_info* fw_info, uint8_t fw_number)
 static uint8_t Firmware_Check_Available(void)
 {
     uint32_t CRC_Result = 0;
-    s_firmware_info fw_info;
-
+    s_firmware_info fw_info1;
+    s_firmware_info fw_info2;
     // Kiểm tra Firmware 1 core 1
-    memset(&fw_info, 0, sizeof(fw_info));
-    if(Flash_Read_Metadata(&fw_info, 1) == FOTA_FAILED)	return FOTA_FAILED;
+    memset(&fw_info1, 0, sizeof(fw_info1));
+    if(Flash_Read_Metadata(&fw_info1, 1) == FOTA_FAILED)	return FOTA_FAILED;
 
-    if (fw_info.length > 0)
+    if(fw_info1.address != FIRMWARE1_CORE1_MEM_BASE)	return FOTA_FAILED;
+
+    if (fw_info1.length > 0)
     {
-		CRC_Result = Firmware_CRC_Verification(fw_info.address, fw_info.length);
-		if (CRC_Result != fw_info.crc)
+		CRC_Result = Firmware_CRC_Verification(fw_info1.address, fw_info1.length);
+		if (CRC_Result != fw_info1.crc)
 		{
-			if (Flash_CopyData(FIRMWARE2_CORE1_MEM_BASE, FIRMWARE1_CORE1_MEM_BASE, fw_info.length) != FOTA_SUCCESS)	return FOTA_FAILED;
-			CRC_Result = Firmware_CRC_Verification(fw_info.address, fw_info.length);
+			if (Flash_CopyData(FIRMWARE2_CORE1_MEM_BASE, FIRMWARE1_CORE1_MEM_BASE, fw_info1.length) != FOTA_SUCCESS)	return FOTA_FAILED;
+			CRC_Result = Firmware_CRC_Verification(fw_info1.address, fw_info1.length);
 		}
 
-		if (CRC_Result != fw_info.crc)	return FOTA_FAILED;
+		if (CRC_Result != fw_info1.crc)	return FOTA_FAILED;
     }
 
     else return FOTA_FAILED;
 
     // Kiểm tra Firmware 1 core 2
-    memset(&fw_info, 0, sizeof(fw_info));
-    if(Flash_Read_Metadata(&fw_info, 2) == FOTA_FAILED)	return FOTA_FAILED;
+    memset(&fw_info2, 0, sizeof(fw_info2));
+    if(Flash_Read_Metadata(&fw_info2, 2) == FOTA_FAILED)	return FOTA_FAILED;
+    if(fw_info2.address != FIRMWARE1_CORE2_MEM_BASE)	return FOTA_FAILED;
 
-    if (fw_info.length > 0)
+    if (fw_info2.length > 0)
     {
-		CRC_Result = Firmware_CRC_Verification(fw_info.address, fw_info.length);
-		if (CRC_Result != fw_info.crc)
+		CRC_Result = Firmware_CRC_Verification(fw_info2.address, fw_info2.length);
+		if (CRC_Result != fw_info2.crc)
 		{
-			if (Flash_CopyData(FIRMWARE2_CORE2_MEM_BASE, FIRMWARE1_CORE2_MEM_BASE, fw_info.length) != FOTA_SUCCESS)	return FOTA_FAILED;
-			CRC_Result = Firmware_CRC_Verification(fw_info.address, fw_info.length);
+			if (Flash_CopyData(FIRMWARE2_CORE2_MEM_BASE, FIRMWARE1_CORE2_MEM_BASE, fw_info2.length) != FOTA_SUCCESS)	return FOTA_FAILED;
+			CRC_Result = Firmware_CRC_Verification(fw_info2.address, fw_info2.length);
 		}
 
-		if (CRC_Result != fw_info.crc)	return FOTA_FAILED;
+		if (CRC_Result != fw_info2.crc)	return FOTA_FAILED;
     }
 
     else return FOTA_FAILED;
 
 	uint32_t app_address = FIRMWARE1_CORE1_MEM_BASE;
-	fw_info.fota_rqt = false;
-	if(Flash_Write_Metadata(&fw_info, 1) != FOTA_SUCCESS) return FOTA_FAILED;
 	if(Jump_To_App(app_address) != FOTA_SUCCESS) return FOTA_FAILED;
 	return FOTA_FAILED;
 }
@@ -736,4 +750,53 @@ static uint8_t Flash_CopyData(uint32_t src_addr, uint32_t dst_addr, uint32_t len
 	return FOTA_SUCCESS;
 }
 
+void update_no_init_vars(uint32_t reset_cause)
+{
+	EnableBackupRAM();
+    memset(&no_init_vars, 0, sizeof(no_init_vars));
+    no_init_vars.magic = WDG_NO_INIT_VARS_MAGIC;
+    no_init_vars.reset_cause = reset_cause;
+    no_init_vars.reset_wdg_id = 0;
+    DisableBackupRAM();
+}
 
+void validate_no_init_vars(void)
+{
+	EnableBackupRAM();
+    if (no_init_vars.magic != WDG_NO_INIT_VARS_MAGIC)
+    {
+        memset(&no_init_vars, 0, sizeof(no_init_vars));
+        no_init_vars.magic = WDG_NO_INIT_VARS_MAGIC;
+        no_init_vars.reset_cause = RESET_CAUSE_NORMAL;
+        no_init_vars.reset_wdg_id = 0xFF;
+
+    }
+
+    if (no_init_vars.reset_cause == RESET_CAUSE_BOOTLOADER)
+    {
+		boot_timeout = BLD_TIMEOUT;
+    }
+
+    else if (no_init_vars.reset_cause == RESET_CAUSE_NORMAL)
+	{
+		boot_timeout = BLD_TIMEOUT_NORMAL;
+	}
+
+    DisableBackupRAM();
+    return;
+}
+
+static void EnableBackupRAM(void)
+{
+    HAL_PWR_EnableBkUpAccess();
+    __HAL_RCC_BKPRAM_CLK_ENABLE();
+    HAL_PWREx_EnableBkUpReg();
+    while (!__HAL_PWR_GET_FLAG(PWR_FLAG_BRR));
+}
+
+static void DisableBackupRAM(void)
+{
+    HAL_PWREx_DisableBkUpReg();
+    __HAL_RCC_BKPRAM_CLK_DISABLE();
+    HAL_PWR_DisableBkUpAccess();
+}

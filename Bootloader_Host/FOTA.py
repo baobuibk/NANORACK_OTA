@@ -10,6 +10,23 @@ import hashlib
 import json
 from tqdm import tqdm
 import serial.tools.list_ports
+import RPi.GPIO as GPIO
+
+
+def GPIO9_Init():
+    GPIO_PIN = 9
+    GPIO.setup(GPIO_PIN, GPIO.OUT)
+    GPIO9_Set_Output(True)
+    return True
+
+def GPIO9_Set_Output(state: bool) -> bool:
+    GPIO_PIN = 9
+    if not GPIO.gpio_function(GPIO_PIN) == GPIO.OUT:
+        GPIO.setup(GPIO_PIN, GPIO.OUT)
+    GPIO.output(GPIO_PIN, GPIO.HIGH if state else GPIO.LOW)
+    return True
+
+
 
 CRC_TABLE = [
     0x00000000, 0x04C11DB7, 0x09823B6E, 0x0D4326D9, 0x130476DC, 0x17C56B6B, 0x1A864DB2, 0x1E475005,
@@ -71,7 +88,7 @@ def list_bin_files(mcu):
         print("No .bin files found in the current directory!")
     else:
         print("Available .bin files:")
-        for index, file in enumerate(sorted(bin_files), start=1):
+        for index, file in enumerate(bin_files, start=1):
             print(f"{index}: {file}")
     
     # Select .bin file
@@ -112,14 +129,13 @@ def list_bin_files(mcu):
         except KeyboardInterrupt:
             print("\nOperation cancelled by user.")
             return None, None
-    
     # List .json files
     json_files = [f for f in os.listdir(current_dir) if f.lower().endswith('.json')]
     if not json_files:
         print("No metadata files found in the current directory!")
     else:
         print("Available metadata files:")
-        for index, file in enumerate(sorted(json_files), start=1):
+        for index, file in enumerate(json_files, start=1):
             print(f"{index}: {file}")
     
     # Select .json file
@@ -152,6 +168,11 @@ def list_bin_files(mcu):
             return bin_file, None
     
     return bin_file, json_file
+
+
+
+
+
 
 #######################  VALID FIRMWARE BIN FILE  ######################
 def calculate_sha256(file_path):
@@ -197,7 +218,10 @@ def is_valid_bin_file(file_path):
 def is_valid_json_file(file_path):
     """Check if file has .json extension"""
     return file_path.lower().endswith('.json')
+
 def valid_bin_file(bin_file, json_file):
+    print(bin_file)
+    print(json_file)
     file_name, version, stored_hash, stored_size = read_json_file(json_file)
     if stored_size and isinstance(stored_size, str) and stored_size.startswith("Error"):
         print(stored_size)
@@ -221,7 +245,7 @@ def valid_bin_file(bin_file, json_file):
 ##################################################################
 
 class STM32Bootloader:
-    def __init__(self, mcu, port = 'com13', baudrate=115200):
+    def __init__(self, mcu, port = '/dev/ttyAMA3', baudrate=115200):
         self.mcu = mcu
         self.port = port
         self.baudrate = baudrate
@@ -229,6 +253,64 @@ class STM32Bootloader:
         self.firmware_number = None  # Store firmware selection
         self.NOT_ACKNOWLEDGE = 0xAB
         self.FOTA_SUCCEEDED = 0
+
+    def send_board_reset(self):
+        if self.mcu == 1:
+            print("\rReseting EXP...", end='')
+        else:
+            print("\rReseting OBC...", end='')
+        send_frame = None
+        expected_frame = None
+        SFP_START1_BYTE = 0xC0
+        SFP_START2_BYTE = 0xDE
+        if self.mcu == 2:
+            send_frame = [0xC0, 0xDE, 0x03, 0x00, 0x00, 0x50, 0x59, 0xDA, 0xED]
+            expected_frame = [0xC0, 0xDE, 0x13, 0x00, 0x00, 0x33, 0x1A, 0xDA, 0xED]
+        elif self.mcu == 1:
+            GPIO9_Set_Output(True)
+            time.sleep(1)
+            GPIO9_Set_Output(False)
+            send_frame = [0xC0, 0xDE, 0x04, 0x00, 0x00, 0xC0, 0xDC, 0xDA, 0xED]
+            expected_frame = [0xC0, 0xDE, 0x14, 0x00, 0x00, 0xA3, 0x9F, 0xDA, 0xED]
+        else:
+            return False
+        
+        self.serial.reset_input_buffer()
+        self.serial.reset_output_buffer()
+        self.serial.write(bytes(send_frame))
+        
+        start_time = time.time()
+        state = "WAIT_START1"
+        byte_index = 0
+        
+        while time.time() - start_time < 10:
+            if self.serial.in_waiting > 0:
+                data = self.serial.read(self.serial.in_waiting)
+                for byte in data:
+                    if state == "WAIT_START1":
+                        if byte == SFP_START1_BYTE:
+                            state = "WAIT_START2"
+                            byte_index = 1
+                    
+                    elif state == "WAIT_START2":
+                        if byte == SFP_START2_BYTE:
+                            state = "CHECK_FRAME"
+                            byte_index = 2
+                        else:
+                            state = "WAIT_START1"
+                    
+                    elif state == "CHECK_FRAME":
+                        if byte != expected_frame[byte_index]:
+                            state = "WAIT_START1"
+                            byte_index = 0
+                        else:
+                            byte_index += 1
+                            if byte_index == len(expected_frame):
+                                print("   \033[32mDone ✓\033[0m")
+                                return True
+        print("   \033[31mFailed ✗\033[0m")
+        return False
+
 
     def read_firmware_detail(self):
         """Read Firmware Version (0x16)"""
@@ -249,7 +331,7 @@ class STM32Bootloader:
             print(f"Firmware {self.firmware_number} Version: {response[1]}.{response[2]}.{response[3]}")
             print(f"Firmware {self.firmware_number} Size: {(response[4]<< 8) | response[5]}KB")
             return True
-        print("   \033[31mFailed ✗\033[0m")# to read firmware data!")
+        print("   \033[31mFailed ✗\033[0m")
         return False
     
     def write_firmware_version(self, version_name):
@@ -289,7 +371,7 @@ class STM32Bootloader:
                 bytesize=serial.EIGHTBITS,
                 timeout=2
             )
-            print(f"Connected to STM32 on {self.port.upper()}")
+            print(f"Port {self.port.upper()} opened.")
             return True
         except serial.SerialException as e:
             print(f"Serial connection error: {e}")
@@ -313,7 +395,7 @@ class STM32Bootloader:
         packet[1] = 0x10
         crc = calculate_crc32(packet[:2])
         struct.pack_into('<I', packet, 2, crc)
-        response = self.send_packet(packet, 2, 1)
+        response = self.send_packet(packet, 2, 5)
         if response and response[0] != self.NOT_ACKNOWLEDGE:
             chip_id = (response[1] << 8) | response[0]
             print(f"Chip ID: 0x{chip_id:04X}")
@@ -330,7 +412,7 @@ class STM32Bootloader:
         packet[1] = 0x15
         crc = calculate_crc32(packet[:2])
         struct.pack_into('<I', packet, 2, crc)
-        response = self.send_packet(packet, 3, 3)
+        response = self.send_packet(packet, 3, 5)
         if response and response[0] == self.FOTA_SUCCEEDED and response[1] == ord('O') and response[2] == ord('K'):
             print("   \033[32mDone ✓\033[0m")
             time.sleep(0.6)
@@ -370,14 +452,14 @@ class STM32Bootloader:
         if mode == 0:
             while True:
                 choice = input("Select core number (1 or 2): ")
-                if self.mcu == 1:         #mcu is f4 or f7 (1 core)
+                if self.mcu == 1:         #board is exp (1 core)
                     if choice == "1":
                         self.firmware_number = int(choice)
                         print(f"Firmware {self.firmware_number} selected")
                         return True
                     else:
-                        print("Invalid input! MCU F4, F7 have 1 core, pls enter 1.")
-                elif self.mcu == 2:         #mcu is h7 (2 core) 
+                        print("Invalid input! board EXP have 1 core, pls enter 1.")
+                elif self.mcu == 2:         #board is obc (2 core) 
                     if choice in ["1", "2"]:
                         self.firmware_number = int(choice)
                         print(f"Core {self.firmware_number} selected")
@@ -454,9 +536,6 @@ class STM32Bootloader:
             if not response or response[0] != self.FOTA_SUCCEEDED:
                 print("\r\n\033[31mUpload failed!\033[0m")
                 return False
-
-            progress = int((i + actual_chunk_size) / file_size * 100)
-            #print(f"Process: {progress:.1f}%")
             frame_index += 1
 
         print("\033[32mDone ✓\033[0m")
@@ -471,9 +550,11 @@ class STM32Bootloader:
         
         crc = calculate_crc32(packet[:2])  # CRC trên 2 byte đầu
         struct.pack_into('<I', packet, 2, crc)  # Nhúng CRC vào packet
-        response = self.send_packet(packet, 1, 5)
+        response = self.send_packet(packet, 1, 10)
         if response and response[0] == self.FOTA_SUCCEEDED:
             print("   \033[32mDone ✓\033[0m")
+            if(self.mcu == 1):
+                GPIO9_Set_Output(True)
             return True
         print("   \033[31mFailed ✗\033[0m")
         return False
@@ -528,17 +609,16 @@ def process_opt_mode():
         
     while True:
         try:
-            print("Choose your mcu selection:")
-            print("1: STM32F4, STM32F7 (single core)")
-            print("2: STM32H7 (dual core)")
+            print("Choose board selection:")
+            print("1: EXP (singlecore)")
+            print("2: OBC (dualcore)")
             choice = input("Select an option: ")
             choice = int(choice)
             if 1 <= choice <= 2:
                 mcu = choice
-                print(f"Device {('STM32F4, STM32F7' if mcu == 1 else 'STM32H7')} selected.")
+                print(f"Board {('EXP' if mcu == 1 else 'OBC')} selected.")
                 break
             raise ValueError
-            #print("Invalid choice. Please select 1 to 2.")
         except ValueError as e:
             print(f"Invalid choice. Please select 1 to 2.")
         except KeyboardInterrupt:
@@ -548,35 +628,36 @@ def process_opt_mode():
     bootloader = STM32Bootloader(mcu)
     if not bootloader.connect_serial():
         return
-    
+            
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(True)
+    GPIO9_Init()
     connection_checked = False 
     
     while True:
         try:
             print("\nMenu Options:")
-            print("1: Check Connection")
-            print("2: Read Chip ID")
-            # print("3: Select Core (1 or 2)")
-            # print("4: Erase Flash")
-            # print("5: Select Firmware File")
-            print("3: Flash Firmware")
-            # print("7: Write Firmware Version")
-            print("4: Read Firmware Detail")
-            # print("9: Jump to Application")
-            # print("5: UART Console")
-            print("5: Exit")
+            print("1: Reset to bootloader")
+            print("2: Check Connection")
+            print("3: Read Chip ID")
+            print("4: Flash Firmware")
+            print("5: Read Firmware Detail")
+            print("6: Exit")
 
-            choice = input("Select an option (1-11): ")
-            if choice in ["2", "3", "4"]:
+            choice = input("Select an option (1-6): ")
+            if choice in ["3", "4", "5"]:
                 if not connection_checked:
-                    print("Error: Please select 'Check Connection' (option 1) first.")
+                    print("Error: Please select 'Check Connection' (option 2) first.")
                     continue
-                
             if choice == "1":
-                    connection_checked = bootloader.check_connection()      
+                if not bootloader.send_board_reset():
+                    continue
+                   
             elif choice == "2":
-                bootloader.read_chip_id()
+                connection_checked = bootloader.check_connection()      
             elif choice == "3":
+                bootloader.read_chip_id()
+            elif choice == "4":
                 if(mcu == 1):
                     bin_file1, json_file1 = list_bin_files(0)     # select .bin file
                 else:
@@ -589,51 +670,13 @@ def process_opt_mode():
                     status, version1 = valid_bin_file(bin_file1, json_file1)
                     if not status:
                         continue
-                    # file_name, version1, stored_hash, stored_size = read_json_file(json_file1)
-                    # if stored_size and isinstance(stored_size, str) and stored_size.startswith("Error"):
-                    #     print(stored_size)
-                    #     continue
-                    
-                    # current_hash, hash_error = calculate_sha256(bin_file1)
-                    # current_size, size_error = get_file_size(bin_file1)
-                    
-                    # if current_hash is None:
-                    #     print(hash_error)
-                    #     continue
-                    # if current_size is None:
-                    #     print(size_error)
-                    #     continue   
-                    # if current_hash == stored_hash and current_size == stored_size: #verify bin1 ok
-                    #     print(f"Verified {bin_file1} done!")
-                    # else:
-                    #     print(f"Verified {bin_file1} failed!")
-                    #     continue
-                
-                if(mcu == 2):       #if mcu is h7 have 2 core    
+
+                if(mcu == 2):       #if obc have 2 core    
                     bin_file2, json_file2 = list_bin_files(2)     # select .bin file
                     if not bin_file2 or not json_file2:
                         bootloader.close()
                         sys.exit(0)
                     else:
-                        # file_name, version2, stored_hash, stored_size = read_json_file(json_file2)
-                        # if stored_size and isinstance(stored_size, str) and stored_size.startswith("Error"):
-                        #     print(stored_size)
-                        #     continue
-                        
-                        # current_hash, hash_error = calculate_sha256(bin_file2)
-                        # current_size, size_error = get_file_size(bin_file2)
-                        
-                        # if current_hash is None:
-                        #     print(hash_error)
-                        #     continue
-                        # if current_size is None:
-                        #     print(size_error)
-                        #     continue   
-                        # if current_hash == stored_hash and current_size == stored_size: #verify bin1 ok
-                        #     print(f"Verified {bin_file2} done!")
-                        # else:
-                        #     print(f"Verified {bin_file2} failed!")
-                        #     continue
                         status, version2 = valid_bin_file(bin_file2, json_file2)
                         if not status:
                             continue
@@ -667,27 +710,14 @@ def process_opt_mode():
                 else:
                     connection_checked = False
                     
-            elif choice == "7":
-                while True:
-                    try:
-                        ver = input("Enter version name (e.g., 1.0.0): ").strip()
-                        if not re.match(r"^\d+\.\d+\.\d+$", ver):
-                            raise ValueError(f"{ver} must follow 'x.y.z' format (e.g., 1.0.0).")
-                        break    
-                    except ValueError as e:
-                        print(e)
-                bootloader.write_firmware_version(ver)
-            elif choice == "8":
+            elif choice == "5":
+                bootloader.select_firmware(1)
                 bootloader.read_firmware_detail()
-            elif choice == "9":
-                if bootloader.jump_to_application():
-                    connection_checked = False
-            elif choice == "10": 
-                #if connection_checked:
-                #    print("This selection is used for console mode in Application! Please select 'Jump to Application' (option 9) to use this selection.")
-                #else:
-                bootloader.uart_terminal()
-            elif choice == "11":
+                
+                bootloader.select_firmware(2)
+                bootloader.read_firmware_detail()
+
+            elif choice == "6":
                 print("Exiting...")
                 bootloader.close()
                 break
@@ -710,9 +740,13 @@ def process_seq_mode(args):
     """
     print("Processing in Sequential Mode:")
     
-    if args.mcu in ["F4", "F7", "f4", "f7"]:
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(True)
+    GPIO9_Init()
+    
+    if args.board in ["EXP", "exp"]:
         mcu = 1
-    elif args.mcu in ["H7", "h7"]:
+    elif args.board in ["OBC", "obc"]:
         mcu = 2
         
     bootloader = STM32Bootloader(mcu, args.port)
@@ -789,12 +823,16 @@ def process_seq_mode(args):
         if not status:
             return 
     
-
+    '''Step 1: Check connection: jump to bootloader'''
+    if not bootloader.send_board_reset():
+        bootloader.close()
+        sys.exit(1)
+    time.sleep(0.5)
+    
     '''Step 1: Check connection: jump to bootloader'''
     if not bootloader.check_connection():
         bootloader.close()
         sys.exit(1)
-    time.sleep(0.1)
     
     '''Step 2: Select firmware 1'''
     bootloader.select_firmware(1)
@@ -855,18 +893,18 @@ def validate_fw_args(args):
         raise argparse.ArgumentError(None, "Port argument (-port) is required.")
     
     # Check bin file for MCU
-    if args.mcu in ["F4", "F7", "f4", "f7"]:
+    if args.board in ["exp", "EXP"]:
         if not args.bin:
-            raise argparse.ArgumentError(None, f"For MCU {args.mcu}, exactly one -bin argument is required.")
+            raise argparse.ArgumentError(None, f"For board EXP, exactly one -bin argument is required.")
         if args.bin1 or args.bin2:
-            raise argparse.ArgumentError(None, f"For MCU {args.mcu}, use -bin, not -bin1 or -bin2.")
-    elif args.mcu in ["H7", "h7"]:
+            raise argparse.ArgumentError(None, f"For board EXP, use -bin, not -bin1 or -bin2.")
+    elif args.board in ["obc", "OBC"]:
         if not (args.bin1 and args.bin2):
-            raise argparse.ArgumentError(None, "For MCU H7, both -bin1 and -bin2 arguments are required.")
+            raise argparse.ArgumentError(None, "For board OBC, both -bin1 and -bin2 arguments are required.")
         if args.bin:
-            raise argparse.ArgumentError(None, "For MCU H7, use -bin1 and -bin2, not -bin.")
+            raise argparse.ArgumentError(None, "For board OBC, use -bin1 and -bin2, not -bin.")
     else:
-        raise argparse.ArgumentError(None, "Invalid MCU type. Must be 'F4', 'F7', or 'H7'.")
+        raise argparse.ArgumentError(None, "Invalid MCU type. Must be 'EXP', or 'OBC'.")
     
     
 
@@ -874,15 +912,15 @@ def main():
     parser = argparse.ArgumentParser(description="FOTA update for STM32 MCU")
     parser.add_argument("-mode", type=str, default="opt", choices=["opt", "seq"], help="Option mode: 'option' for interactive menu, 'seq' for sequential FOTA")
     parser.add_argument("-port", type=str, default="/dev/ttyAMA3", help="Serial port (e.g., COMx or /dev/ttyUSB0)")
-    parser.add_argument("-mcu", type=str, help="MCU type (F4 or F7 or H7)")
+    parser.add_argument("-board", type=str, help="Board type (EXP or OBC)")
     
-    parser.add_argument("-bin", type=str, help="Single .bin file for F4 & F7")
-    parser.add_argument("-bin1", type=str, help="First .bin file for H7")
-    parser.add_argument("-bin2", type=str, help="Second .bin file for H7")
+    parser.add_argument("-bin", type=str, help="Single .bin file for EXP board")
+    parser.add_argument("-bin1", type=str, help="First .bin file for core M7 of OBC board")
+    parser.add_argument("-bin2", type=str, help="Second .bin file for core M4 of OBC board")
     
-    parser.add_argument("-meta", type=str, default="1.0.0", help="Single metadata for F4 & F7")
-    parser.add_argument("-meta1", type=str, default="1.0.0", help="First metadata file for H7")
-    parser.add_argument("-meta2", type=str, default="1.0.0", help="Second metadata file for H7")
+    parser.add_argument("-meta", type=str, default="1.0.0", help="Single metadata for EXP")
+    parser.add_argument("-meta1", type=str, default="1.0.0", help="First metadata file for OBC")
+    parser.add_argument("-meta2", type=str, default="1.0.0", help="Second metadata file for OBC")
     try:
         args = parser.parse_args()
         

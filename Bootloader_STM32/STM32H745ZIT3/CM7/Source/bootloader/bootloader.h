@@ -14,8 +14,8 @@
 
 
 
-#define BLD_TIMEOUT					20000			// Timeout cho bootloader ở trạng thái reset do request là 20s
-
+#define BLD_TIMEOUT					30000			// Timeout cho bootloader ở trạng thái reset do request là 30s
+#define BLD_TIMEOUT_NORMAL			5000
 // Bank 1
 #define BOOTLOADER_CORE1_MEM_BASE   0x08000000U  	// Sector 0(bootloader, 128 KB)
 #define METADATA_CORE1_MEM_BASE     0x08020000U  	// Sector 1 (metadata, 128 KB)
@@ -78,9 +78,14 @@
 #define FOTA_FAILED                 		1
 
 
+// Reset_cause
+#define WDG_NO_INIT_VARS_MAGIC 		0xdeaddead
+#define RESET_CAUSE_NORMAL			0
+#define RESET_CAUSE_BOOTLOADER		1
+
+
 typedef struct _s_firmware_info_
 {
-    bool fota_rqt;
     uint32_t address;      // Địa chỉ firmware
     uint32_t length;       // Độ dài firmware
     uint32_t crc;          // CRC cho firmware
@@ -89,6 +94,13 @@ typedef struct _s_firmware_info_
     uint8_t version_patch;
 } s_firmware_info;
 
+typedef struct
+{
+    uint32_t magic;
+    uint32_t reset_cause;
+    uint32_t reset_wdg_id;
+}wdg_no_init_vars;
+
 typedef void (*pMainApp)(void);
 typedef void (*Jump_Ptr)(void);
 
@@ -96,7 +108,8 @@ extern volatile uint32_t boot_timeout;
 
 void BL_UART_Fetch_Host_Command(void*);
 uint8_t Jump_To_App(uint32_t app_address);
-void Bootloader_Check_Reset_Reason(void);
+//void Bootloader_Check_Reset_Reason(void);
 void Bootloader_Check_Timeout(void*);
-
+void update_no_init_vars(uint32_t reset_cause);
+void validate_no_init_vars(void);
 #endif /* BOOTLOADER_H_ */

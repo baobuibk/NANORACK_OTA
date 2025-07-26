@@ -144,7 +144,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   SchedulerInit(1000);
   USART2_init();
-  Bootloader_Check_Reset_Reason();
+  validate_no_init_vars();
   /* USER CODE END 2 */
 
   /* Infinite loop */
