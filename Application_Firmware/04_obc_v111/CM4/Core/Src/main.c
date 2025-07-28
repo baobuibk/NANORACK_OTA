@@ -82,8 +82,6 @@ int main(void)
   /* USER CODE END 1 */
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /*HW semaphore Clock enable*/
-
 #ifdef USE_CORE_M4
   __HAL_RCC_HSEM_CLK_ENABLE();
   HAL_HSEM_FastTake(0);

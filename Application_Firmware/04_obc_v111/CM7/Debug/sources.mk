@@ -44,11 +44,12 @@ SUBDIRS := \
 1_DEV/M2_System/Dmesg \
 1_DEV/M2_System/FileSystem \
 1_DEV/M2_System/MIN_Process \
+1_DEV/M2_System/RAMBK_Infor \
 1_DEV/M2_System/ScriptManager \
+1_DEV/M2_System/SimpleDataTransfer \
 1_DEV/M2_System/SysLog \
 1_DEV/M2_System/SysLog_Queue \
 1_DEV/M2_System/SystemManager \
-1_DEV/M2_System/bsp_system \
 1_DEV/M3_Devices/I2C_RTC-RV3129 \
 1_DEV/M3_Devices/IO_ExWD-TPL5010 \
 1_DEV/M3_Devices/SPI_FRAM \

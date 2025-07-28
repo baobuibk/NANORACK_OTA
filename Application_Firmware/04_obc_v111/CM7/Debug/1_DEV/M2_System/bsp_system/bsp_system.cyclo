@@ -1,4 +1,0 @@
-../../Drivers/CMSIS/Include/core_cm7.h:2156:34:__NVIC_SystemReset	1
-../1_DEV/M2_System/bsp_system/bsp_system.c:17:16:Flash_Write_Metadata	8
-../1_DEV/M2_System/bsp_system/bsp_system.c:60:16:Flash_Read_Metadata	7
-../1_DEV/M2_System/bsp_system/bsp_system.c:79:9:System_On_Bootloader_Reset	2

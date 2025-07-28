@@ -17,7 +17,7 @@
 ../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:42:16:SPI_SlaveDevice_Init	2
 ../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:61:16:SPI_SlaveDevice_CollectData	10
 ../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:113:16:SPI_SlaveDevice_GetDataInfo	3
-../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:123:16:SPI_SlaveDevice_ResetDMA	4
+../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:123:16:SPI_SlaveDevice_ResetDMA	2
 ../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:153:16:SPI_SlaveDevice_Disable	2
 ../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:172:21:SPI_SlaveDevice_GetTransferState	1
 ../1_DEV/M3_Devices/SPI_SlaveOfCM4/spi_slave.c:177:6:SPI_SlaveDevice_SetTransferState	1

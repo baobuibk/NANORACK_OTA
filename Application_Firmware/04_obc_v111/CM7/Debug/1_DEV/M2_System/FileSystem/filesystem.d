@@ -36,6 +36,8 @@
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
@@ -78,7 +80,12 @@
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Tick/tick.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/board.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/env.h \
- D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SysLog/syslog.h
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SysLog/syslog.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/DateTime/date_time.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/devices.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M1_Drivers/I2C/i2c_driver.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/SPI_FRAM/fram_spi.h
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/FatFS_R015/Core/ff.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/FatFS_R015/Core/ffconf.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/FreeRTOS/FreeRTOS-Kernel/include/FreeRTOS.h:
@@ -115,6 +122,8 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M1_Drivers/SDMMC/emmc_bsp_driver.h
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
@@ -159,3 +168,8 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Tick/tick.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/board.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/env.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SysLog/syslog.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/DateTime/date_time.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/devices.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/I2C_RTC-RV3129/rtc_rv3129.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M1_Drivers/I2C/i2c_driver.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/SPI_FRAM/fram_spi.h:

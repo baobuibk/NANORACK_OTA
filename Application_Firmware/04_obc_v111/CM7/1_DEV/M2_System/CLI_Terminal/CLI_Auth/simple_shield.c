@@ -3,6 +3,8 @@
 #include "stdlib.h"
 
 #include "SPI_FRAM/fram_spi.h"
+#include "DateTime/date_time.h"
+#include "stdio.h"
 
 #ifdef DEBUG_SHIELD
 #include "stdio.h"
@@ -171,10 +173,21 @@ void Shield_ReceiveChar(ShieldInstance_t *instance, char ch) {
                 instance->state = AUTH_ADMIN;
                 Shield_WriteString(instance, SHIELD_NEWLINE);
                 Shield_WriteString(instance, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\r\n");
-                Shield_WriteString(instance, "Logged in as admin: SLT-OBC v1.2.0");
+                Shield_WriteString(instance, "Logged in as admin: SLT-OBC v1.2.0\r\n");
+
+                s_DateTime now;
+                Utils_GetRTC(&now);
+
+                char time_str[64];
+                snprintf(time_str, sizeof(time_str),
+                         "Now-RTC: %02d/%02d/20%02d %02d:%02d:%02d",
+                         now.day, now.month, now.year,
+                         now.hour, now.minute, now.second);
+                Shield_WriteString(instance, time_str);
+
                 Shield_WriteString(instance, SHIELD_NEWLINE);
                 Shield_WriteString(instance, "__________________________________\r\n");
-                Shield_WriteString(instance, "   ______ _______ ____  ___  _____\r\n");
+                Shield_WriteString(instance, "   ___ __ _______ ____  ___  _____\r\n");
                 Shield_WriteString(instance, "  / __/ //_  __(_) __ \\/ _ )/ ___/\r\n");
                 Shield_WriteString(instance, " _\\ \\/ /__/ / _ / /_/ / _  / /__  \r\n");
                 Shield_WriteString(instance, "/___/____/_/ (_)\\____/____/\\___/  \r\n");
@@ -184,10 +197,22 @@ void Shield_ReceiveChar(ShieldInstance_t *instance, char ch) {
                 instance->state = AUTH_USER;
                 Shield_WriteString(instance, SHIELD_NEWLINE);
                 Shield_WriteString(instance, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\r\n");
-                Shield_WriteString(instance, "Logged in as user: SLT-OBC v1.2.0");
+                Shield_WriteString(instance, "Logged in as user: SLT-OBC v1.2.0\r\n");
+
+                s_DateTime now;
+                Utils_GetRTC(&now);
+
+                char time_str[64];
+                snprintf(time_str, sizeof(time_str),
+                         "Now-RTC: %02d/%02d/20%02d %02d:%02d:%02d",
+                         now.day, now.month, now.year,
+                         now.hour, now.minute, now.second);
+                Shield_WriteString(instance, time_str);
+
+
                 Shield_WriteString(instance, SHIELD_NEWLINE);
                 Shield_WriteString(instance, "__________________________________\r\n");
-                Shield_WriteString(instance, "   ______ _______ ____  ___  _____\r\n");
+                Shield_WriteString(instance, "   ___ __ _______ ____  ___  _____\r\n");
                 Shield_WriteString(instance, "  / __/ //_  __(_) __ \\/ _ )/ ___/\r\n");
                 Shield_WriteString(instance, " _\\ \\/ /__/ / _ / /_/ / _  / /__  \r\n");
                 Shield_WriteString(instance, "/___/____/_/ (_)\\____/____/\\___/  \r\n");

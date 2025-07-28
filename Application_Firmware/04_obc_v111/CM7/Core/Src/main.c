@@ -52,6 +52,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 
+CRC_HandleTypeDef hcrc;
+
 MMC_HandleTypeDef hmmc1;
 
 MDMA_HandleTypeDef hmdma_mdma_channel0_sdmmc1_end_data_0;
@@ -75,6 +77,7 @@ static void MX_SPI5_Init(void);
 static void MX_SPI6_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_UART7_Init(void);
+static void MX_CRC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -139,7 +142,7 @@ int main(void)
   MPU_Config();
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
-
+  /* Wait until CPU2 boots and enters in stop mode or timeout*/
 /* USER CODE END Boot_Mode_Sequence_1 */
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -156,15 +159,12 @@ int main(void)
 /* When system initialization is finished, Cortex-M7 will release Cortex-M4 by means of
 HSEM notification */
 /*HW semaphore Clock enable*/
-
 #ifdef USE_CORE_M4
   __HAL_RCC_HSEM_CLK_ENABLE();
   HAL_HSEM_FastTake(1);
-
-  while(!HAL_HSEM_IsSemTaken(0));
+  while (!HAL_HSEM_IsSemTaken(0));
   HAL_HSEM_Release(0, 0);
   while (!__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY));
-
   HAL_Init();
 #endif
 /* USER CODE END Boot_Mode_Sequence_2 */
@@ -188,6 +188,7 @@ HSEM notification */
   MX_SPI6_Init();
   MX_TIM1_Init();
   MX_UART7_Init();
+  MX_CRC_Init();
   /* USER CODE BEGIN 2 */
 #else
 
@@ -428,6 +429,8 @@ HSEM notification */
 //	  while (!LL_USART_IsActiveFlag_TC(UART_USB));
   }
 
+  MX_CRC_Init();
+
 #endif
 
   if (Mgmt_HardwareSystemPreparing() != E_OK){
@@ -537,6 +540,37 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief CRC Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CRC_Init(void)
+{
+
+  /* USER CODE BEGIN CRC_Init 0 */
+
+  /* USER CODE END CRC_Init 0 */
+
+  /* USER CODE BEGIN CRC_Init 1 */
+
+  /* USER CODE END CRC_Init 1 */
+  hcrc.Instance = CRC;
+  hcrc.Init.DefaultPolynomialUse = DEFAULT_POLYNOMIAL_ENABLE;
+  hcrc.Init.DefaultInitValueUse = DEFAULT_INIT_VALUE_ENABLE;
+  hcrc.Init.InputDataInversionMode = CRC_INPUTDATA_INVERSION_NONE;
+  hcrc.Init.OutputDataInversionMode = CRC_OUTPUTDATA_INVERSION_DISABLE;
+  hcrc.InputDataFormat = CRC_INPUTDATA_FORMAT_BYTES;
+  if (HAL_CRC_Init(&hcrc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CRC_Init 2 */
+
+  /* USER CODE END CRC_Init 2 */
+
 }
 
 /**
@@ -897,7 +931,7 @@ static void MX_SPI6_Init(void)
   SPI_InitStruct.TransferDirection = LL_SPI_FULL_DUPLEX;
   SPI_InitStruct.Mode = LL_SPI_MODE_MASTER;
   SPI_InitStruct.DataWidth = LL_SPI_DATAWIDTH_8BIT;
-  SPI_InitStruct.ClockPolarity = LL_SPI_POLARITY_LOW;
+  SPI_InitStruct.ClockPolarity = LL_SPI_POLARITY_HIGH;
   SPI_InitStruct.ClockPhase = LL_SPI_PHASE_1EDGE;
   SPI_InitStruct.NSS = LL_SPI_NSS_SOFT;
   SPI_InitStruct.BaudRate = LL_SPI_BAUDRATEPRESCALER_DIV4;
@@ -1350,6 +1384,7 @@ static void MX_MDMA_Init(void)
   /* MDMA_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(MDMA_IRQn, 7, 0);
   HAL_NVIC_EnableIRQ(MDMA_IRQn);
+
   peripherals[1].errorCode = Sys_OK;
 }
 

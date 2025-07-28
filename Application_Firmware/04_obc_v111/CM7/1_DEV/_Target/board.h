@@ -11,9 +11,9 @@
 
 #define USE_FREERTOS
 
-#define UART_DEBUG					USART2//UART7
+#define UART_DEBUG					USART2
 
-#define UART_EXP					UART7//USART2
+#define UART_EXP					UART7
 
 #define UART_USB					USART1
 

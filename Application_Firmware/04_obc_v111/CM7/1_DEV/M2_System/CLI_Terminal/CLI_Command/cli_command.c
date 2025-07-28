@@ -37,8 +37,12 @@
 #include "ScriptManager/script_manager.h"
 #include "log_manager.h"
 #include "lwl.h"
-#include "bsp_system.h"
+
 #include "AliveCM4/alive_cm4.h"
+
+#include "SimpleDataTransfer/simple_datatrans.h"
+
+#include "modfsp.h"
 
 #define FRAM_USER_PWD_LEN_ADDR  0x0000
 #define FRAM_USER_PWD_ADDR      0x0001
@@ -80,12 +84,16 @@ static void CMD_SPISlaveRST(EmbeddedCli *cli, char *args, void *context);
 static void CMD_MasterRead(EmbeddedCli *cli, char *args, void *context);
 
 static void CMD_Dmesg(EmbeddedCli *cli, char *args, void *context);
-static void CMD_Boot_Reset(EmbeddedCli *cli, char *args, void *context);
 
 /*************************************************
  * Command Define "Dev"              *
  *************************************************/
+static void CMD_DevCM4TestConnection(EmbeddedCli *cli, char *args, void *context);
+
+static void CMD_DevEXPPleaseReset(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevTestConnection(EmbeddedCli *cli, char *args, void *context);
+static void CMD_DevEXPSetRTC(EmbeddedCli *cli, char *args, void *context);
+static void CMD_DevNTCSetControl(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevSetTempProfile(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevStartTempProfile(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevStopTempProfile(EmbeddedCli *cli, char *args, void *context);
@@ -98,16 +106,22 @@ static void CMD_DevSetPosition(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevStartSamplingCycle(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevGetInfoSample(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevGetChunk(EmbeddedCli *cli, char *args, void *context);
+static void CMD_DevGetCRCChunk(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevSetExtLaserProfile(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevTurnOnExtLaser(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevTurnOffExtLaser(EmbeddedCli *cli, char *args, void *context);
+static void CMD_DevSetLaserInt(EmbeddedCli *cli, char *args, void *context);
+static void CMD_DevSetLaserExt(EmbeddedCli *cli, char *args, void *context);
+static void CMD_DevGetCurrentLaser(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevCustomCommand(EmbeddedCli *cli, char *args, void *context);
-
 static void CMD_DevScriptManager(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevEraseScript(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevLogManagerDebug(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevLogManagerLog(EmbeddedCli *cli, char *args, void *context);
 static void CMD_DevCM4KeepAliveStatus(EmbeddedCli *cli, char *args, void *context);
+
+static void CMD_Testcase(EmbeddedCli *cli, char *args, void *context);
+static void CMD_FormatSD(EmbeddedCli *cli, char *args, void *context);
 /*************************************************
  *                 Command  Array                *
  *************************************************/
@@ -131,6 +145,7 @@ static const CliCommandBinding cliStaticBindings_internal[] = {
     { NULL,         	"fram_write",  	"Write to FRAM: fram_write [address] [value]",        	true,  	NULL, CMD_FramWrite, 	 },
     { NULL,         	"fram_read",   	"Read from FRAM: fram_read [address]",                	true,  	NULL, CMD_FramRead,  	 },
 	{ "FileSystem", 	"ls", 			"List files in filesystem", 							false, 	NULL, CMD_ls 			 },
+	{ "FileSystem", 	"format_sd", 	"Format SD card filesystem (delete all)", 				false, 	NULL, CMD_FormatSD 	     },
 	{ "FileSystem", 	"sd_lockin", 	"Lock SD filesystem", 									false, 	NULL, CMD_sd_lockin  	 },
     { "FileSystem", 	"sd_release", 	"Release SD filesystem", 								false, 	NULL, CMD_sd_release 	 },
     { "FileSystem", 	"vim_bypass", 	"Write no queue: vim_bypass <filename> \"content\"", 	true, 	NULL, CMD_vim_bypass 	 },
@@ -158,31 +173,43 @@ static const CliCommandBinding cliStaticBindings_internal[] = {
     { NULL, 			"slavespi_rst", "Reset SPI Slave Device to initial state", 				false, 	NULL, CMD_SPISlaveRST 	 },
     { NULL, 			"master_read",  "Read data via SPI6 Master: master_read <size>", 		true,   NULL, CMD_MasterRead 	 },
 
-	{ "Dev", "test_connection", 			"Send TEST_CONNECTION_CMD with a 32-bit value", 		true, 	NULL, CMD_DevTestConnection },
-	{ "Dev", "set_temp_profile", 			"set_temp_profile <ntc_index> <tec_pos> <heater_pos> <tec_vol> <heater_duty> <target_temp>",
-																									true, 	NULL, CMD_DevSetTempProfile },
-	{ "Dev", "start_temp_profile", 			"Send START_TEMP_PROFILE_CMD", 							false, 	NULL, CMD_DevStartTempProfile },
-	{ "Dev", "stop_temp_profile", 			"Send STOP_TEMP_PROFILE_CMD", 							false, 	NULL, CMD_DevStopTempProfile },
-	{ "Dev", "set_override_tec_profile", 	"set_override_tec_profile <tec_index> <tec_vol>", 		true, 	NULL, CMD_DevSetOverrideTecProfile },
-	{ "Dev", "start_override_tec_profile", 	"Send START_OVERRIDE_TEC_PROFILE_CMD", 					false, 	NULL, CMD_DevStartOverrideTecProfile },
-	{ "Dev", "stop_override_tec_profile", 	"Send STOP_OVERRIDE_TEC_PROFILE_CMD", 					false, 	NULL, CMD_DevStopOverrideTecProfile },
-	{ "Dev", "set_sampling_profile", 		"set_sampling_profile <pre> <in> <post> <sample_rate>", true, 	NULL, CMD_DevSetSamplingProfile },
-	{ "Dev", "set_laser_intensity", 		"set_laser_intensity <intensity>", 						true, 	NULL, CMD_DevSetLaserIntensity },
-	{ "Dev", "set_position", 				"set_position <position>", 								true, 	NULL, CMD_DevSetPosition },
-	{ "Dev", "start_sampling_cycle", 		"Send START_SAMPLING_CYCLE_CMD", 						false, 	NULL, CMD_DevStartSamplingCycle },
-	{ "Dev", "get_info_sample", 			"Send GET_INFO_SAMPLE_CMD", 							false, 	NULL, CMD_DevGetInfoSample },
-	{ "Dev", "get_chunk", 					"get_chunk <num_chunk>", 								true,	NULL, CMD_DevGetChunk },
-	{ "Dev", "set_ext_laser_profile", 		"set_ext_laser_profile <intensity>", 					true, 	NULL, CMD_DevSetExtLaserProfile },
-	{ "Dev", "turn_on_ext_laser", 			"turn_on_ext_laser <position>", 						true, 	NULL, CMD_DevTurnOnExtLaser },
-	{ "Dev", "turn_off_ext_laser", 			"Send TURN_OFF_EXT_LASER_CMD", 							false, 	NULL, CMD_DevTurnOffExtLaser },
-	{ "Dev", "custom_cmd", 					"send_custom_cmd <string>", 							true, 	NULL, CMD_DevCustomCommand },
+	{ NULL,	"cm4_test_connection", 			"-",													false,  NULL, CMD_DevCM4TestConnection},
 
-	{ "Dev", "script_manager", 				"-", 													false, 	NULL, CMD_DevScriptManager},
-	{ "Dev", "erase_script", 				"-", 													false, 	NULL, CMD_DevEraseScript},
-	{ "Dev", "lwl_debug", 					"-", 													false, 	NULL, CMD_DevLogManagerDebug},
-	{ "Dev", "lwl_log", 					"-", 													false, 	NULL, CMD_DevLogManagerLog},
-	{ "Dev", "alivecm4_log", 				"-", 													false, 	NULL, CMD_DevCM4KeepAliveStatus},
-	{ "Dev", "obc_rst", 				"-", 													false, 	NULL, CMD_Boot_Reset},
+	{ NULL,	"exp_please_reset", 			"-",													false,  NULL, CMD_DevEXPPleaseReset},
+	{ NULL, "test_connection", 				"Send TEST_CONNECTION_CMD with a 32-bit value", 		true, 	NULL, CMD_DevTestConnection },
+
+	{ NULL, "exp_set_rtc", 					"exp_set_rtc - Use OBC RTC",							false,  NULL, CMD_DevEXPSetRTC},
+	{ NULL, "ntc_set_control", 				"ntc_set_control <control mask>",						true,   NULL, CMD_DevNTCSetControl},
+	{ NULL, "set_temp_profile", 			"<ref_t> <min_t> <max_t> <ntc_pri> <ntc_sec> <auto_rcv> <tec_mask> <heater_mask> <tec_vol> <heater_duty>",
+																									true, 	NULL, CMD_DevSetTempProfile },
+	{ NULL, "start_temp_profile", 			"Send START_TEMP_PROFILE_CMD", 							false, 	NULL, CMD_DevStartTempProfile },
+	{ NULL, "stop_temp_profile", 			"Send STOP_TEMP_PROFILE_CMD", 							false, 	NULL, CMD_DevStopTempProfile },
+	{ NULL, "set_override_tec_profile", 	"set_override_tec_profile <itv> <index> <vol>", 		true, 	NULL, CMD_DevSetOverrideTecProfile },
+	{ NULL, "start_override_tec_profile", 	"Send START_OVERRIDE_TEC_PROFILE_CMD", 					false, 	NULL, CMD_DevStartOverrideTecProfile },
+	{ NULL, "stop_override_tec_profile", 	"Send STOP_OVERRIDE_TEC_PROFILE_CMD", 					false, 	NULL, CMD_DevStopOverrideTecProfile },
+	{ NULL, "set_sampling_profile", 		"set_sampling_profile <rate> <pre> <in> <post>", 		true, 	NULL, CMD_DevSetSamplingProfile },
+	{ NULL, "set_laser_intensity", 			"set_laser_intensity <intensity>", 						true, 	NULL, CMD_DevSetLaserIntensity },
+	{ NULL, "set_position", 				"set_position <position>", 								true, 	NULL, CMD_DevSetPosition },
+	{ NULL, "start_sampling_cycle", 		"Send START_SAMPLING_CYCLE_CMD", 						false, 	NULL, CMD_DevStartSamplingCycle },
+	{ NULL, "get_info_sample", 				"Send GET_INFO_SAMPLE_CMD", 							false, 	NULL, CMD_DevGetInfoSample },
+	{ NULL, "get_chunk", 					"get_chunk <num_chunk>", 								true,	NULL, CMD_DevGetChunk },
+	{ NULL, "get_chunk_crc", 				"get_chunk_crc <num_chunk>", 							true,	NULL, CMD_DevGetCRCChunk },
+	{ NULL, "set_ext_laser_profile", 		"set_ext_laser_profile <intensity>", 					true, 	NULL, CMD_DevSetExtLaserProfile },
+	{ NULL, "turn_on_ext_laser", 			"turn_on_ext_laser <position>", 						true, 	NULL, CMD_DevTurnOnExtLaser },
+	{ NULL, "turn_off_ext_laser", 			"Send TURN_OFF_EXT_LASER_CMD", 							false, 	NULL, CMD_DevTurnOffExtLaser },
+	{ NULL, "set_laser_int",				"set_laser_int <pos> <percent>",						true, 	NULL, CMD_DevSetLaserInt },
+	{ NULL, "set_laser_ext",				"set_laser_ext <pos> <percent>", 						true, 	NULL, CMD_DevSetLaserExt },
+	{ NULL, "get_current",					"-", 													false, 	NULL, CMD_DevGetCurrentLaser },
+	{ NULL, "custom_cmd", 					"send_custom_cmd <string>", 							true, 	NULL, CMD_DevCustomCommand },
+
+	{ NULL, "script_manager", 				"-", 													false, 	NULL, CMD_DevScriptManager},
+	{ NULL, "erase_script", 				"-", 													false, 	NULL, CMD_DevEraseScript},
+	{ NULL, "lwl_debug", 					"-", 													false, 	NULL, CMD_DevLogManagerDebug},
+	{ NULL, "lwl_log", 						"-", 													false, 	NULL, CMD_DevLogManagerLog},
+	{ NULL, "alivecm4_log", 				"-", 													false, 	NULL, CMD_DevCM4KeepAliveStatus},
+
+	{ NULL, "testcase", 					"Run step-by-step testcase: testcase <mode>", 			true, 	NULL, CMD_Testcase },
+
 
 };
 /*************************************************
@@ -194,6 +221,10 @@ static const CliCommandBinding cliStaticBindings_internal[] = {
  *************************************************/
 extern uint32_t _scustom_data;
 extern uint32_t _ecustom_data;
+
+extern uint8_t g_simple_ram_d3_buffer[DATA_CHUNK_SIZE];
+extern MODFSP_Data_t cm4_protocol;
+
 #define RAM_D2_200KB_START ((uint8_t*)&_scustom_data)
 #define RAM_D3_START ((uint8_t*)0x38000000)
 #define RAM_D2_200KB_SIZE  (200 * 1024)  // 200KB
@@ -307,21 +338,23 @@ static void CMD_RamDump(EmbeddedCli *cli, char *args, void *context) {
 
     uint32_t size = (uint32_t)strtoul(arg1, NULL, 0);
 
-    if (size < 1 || size > RAM_D2_200KB_SIZE) {
-        snprintf(buffer, sizeof(buffer), "Invalid size. Must be 1 to %lu bytes.", (unsigned long)RAM_D2_200KB_SIZE);
-        embeddedCliPrint(cli, buffer);
-        return;
-    }
-
     snprintf(buffer, sizeof(buffer), "Dumping %lu bytes of RAM_D3 contents:", (unsigned long)size);
     embeddedCliPrint(cli, buffer);
 
+    snprintf(buffer, sizeof(buffer),
+             "Base address: 0x%08lX, data[0] @ %p",
+             (unsigned long)(uintptr_t)g_simple_ram_d3_buffer,
+             (void*)&g_simple_ram_d3_buffer[0]);
+    embeddedCliPrint(cli, buffer);
+
     for (uint32_t i = 0; i < size; i += bytes_per_line) {
-        snprintf(buffer, sizeof(buffer), "0x%08lX: ", (uint32_t)(0x38000000 + i));
+        snprintf(buffer, sizeof(buffer), "0x%08lX: ",
+                 (unsigned long)((uintptr_t)g_simple_ram_d3_buffer + i));
         char *ptr = buffer + strlen(buffer);
 
+        // In hex
         for (uint32_t j = 0; j < bytes_per_line && (i + j) < size; j++) {
-            uint8_t value = RAM_D3_START[i + j];
+            uint8_t value = g_simple_ram_d3_buffer[i + j];
             snprintf(ptr, sizeof(buffer) - (ptr - buffer), "%02X ", value);
             ptr += 3;
             byte_count++;
@@ -331,21 +364,22 @@ static void CMD_RamDump(EmbeddedCli *cli, char *args, void *context) {
         *ptr++ = ' ';
         *ptr++ = '|';
         for (uint32_t j = 0; j < bytes_per_line && (i + j) < size; j++) {
-            uint8_t c = RAM_D3_START[i + j];
+            uint8_t c = g_simple_ram_d3_buffer[i + j];
             *ptr++ = (c >= 32 && c <= 126) ? c : '.';
         }
         *ptr = '\0';
 
         embeddedCliPrint(cli, buffer);
-
         vTaskDelay(pdMS_TO_TICKS(1));
     }
 
-    snprintf(buffer, sizeof(buffer), "Dump complete. Counted bytes: %lu, CRC16-XMODEM: 0x%04X",
+    snprintf(buffer, sizeof(buffer),
+             "Dump complete. Counted bytes: %lu, CRC16-XMODEM: 0x%04X",
              (unsigned long)byte_count, crc);
     embeddedCliPrint(cli, buffer);
     embeddedCliPrint(cli, "");
 }
+
 
 static void CMD_StateToCM4(EmbeddedCli *cli, char *args, void *context) {
     const char *arg1 = embeddedCliGetToken(args, 1);
@@ -472,6 +506,9 @@ static void CMD_PullData(EmbeddedCli *cli, char *args, void *context) {
     embeddedCliPrint(cli, "");
 }
 
+#define READDONE_PIN_PORT				OBCOUT_EXPIN_READDONE_GPIO_Port
+#define READDONE_PIN					OBCOUT_EXPIN_READDONE_Pin
+
 static void CMD_MasterRead(EmbeddedCli *cli, char *args, void *context) {
     const char *arg1 = embeddedCliGetToken(args, 1); // size
     char buffer[100];
@@ -483,11 +520,11 @@ static void CMD_MasterRead(EmbeddedCli *cli, char *args, void *context) {
 
     uint32_t size = (uint32_t)strtoul(arg1, NULL, 0);
 
-    if (size < 1 || size > RAM_D2_200KB_SIZE) {
-        snprintf(buffer, sizeof(buffer), "Invalid size. Must be 1 to %lu bytes.", (unsigned long)RAM_D2_200KB_SIZE);
-        embeddedCliPrint(cli, buffer);
-        return;
-    }
+//    if (size < 1 || size > RAM_D2_200KB_SIZE) {
+//        snprintf(buffer, sizeof(buffer), "Invalid size. Must be 1 to %lu bytes.", (unsigned long)RAM_D2_200KB_SIZE);
+//        embeddedCliPrint(cli, buffer);
+//        return;
+//    }
 
 //    if (toCM4_GetState() != TOCM4_IDLE) {
 //        snprintf(buffer, sizeof(buffer), "Cannot read data. Current state: %s",
@@ -503,11 +540,14 @@ static void CMD_MasterRead(EmbeddedCli *cli, char *args, void *context) {
         return;
     }
 
-    Std_ReturnType ret = SPI_MasterDevice_ReadDMA(0x38000000, size);
+    Std_ReturnType ret = SPI_MasterDevice_ReadDMA((uint32_t)g_simple_ram_d3_buffer, size);
+
+    LL_GPIO_SetOutputPin(READDONE_PIN_PORT, READDONE_PIN);
+
     if (ret == E_OK) {
         uint16_t crc = 0x0000;
         for (uint32_t i = 0; i < size; i++) {
-            crc = UpdateCRC16_XMODEM(crc, RAM_D3_START[i]);
+            crc = UpdateCRC16_XMODEM(crc, g_simple_ram_d3_buffer[i]);
         }
         snprintf(buffer, sizeof(buffer), "Read %lu bytes via SPI6 Master, CRC: 0x%04X",
                  (unsigned long)size, crc);
@@ -522,6 +562,10 @@ static void CMD_MasterRead(EmbeddedCli *cli, char *args, void *context) {
 
 static void CMD_ClearCLI(EmbeddedCli *cli, char *args, void *context) {
     char buffer[10];
+
+    LL_GPIO_ResetOutputPin(READDONE_PIN_PORT, READDONE_PIN);
+
+
     snprintf(buffer, sizeof(buffer), "\33[2J");
     embeddedCliPrint(cli, buffer);
 }
@@ -821,7 +865,7 @@ static void CMD_vim(EmbeddedCli *cli, char *args, void *context) {
         return;
     }
 
-    if (FS_Request_Write(filename, (uint8_t*)content, content_len) == E_OK) {
+    if (FS_Write_Direct(filename, (uint8_t*)content, content_len) == E_OK) {
         snprintf(buffer, sizeof(buffer), "Content written to %s", filename);
         embeddedCliPrint(cli, buffer);
     } else {
@@ -1083,6 +1127,16 @@ static void CMD_Reset(EmbeddedCli *cli, char *args, void *context) {
 /*************************************************
  * Command Function "Dev"            *
  *************************************************/
+static void CMD_DevEXPPleaseReset(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[100];
+    MIN_Send_PLEASE_RESET_CMD();
+    snprintf(buffer, sizeof(buffer), "Sent EXP-PLEASE_RESET_CMD");
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
+
 static void CMD_DevTestConnection(EmbeddedCli *cli, char *args, void *context)
 {
     const char *arg1 = embeddedCliGetToken(args, 1);
@@ -1099,32 +1153,128 @@ static void CMD_DevTestConnection(EmbeddedCli *cli, char *args, void *context)
     embeddedCliPrint(cli, "");
 }
 
-static void CMD_DevSetTempProfile(EmbeddedCli *cli, char *args, void *context)
+static void CMD_DevCM4TestConnection(EmbeddedCli *cli, char *args, void *context)
 {
-    char buffer[256];
     const char *arg1 = embeddedCliGetToken(args, 1);
-    const char *arg2 = embeddedCliGetToken(args, 2);
-    const char *arg3 = embeddedCliGetToken(args, 3);
-    const char *arg4 = embeddedCliGetToken(args, 4);
-    const char *arg5 = embeddedCliGetToken(args, 5);
-    const char *arg6 = embeddedCliGetToken(args, 6);
-
-    if (!arg1 || !arg2 || !arg3 || !arg4 || !arg5 || !arg6) {
-        snprintf(buffer, sizeof(buffer), "Usage: set_temp_profile <ntc_index> <tec_pos> <heater_pos> <tec_vol> <heater_duty> <target_temp>");
+    char buffer[100];
+    if (arg1 == NULL) {
+        snprintf(buffer, sizeof(buffer), "Usage: cm4_test_connection <value(32bit)>");
         embeddedCliPrint(cli, buffer);
         return;
     }
 
-    uint8_t ntc_index         = (uint8_t)strtoul(arg1, NULL, 0);
-    uint8_t tec_positions     = (uint8_t)strtoul(arg2, NULL, 0);
-    uint8_t heater_positions  = (uint8_t)strtoul(arg3, NULL, 0);
-    uint16_t tec_vol          = (uint16_t)strtoul(arg4, NULL, 0);
-    uint8_t heater_duty_cycle = (uint8_t)strtoul(arg5, NULL, 0);
-    uint16_t target_temp      = (uint16_t)strtoul(arg6, NULL, 0);
+    uint32_t value = (uint32_t)strtoul(arg1, NULL, 0);
 
-    MIN_Send_SET_TEMP_PROFILE_CMD(ntc_index, tec_positions, heater_positions, tec_vol, heater_duty_cycle, target_temp);
-    snprintf(buffer, sizeof(buffer), "Sent SET_TEMP_PROFILE_CMD with params: %u, %u, %u, %u, %u, %u",
-             ntc_index, tec_positions, heater_positions, tec_vol, heater_duty_cycle, target_temp);
+	uint8_t trigger_data[4];
+	trigger_data[0] = (uint8_t)((value >> 24) & 0xFF);
+	trigger_data[1] = (uint8_t)((value >> 16) & 0xFF);
+	trigger_data[2] = (uint8_t)((value >> 8) & 0xFF);
+	trigger_data[3] = (uint8_t)(value & 0xFF);
+
+	MODFSP_Send(&cm4_protocol, 0x99,
+					 trigger_data, sizeof(trigger_data));
+
+    snprintf(buffer, sizeof(buffer), "Sent CM4_TEST_CONNECTION_CMD with value: %lu", (unsigned long)value);
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
+
+static void CMD_DevEXPSetRTC(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[100];
+    MIN_Send_SET_WORKING_RTC_CMD();
+    s_DateTime now;
+    Utils_GetRTC(&now);
+
+    snprintf(buffer, sizeof(buffer), "Sent SET_WORKING_RTC_CMD with %u-%u:%u:%u", now.day, now.hour, now.minute, now.second);
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
+static void CMD_DevNTCSetControl(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[150];
+    uint8_t ntc_control_byte = 0;
+
+    const char *arg[8];
+    for (int i = 0; i < 8; i++) {
+        arg[i] = embeddedCliGetToken(args, i + 1);
+    }
+
+    for (int i = 0; i < 8; i++) {
+        if (!arg[i]) {
+            snprintf(buffer, sizeof(buffer), "Usage: set_ntc_control <ntc0[0:off/1:on]> <ntc1> ... <ntc7>");
+            embeddedCliPrint(cli, buffer);
+            return;
+        }
+    }
+
+    for (int i = 0; i < 8; i++) {
+        uint8_t enable_flag = (uint8_t)strtoul(arg[i], NULL, 0);
+        if (enable_flag > 1) {
+            snprintf(buffer, sizeof(buffer), "Invalid argument for ntc%d. Please use 0 (off) or 1 (on).", i);
+            embeddedCliPrint(cli, buffer);
+            return;
+        }
+        ntc_control_byte |= (enable_flag << i);
+    }
+
+    MIN_Send_SET_NTC_CONTROL_CMD(ntc_control_byte);
+
+    snprintf(buffer, sizeof(buffer), "Sent SET_NTC_CONTROL_CMD with Data Hex: 0x%02X, NTC0: %d, NTC1: %d, NTC2: %d, NTC3: %d, NTC4: %d, NTC5: %d, NTC6: %d, NTC7: %d",
+             ntc_control_byte,
+             (ntc_control_byte >> 0) & 0x01,
+             (ntc_control_byte >> 1) & 0x01,
+             (ntc_control_byte >> 2) & 0x01,
+             (ntc_control_byte >> 3) & 0x01,
+             (ntc_control_byte >> 4) & 0x01,
+             (ntc_control_byte >> 5) & 0x01,
+             (ntc_control_byte >> 6) & 0x01,
+             (ntc_control_byte >> 7) & 0x01);
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
+static void CMD_DevSetTempProfile(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[256];
+    const char *arg1 = embeddedCliGetToken(args, 1);  // target_temp
+    const char *arg2 = embeddedCliGetToken(args, 2);  // min_temp
+    const char *arg3 = embeddedCliGetToken(args, 3);  // max_temp
+    const char *arg4 = embeddedCliGetToken(args, 4);  // ntc_pri
+    const char *arg5 = embeddedCliGetToken(args, 5);  // ntc_sec
+    const char *arg6 = embeddedCliGetToken(args, 6);  // auto_recover
+    const char *arg7 = embeddedCliGetToken(args, 7);  // tec_positions
+    const char *arg8 = embeddedCliGetToken(args, 8);  // heater_positions
+    const char *arg9 = embeddedCliGetToken(args, 9);  // tec_vol
+    const char *arg10 = embeddedCliGetToken(args, 10); // heater_duty_cycle
+
+    if (!arg1 || !arg2 || !arg3 || !arg4 || !arg5 || !arg6 || !arg7 || !arg8 || !arg9 || !arg10) {
+        snprintf(buffer, sizeof(buffer), "Usage: set_temp_profile <ref_t> <min_t> <max_t> <ntc_pri> <ntc_sec> <auto_rcv> <tec_mask> <heater_mask> <tec_vol> <heater_duty>");
+        embeddedCliPrint(cli, buffer);
+        return;
+    }
+
+    uint16_t target_temp       = (uint16_t)strtoul(arg1, NULL, 0);
+    uint16_t min_temp          = (uint16_t)strtoul(arg2, NULL, 0);
+    uint16_t max_temp          = (uint16_t)strtoul(arg3, NULL, 0);
+    uint8_t  ntc_pri           = (uint8_t)strtoul(arg4, NULL, 0);
+    uint8_t  ntc_sec           = (uint8_t)strtoul(arg5, NULL, 0);
+    uint8_t  auto_recover      = (uint8_t)strtoul(arg6, NULL, 0);
+    uint8_t  tec_positions     = (uint8_t)strtoul(arg7, NULL, 0);
+    uint8_t  heater_positions  = (uint8_t)strtoul(arg8, NULL, 0);
+    uint16_t tec_vol           = (uint16_t)strtoul(arg9, NULL, 0);
+    uint8_t  heater_duty_cycle = (uint8_t)strtoul(arg10, NULL, 0);
+
+    MIN_Send_SET_TEMP_PROFILE_CMD(target_temp, min_temp, max_temp,
+            ntc_pri, ntc_sec, auto_recover,
+            tec_positions, heater_positions,
+            tec_vol, heater_duty_cycle
+        );
+
+    snprintf(buffer, sizeof(buffer), "Sent SET_TEMP_PROFILE_CMD with params:%u, %u, %u, %u, %u, %u, %u, %u, %u, %u",
+    		target_temp, min_temp, max_temp, ntc_pri, ntc_sec, auto_recover, tec_positions, heater_positions, tec_vol, heater_duty_cycle);
     embeddedCliPrint(cli, buffer);
     embeddedCliPrint(cli, "");
 }
@@ -1152,19 +1302,21 @@ static void CMD_DevSetOverrideTecProfile(EmbeddedCli *cli, char *args, void *con
     char buffer[100];
     const char *arg1 = embeddedCliGetToken(args, 1);
     const char *arg2 = embeddedCliGetToken(args, 2);
+    const char *arg3 = embeddedCliGetToken(args, 3);
 
-    if (!arg1 || !arg2) {
-        snprintf(buffer, sizeof(buffer), "Usage: set_override_tec_profile <tec_index> <tec_vol>");
+    if (!arg1 || !arg2 || !arg3) {
+        snprintf(buffer, sizeof(buffer), "Usage: set_override_tec_profile <interval> <tec_index> <tec_vol>");
         embeddedCliPrint(cli, buffer);
         return;
     }
 
-    uint8_t ovr_tec_index = (uint8_t)strtoul(arg1, NULL, 0);
-    uint16_t ovr_tec_vol  = (uint16_t)strtoul(arg2, NULL, 0);
+    uint16_t interval  = (uint16_t)strtoul(arg1, NULL, 0);
+    uint8_t ovr_tec_index = (uint8_t)strtoul(arg2, NULL, 0);
+    uint16_t ovr_tec_vol  = (uint16_t)strtoul(arg3, NULL, 0);
 
-    MIN_Send_SET_OVERRIDE_TEC_PROFILE_CMD(ovr_tec_index, ovr_tec_vol);
-    snprintf(buffer, sizeof(buffer), "Sent SET_OVERRIDE_TEC_PROFILE_CMD with params: %u, %u",
-             ovr_tec_index, ovr_tec_vol);
+    MIN_Send_SET_OVERRIDE_TEC_PROFILE_CMD(interval, ovr_tec_index, ovr_tec_vol);
+    snprintf(buffer, sizeof(buffer), "Sent SET_OVERRIDE_TEC_PROFILE_CMD with params: %u, %u, %u",
+             interval, ovr_tec_index, ovr_tec_vol);
     embeddedCliPrint(cli, buffer);
     embeddedCliPrint(cli, "");
 }
@@ -1196,19 +1348,20 @@ static void CMD_DevSetSamplingProfile(EmbeddedCli *cli, char *args, void *contex
     const char *arg4 = embeddedCliGetToken(args, 4);
 
     if (!arg1 || !arg2 || !arg3 || !arg4) {
-        snprintf(buffer, sizeof(buffer), "Usage: set_sampling_profile <pre> <in> <post> <sample_rate>");
+        snprintf(buffer, sizeof(buffer), "Usage: set_sampling_profile <rate> <pre> <in> <post>");
         embeddedCliPrint(cli, buffer);
         return;
     }
 
-    uint32_t pre         = (uint32_t)strtoul(arg1, NULL, 0);
-    uint32_t in          = (uint32_t)strtoul(arg2, NULL, 0);
-    uint32_t post        = (uint32_t)strtoul(arg3, NULL, 0);
-    uint16_t sample_rate = (uint16_t)strtoul(arg4, NULL, 0);
+    uint32_t sample_rate = (uint32_t)strtoul(arg1, NULL, 0);
+    uint16_t pre         = (uint16_t)strtoul(arg2, NULL, 0);
+    uint16_t in          = (uint16_t)strtoul(arg3, NULL, 0);
+    uint16_t post        = (uint16_t)strtoul(arg4, NULL, 0);
 
-    MIN_Send_SET_PDA_PROFILE_CMD(pre, in, post, sample_rate);
-    snprintf(buffer, sizeof(buffer), "Sent SET_SAMPLING_PROFILE_CMD with params: pre=%lu, in=%lu, post=%lu, sample_rate=%u",
-             (unsigned long)pre, (unsigned long)in, (unsigned long)post, sample_rate);
+
+    MIN_Send_SET_PDA_PROFILE_CMD(sample_rate, pre, in, post);
+    snprintf(buffer, sizeof(buffer), "Sent SET_SAMPLING_PROFILE_CMD with params:rate=%lu, pre=%u, in=%u, post=%u",
+    		(unsigned long)sample_rate, pre, in, post );
     embeddedCliPrint(cli, buffer);
     embeddedCliPrint(cli, "");
 }
@@ -1279,6 +1432,22 @@ static void CMD_DevGetChunk(EmbeddedCli *cli, char *args, void *context)
     embeddedCliPrint(cli, "");
 }
 
+static void CMD_DevGetCRCChunk(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[100];
+    const char *arg1 = embeddedCliGetToken(args, 1);
+    if (!arg1) {
+        snprintf(buffer, sizeof(buffer), "Usage: get_chunk_crc <num_chunk>");
+        embeddedCliPrint(cli, buffer);
+        return;
+    }
+    uint8_t noChunk = (uint8_t)strtoul(arg1, NULL, 0);
+    MIN_Send_GET_CHUNK_CRC_CMD(noChunk);
+    snprintf(buffer, sizeof(buffer), "Sent GET_CHUNK_CMD for chunk: %u", noChunk);
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
 static void CMD_DevSetExtLaserProfile(EmbeddedCli *cli, char *args, void *context)
 {
     char buffer[100];
@@ -1317,6 +1486,61 @@ static void CMD_DevTurnOffExtLaser(EmbeddedCli *cli, char *args, void *context)
     (void)context;
     MIN_Send_TURN_OFF_EXT_LASER_CMD();
     embeddedCliPrint(cli, "Sent TURN_OFF_EXT_LASER_CMD");
+    embeddedCliPrint(cli, "");
+}
+
+static void CMD_DevSetLaserInt(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[100];
+    const char *arg1 = embeddedCliGetToken(args, 1); // pos
+    const char *arg2 = embeddedCliGetToken(args, 2); // percent
+
+    if (!arg1 || !arg2) {
+        snprintf(buffer, sizeof(buffer), "Usage: set_laser_int <pos> <percent>");
+        embeddedCliPrint(cli, buffer);
+        return;
+    }
+
+    uint8_t pos = (uint8_t)strtoul(arg1, NULL, 0);
+    uint8_t percent = (uint8_t)strtoul(arg2, NULL, 0);
+
+    MIN_Send_SET_LASER_INT_CMD(pos, percent);
+
+    snprintf(buffer, sizeof(buffer), "Sent SET_LASER_INT_CMD with Position: %u, Percent: %u", pos, percent);
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
+static void CMD_DevSetLaserExt(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[100];
+    const char *arg1 = embeddedCliGetToken(args, 1);
+    const char *arg2 = embeddedCliGetToken(args, 2);
+
+    if (!arg1 || !arg2) {
+        snprintf(buffer, sizeof(buffer), "Usage: set_laser_ext <pos> <percent>");
+        embeddedCliPrint(cli, buffer);
+        return;
+    }
+
+    uint8_t pos = (uint8_t)strtoul(arg1, NULL, 0);
+    uint8_t percent = (uint8_t)strtoul(arg2, NULL, 0);
+
+    MIN_Send_SET_LASER_EXT_CMD(pos, percent);
+
+    snprintf(buffer, sizeof(buffer), "Sent SET_LASER_EXT_CMD with Position: %u, Percent: %u", pos, percent);
+    embeddedCliPrint(cli, buffer);
+    embeddedCliPrint(cli, "");
+}
+
+static void CMD_DevGetCurrentLaser(EmbeddedCli *cli, char *args, void *context)
+{
+    char buffer[100];
+
+    MIN_Send_GET_CURRENT_CMD();
+
+    snprintf(buffer, sizeof(buffer), "Sent GET_CURRENT_CMD");
+    embeddedCliPrint(cli, buffer);
     embeddedCliPrint(cli, "");
 }
 
@@ -1389,12 +1613,95 @@ static void CMD_DevCM4KeepAliveStatus(EmbeddedCli *cli, char *args, void *contex
     embeddedCliPrint(cli, "");
 }
 
-static void CMD_Boot_Reset(EmbeddedCli *cli, char *args, void *context)
+
+
+static uint8_t current_step = 0;
+static int mode = -1;
+
+static void CMD_Testcase(EmbeddedCli *cli, char *args, void *context)
 {
-	embeddedCliPrint(cli, "bootloader");
-	vTaskDelay(1000);
-	System_On_Bootloader_Reset();
+    if (args != NULL && strlen(args) > 0) {
+        const char *arg1 = embeddedCliGetToken(args, 1);
+
+        if (arg1 == NULL) {
+            embeddedCliPrint(cli, "Usage: testcase <mode|reset>");
+            return;
+        }
+
+        if (strcmp(arg1, "reset") == 0) {
+            mode = -1;
+            current_step = 0;
+            embeddedCliPrint(cli, "Testcase state reset.");
+            return;
+        }
+        mode = atoi(arg1);
+        if(current_step == 0){
+            char msg[64];
+            snprintf(msg, sizeof(msg), "Start Testcase Mode %d", mode);
+            embeddedCliPrint(cli, msg);
+        }
+    }
+
+    if (mode == 0) {
+        switch (current_step) {
+            case 0:
+                embeddedCliPrint(cli, "-> Step 1: set_sampling_profile 100000 100 4000 100");
+                CMD_DevSetSamplingProfile(cli, " 100000 100 4000 100", context);
+                break;
+            case 1:
+                embeddedCliPrint(cli, "-> Step 2: set_position 1");
+                CMD_DevSetPosition(cli, " 1", context);
+                break;
+            case 2:
+                embeddedCliPrint(cli, "-> Step 3: set_laser_intensity 50");
+                CMD_DevSetLaserIntensity(cli, " 50", context);
+                break;
+            case 3:
+                embeddedCliPrint(cli, "-> Step 4: start_sampling_cycle");
+                CMD_DevStartSamplingCycle(cli, "", context);
+                break;
+            case 4:
+                embeddedCliPrint(cli, "-> Step 5: get_chunk 0");
+                CMD_DevGetChunk(cli, " 0", context);
+                break;
+            default:
+                embeddedCliPrint(cli, "[v] Testcase 0 completed.");
+                mode = -1;
+                current_step = 0;
+                return;
+        }
+        current_step++;
+    } else if (mode == 2){
+		uint8_t trigger_data[4];
+		trigger_data[0] = (uint8_t)((0x11 >> 8) & 0xFF);
+		trigger_data[1] = (uint8_t)(0x22 & 0xFF);
+		trigger_data[2] = (uint8_t)((0x33 >> 8) & 0xFF);
+		trigger_data[3] = (uint8_t)(0x44 & 0xFF);
+		if (MODFSP_Send(&cm4_protocol, 0x21,
+						 trigger_data, sizeof(trigger_data)) != MODFSP_OK) {
+			embeddedCliPrint(cli, "Send to CM4 Fail!");
+		}
+		embeddedCliPrint(cli, "Send to CM4 OK!");
+    }
+
+    else{
+        embeddedCliPrint(cli, "Unsupported mode. Only '0' is implemented.");
+    }
 }
+
+
+static void CMD_FormatSD(EmbeddedCli *cli, char *args, void *context) {
+    Std_ReturnType ret = PerformCleanup();
+    if (ret == E_OK) {
+        embeddedCliPrint(cli, "Filesystem formatted successfully.");
+    } else if (ret == E_BUSY) {
+        embeddedCliPrint(cli, "Filesystem busy. Try again later.");
+    } else {
+        embeddedCliPrint(cli, "Filesystem format failed.");
+    }
+    embeddedCliPrint(cli, "");
+}
+
 
 
 /*************************************************

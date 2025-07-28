@@ -31,15 +31,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  13 .debug_macro  00045b12  00000000  00000000  00040967  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_line   0002c5e9  00000000  00000000  00086479  2**0
+ 14 .debug_line   0002c5e7  00000000  00000000  00086479  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_str    001a864d  00000000  00000000  000b2a62  2**0
+ 15 .debug_str    001a864d  00000000  00000000  000b2a60  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .comment      00000043  00000000  00000000  0025b0af  2**0
+ 16 .comment      00000043  00000000  00000000  0025b0ad  2**0
                   CONTENTS, READONLY
- 17 .debug_frame  00009690  00000000  00000000  0025b0f4  2**2
+ 17 .debug_frame  00009690  00000000  00000000  0025b0f0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line_str 00000055  00000000  00000000  00264784  2**0
+ 18 .debug_line_str 00000055  00000000  00000000  00264780  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -4460,9 +4460,9 @@ int main(void)
  8141d72:	b082      	sub	sp, #8
  8141d74:	af00      	add	r7, sp, #0
 
-/* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /*HW semaphore Clock enable*/
+  /* USER CODE END 1 */
 
+/* USER CODE BEGIN Boot_Mode_Sequence_1 */
 #ifdef USE_CORE_M4
   __HAL_RCC_HSEM_CLK_ENABLE();
  8141d76:	4b15      	ldr	r3, [pc, #84]	@ (8141dcc <main+0x5c>)

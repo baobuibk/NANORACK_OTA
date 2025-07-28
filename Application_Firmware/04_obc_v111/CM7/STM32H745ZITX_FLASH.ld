@@ -51,6 +51,7 @@ MEMORY
   RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 62K
   SHARED_RAM (xrw): ORIGIN = 0x3800F800, LENGTH = 2K
   ITCMRAM (xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
+  BKPRAM (xrw)  : ORIGIN = 0x38800000, LENGTH = 4K
 }
 
 /* Sections */
@@ -192,6 +193,20 @@ SECTIONS
     . = ALIGN(8);
   } >RAM_D1
   
+  .ram_data_transfer(NOLOAD) :
+  {
+    . = ALIGN(4);
+    /* Giữ lại toàn bộ dữ liệu của các input section .ram_data_bridge */
+    KEEP(*(.ram_data_transfer))
+    /* Nếu bạn có thêm các section con như .ram_data_bridge.* thì: */
+    KEEP(*(.ram_data_transfer*))
+    . = ALIGN(4);
+    _sram_data_transfer = .;
+    . = . + 0x1000;
+    _eram_data_transfer = .;
+    . = ALIGN(4);
+  } >RAM_D1  
+  
   .dmesg_buffer (NOLOAD) :
   {
 	    . = ALIGN(4);
@@ -216,12 +231,32 @@ SECTIONS
     . = . + 0x14000;         /* 80KB = 0x14000 bytes */
     _elog_data = .;          /* End of log data */
   } >RAM_D2
+  
+  .ram_data_bridge (NOLOAD) :
+  {
+    . = ALIGN(4);
+    /* Giữ lại toàn bộ dữ liệu của các input section .ram_data_bridge */
+    KEEP(*(.ram_data_bridge))
+    /* Nếu bạn có thêm các section con như .ram_data_bridge.* thì: */
+    KEEP(*(.ram_data_bridge*))
+    . = ALIGN(4);
+    _sram_data_bridge = .;
+    . = . + 0x1000;
+    _eram_data_bridge = .;
+    . = ALIGN(4);
+  } >RAM_D3
 
   .shared_mem (NOLOAD) :
   {
     . = ALIGN(4);
     KEEP(*(.shared_mem))
   } >SHARED_RAM
+  
+  .bkpram (NOLOAD) :
+  {
+    *(.bkpram .bkpram.*)
+    . = ALIGN(4);
+  } > BKPRAM
   /* Remove information from the compiler libraries */
   /DISCARD/ :
   {

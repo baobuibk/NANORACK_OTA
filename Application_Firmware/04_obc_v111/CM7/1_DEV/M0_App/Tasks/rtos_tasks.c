@@ -101,7 +101,7 @@ void CLI_Handle_Task(void *pvParameters);
 void vTask1_handler(void *pvParameters);
 void vTask2_handler(void *pvParameters);
 void vTask3_handler(void *pvParameters);
-void vUART_bufferTest(void *pvParameters);
+//void vUART_bufferTest(void *pvParameters);
 //void vUSBCheck_Task(void *argument);
 //void CDC_TX_Task(void *pvParameters);
 void UART_USB_DMA_RX_TASK(void *pvParameters);
@@ -262,41 +262,41 @@ Std_ReturnType OBC_AppInit(void)
 
 	MODFSP_Init(&cm4_protocol);
 
-
-    CREATE_TASK(FS_Gatekeeper_Task, 	"FS_Gatekeeper", 	MIN_STACK_SIZE * 20, 	NULL, 									2, NULL);
-
     CREATE_TASK(MIN_Process_Task, 		"MIN_Process", 		MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
 
     CREATE_TASK(MODFSP_Process_Task, 	"MODFSP_Process", 	MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
 
-    CREATE_TASK(SysLog_Task, 			"SysLog_Task", 		MIN_STACK_SIZE * 10, 	NULL, 									1, NULL);	// Syslog Queue from syslog_queue.c
+    CREATE_TASK(SysLog_Task, 			"SysLog", 			MIN_STACK_SIZE * 10, 	NULL, 									1, NULL);	// Syslog Queue from syslog_queue.c
 
-    CREATE_TASK(vSoft_RTC_Task, 		"Soft_RTC_Task", 	MIN_STACK_SIZE * 5, 	NULL, 									1, NULL);
+    CREATE_TASK(vSoft_RTC_Task, 		"Soft_RTC", 		MIN_STACK_SIZE * 5, 	NULL, 									1, NULL);
 
-    CREATE_TASK(UART_DEBUG_DMA_RX_Task, "DEBUG_RX_Task", 	MIN_STACK_SIZE * 20, 	(void*)UART_DMA_Driver_Get(UART_DEBUG), 1, NULL);
+    CREATE_TASK(UART_DEBUG_DMA_RX_Task, "DEBUG_RX", 		MIN_STACK_SIZE * 20, 	(void*)UART_DMA_Driver_Get(UART_DEBUG), 1, NULL);
 
-    CREATE_TASK(UART_EXP_DMA_RX_Task, 	"EXP_RX_Task",	 	MIN_STACK_SIZE * 20, 	(void*)UART_DMA_Driver_Get(UART_EXP), 	1, NULL);
+    CREATE_TASK(UART_EXP_DMA_RX_Task, 	"EXP_RX",	 		MIN_STACK_SIZE * 20, 	(void*)UART_DMA_Driver_Get(UART_EXP), 	1, NULL);
 
-    CREATE_TASK(CLI_Handle_Task, 		"CLI_Handle_Task", 	MIN_STACK_SIZE * 10, 	NULL, 									1, NULL);
+    CREATE_TASK(CLI_Handle_Task, 		"CLI_Handle", 		MIN_STACK_SIZE * 10, 	NULL, 									1, NULL);
 
     CREATE_TASK(vTask1_handler, 		"vTask1", 			MIN_STACK_SIZE, 		NULL, 									1, NULL);
 
     CREATE_TASK(vTask2_handler, 		"vTask2", 			MIN_STACK_SIZE, 		NULL, 									1, NULL);
 
-    		CREATE_TASK(ScriptManager_Task, 		"vTaskx", 			MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
-    		CREATE_TASK(ScriptDLS_Task, 			"vTasky", 			MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
-    		CREATE_TASK(ScriptCAM_Task, 			"vTaskz", 			MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
+    		CREATE_TASK(ScriptManager_Task, 		"ScriptManager", 		MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
+    		CREATE_TASK(ScriptDLS_Task, 			"ScriptDLS", 			MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
+    		CREATE_TASK(ScriptCAM_Task, 			"ScriptCAM", 			MIN_STACK_SIZE * 20, 	NULL, 									1, NULL);
+    		CREATE_TASK(LogManager_Task, 			"LogManager", 			MIN_STACK_SIZE * 5, 		NULL, 								1, NULL);
 
-    CREATE_TASK(UART_USB_DMA_RX_TASK, 	"UART_USB_RX_Task", MIN_STACK_SIZE * 20, 	(void*)UART_DMA_Driver_Get(UART_USB),	1, NULL);
+    CREATE_TASK(UART_USB_DMA_RX_TASK, 	"UART_USB_RX", MIN_STACK_SIZE * 20, 	(void*)UART_DMA_Driver_Get(UART_USB),	1, NULL);
 
-    		CREATE_TASK(LogManager_Task, 			"LogManager", 		MIN_STACK_SIZE * 5, 		NULL, 								1, NULL);
-
-    CREATE_TASK(WatchdogMonitorTask, 	"WatchdogMonitorTask", 	MIN_STACK_SIZE * 2, 		NULL, 									1, NULL);
-    CREATE_TASK(WatchdogPulseTask, 		"WatchdogPulseTask", 	MIN_STACK_SIZE * 2, 		NULL, 									1, NULL);
+    CREATE_TASK(WatchdogMonitorTask, 	"WatchdogMonitor", 	MIN_STACK_SIZE * 2, 		NULL, 									1, NULL);
+    CREATE_TASK(WatchdogPulseTask, 		"WatchdogPulse", 	MIN_STACK_SIZE * 2, 		NULL, 									1, NULL);
 
     CREATE_TASK(CM4_KeepAliveTask, 		"CM4_KeepAlive", 		MIN_STACK_SIZE * 5, 		NULL, 									1, NULL);
 
-    CREATE_TASK(ExpMonitorTask, 		"ExpMonitorTask", 		MIN_STACK_SIZE * 2, 		NULL, 									1, NULL);
+    CREATE_TASK(LogFetching_Task, 		"LogFetching", 		MIN_STACK_SIZE * 10, 		NULL, 									1, NULL);
+
+    CREATE_TASK(ExpMonitorTask, 		"ExpMonitor", 		MIN_STACK_SIZE * 2, 		NULL, 									1, NULL);
+
+    CREATE_TASK(SDLockRelease_Task, 	"SDLockRelease", 	MIN_STACK_SIZE * 5, 		NULL, 									1, NULL);
 
     vTaskDelay(pdMS_TO_TICKS(1));
 
@@ -497,7 +497,7 @@ void MODFSP_Process_Task(void *pvParameters)
             	MODFSP_Process(&cm4_protocol);
             }
         }
-	    vTaskDelay(pdMS_TO_TICKS(1));
+	    vTaskDelay(pdMS_TO_TICKS(2));
 	}
 }
 
@@ -510,7 +510,7 @@ void MIN_Process_Task(void *pvParameters)
         if (mode == FORWARD_MODE_NORMAL) {
         	MIN_Processing();
         }
-	    vTaskDelay(pdMS_TO_TICKS(1));
+	    vTaskDelay(pdMS_TO_TICKS(2));
 	}
 }
 
@@ -547,13 +547,13 @@ void vTask3_handler(void *pvParameters)
 		SYSLOG_NOTICE(buffer);
 		vTaskDelay(60000);
 	}
-}\
+}
 
 void LogManager_Task(void *pvParameters)
 {
     for (;;) {
     	Task_Kick("LOG");
-    	LogManager_Process();
+//    	LogManager_Process();
         vTaskDelay(100);
     }
 }
@@ -602,9 +602,11 @@ void WatchdogPulseTask(void *pvParameters)
 void ExpMonitorTask(void *pvParameters) {
     uint8_t lastLow = GPIO_IsInLow(CM4_PIN_PORT, CM4_PIN);
     uint32_t lastChangeTime = xTaskGetTickCount();
+    uint8_t resetSent = 0;
 
     for (;;) {
         if (!ExpMonitor_IsEnabled()) {
+            resetSent = 0;
             vTaskDelay(pdMS_TO_TICKS(100));
             continue;
         }
@@ -617,14 +619,14 @@ void ExpMonitorTask(void *pvParameters) {
             lastChangeTime = now;
         } else {
             uint32_t elapsedMs = (now - lastChangeTime) * portTICK_PERIOD_MS;
-            if (isLow && elapsedMs >= MONITOR_DEBOUNCE_MS) {
-                // Low > 100 ms: reset EXP  UART-forward
-            	MIN_Send_PLEASE_RESET_CMD();
+
+            if (isLow && elapsedMs >= MONITOR_DEBOUNCE_MS && !resetSent) {
+                (void)MIN_Send_PLEASE_RESET_CMD();
+
                 ForwardMode_Set(FORWARD_MODE_UART);
-                ExpMonitor_SetEnabled(0);
+                resetSent = 1;
             }
             else if (!isLow && elapsedMs >= MONITOR_DEBOUNCE_MS) {
-                // High > 100 ms: NORMAL mode
                 ForwardMode_Set(FORWARD_MODE_NORMAL);
                 ExpMonitor_SetEnabled(0);
             }

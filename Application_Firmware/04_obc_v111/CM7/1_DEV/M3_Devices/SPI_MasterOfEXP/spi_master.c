@@ -63,10 +63,6 @@ Std_ReturnType SPI_MasterDevice_ReadDMA(uint32_t data_addr, uint32_t size)
 //        return E_ERROR;
 //    }
 
-    if (size < 1 || size > RAM_D2_200KB_SIZE) {
-        return E_ERROR;
-    }
-
     spi_master_instance.transfer_state = SPI_MASTER_TRANSFER_BUSY;
 
     LL_BDMA_ConfigAddresses(BDMA, LL_BDMA_CHANNEL_1,

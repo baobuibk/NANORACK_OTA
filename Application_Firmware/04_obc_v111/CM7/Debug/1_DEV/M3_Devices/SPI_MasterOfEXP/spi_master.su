@@ -22,8 +22,8 @@
 ../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:24:21:SPI_MasterDevice_GetHandle	4	static
 ../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:29:16:SPI_MasterDevice_Init	24	static
 ../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:56:16:SPI_MasterDevice_ReadDMA	24	static
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:120:16:SPI_MasterDevice_Disable	8	static
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:139:27:SPI_MasterDevice_GetTransferState	4	static
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:144:6:SPI_MasterDevice_SetTransferState	16	static
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:149:15:SPI_MasterDevice_GetCM4State	8	static
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:154:6:SPIMaster_IRQHandler	16	static,ignoring_inline_asm
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:116:16:SPI_MasterDevice_Disable	8	static
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:135:27:SPI_MasterDevice_GetTransferState	4	static
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:140:6:SPI_MasterDevice_SetTransferState	16	static
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:145:15:SPI_MasterDevice_GetCM4State	8	static
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:150:6:SPIMaster_IRQHandler	16	static,ignoring_inline_asm

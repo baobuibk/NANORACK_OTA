@@ -37,11 +37,12 @@ RM := rm -rf
 -include 1_DEV/M3_Devices/SPI_FRAM/subdir.mk
 -include 1_DEV/M3_Devices/IO_ExWD-TPL5010/subdir.mk
 -include 1_DEV/M3_Devices/I2C_RTC-RV3129/subdir.mk
--include 1_DEV/M2_System/bsp_system/subdir.mk
 -include 1_DEV/M2_System/SystemManager/subdir.mk
 -include 1_DEV/M2_System/SysLog_Queue/subdir.mk
 -include 1_DEV/M2_System/SysLog/subdir.mk
+-include 1_DEV/M2_System/SimpleDataTransfer/subdir.mk
 -include 1_DEV/M2_System/ScriptManager/subdir.mk
+-include 1_DEV/M2_System/RAMBK_Infor/subdir.mk
 -include 1_DEV/M2_System/MIN_Process/subdir.mk
 -include 1_DEV/M2_System/FileSystem/subdir.mk
 -include 1_DEV/M2_System/Dmesg/subdir.mk

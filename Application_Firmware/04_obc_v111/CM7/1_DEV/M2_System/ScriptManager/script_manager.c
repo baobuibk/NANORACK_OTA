@@ -16,7 +16,6 @@
 #include "DateTime/date_time.h"
 #include "action_id.h"
 #include "utils.h"
-#include "bsp_system.h"
 #include "modfsp.h"
 #include <string.h>
 
@@ -25,17 +24,52 @@
 extern MODFSP_Data_t cm4_protocol;
 
 #include "MIN_Process/min_process.h"
+
+#include "DateTime/date_time.h"
+
+#include "SimpleDataTransfer/simple_datatrans.h"
+#include "main.h"
+#include "stdio.h"
+#include "log_manager.h"
+
+#include "filesystem.h"
+#include "reinit.h"
+
+#include "RAMBK_Infor/rambk_infor.h"
 /*************************************************
  *               PRIVATE VARIABLES               *
  *************************************************/
 
-#define SCHED_OFFSET_SEC 5
+#define SCHED_OFFSET_SEC 		5
+
+#define SAMPLING_TIMEOUT_MS		25000
 
 static volatile uint8_t g_user_activity_detected = 0;
 static uint8_t frames_received = 0;
 static ScriptManager_t g_script_manager;
 
 static volatile uint8_t expMonitorFlag = 0;
+static volatile bool g_log_fetching_enabled = false;
+
+
+#define EXP_LOG_TRIGGER_GPIO_PORT 	EXPOUT_OBCIN_LOGTRIGGER_GPIO_Port
+#define EXP_LOG_TRIGGER_GPIO_PIN	EXPOUT_OBCIN_LOGTRIGGER_Pin
+
+#define EXP_MINBUSY_GPIO_PORT		EXPOUT_OBCIN_MINBUSY_GPIO_Port
+#define EXP_MINBUSY_GPIO_PIN		EXPOUT_OBCIN_MINBUSY_Pin
+
+typedef struct {
+    uint32_t release_time_sec;
+    uint32_t lockin_time_sec;
+    bool release_done_today;
+    bool lockin_done_today;
+    bool configured;
+} SDScheduler_t;
+
+extern MODFSP_Data_t cm4_protocol;
+
+static SDScheduler_t g_sd_scheduler = {0};
+
 /*************************************************
  *               PRIVATE FUNCTIONS               *
  *************************************************/
@@ -55,6 +89,30 @@ static _Bool ScriptManager_HandleAutoLoad(void);
 /*************************************************
  *           TIME MANAGEMENT FUNCTIONS           *
  *************************************************/
+
+void SDScheduler_Configure(uint32_t release_time_raw, uint32_t lockin_time_raw)
+{
+    uint8_t release_hh = (release_time_raw >> 16) & 0xFF;
+    uint8_t release_mm = (release_time_raw >> 8) & 0xFF;
+    uint8_t release_ss = release_time_raw & 0xFF;
+
+    uint8_t lockin_hh = (lockin_time_raw >> 16) & 0xFF;
+    uint8_t lockin_mm = (lockin_time_raw >> 8) & 0xFF;
+    uint8_t lockin_ss = lockin_time_raw & 0xFF;
+
+    g_sd_scheduler.release_time_sec = release_hh * 3600 + release_mm * 60 + release_ss;
+    g_sd_scheduler.lockin_time_sec = lockin_hh * 3600 + lockin_mm * 60 + lockin_ss;
+
+    g_sd_scheduler.release_done_today = false;
+    g_sd_scheduler.lockin_done_today = false;
+    g_sd_scheduler.configured = true;
+
+    // Logging (optional)
+    BScript_Log("[SDScheduler] Configured: Release @ %02u:%02u:%02u (%us), Lock-in @ %02u:%02u:%02u (%us)",
+        release_hh, release_mm, release_ss, g_sd_scheduler.release_time_sec,
+        lockin_hh, lockin_mm, lockin_ss, g_sd_scheduler.lockin_time_sec);
+}
+
 
 /**
  * @brief Get current time in seconds since start of day (0-86399)
@@ -403,6 +461,7 @@ static void ScriptManager_ResetContext(ScriptType_t type)
     context->state = SCRIPT_EXEC_IDLE;
     context->current_step = 0;
     context->retry_count = 0;
+    SimpleDataTransfer_SetFatfsOk(true);
     context->first_run = true;
 }
 
@@ -460,6 +519,8 @@ void ScriptManager_Init(void)
 {
     memset(&g_script_manager, 0, sizeof(ScriptManager_t));
 
+
+
     // Create synchronization objects
     g_script_manager.execution_mutex = xSemaphoreCreateMutex();
     g_script_manager.dls_semaphore = xSemaphoreCreateBinary();
@@ -485,7 +546,24 @@ void ScriptManager_Init(void)
 
     BScript_Log("[ScriptManager] Initialized successfully");
 
+    if (SimpleDataTransfer_Init() != E_OK) {
+        BScript_Log("[ScriptManager] Failed to initialize Simple Data Transfer");
+    } else {
+        BScript_Log("[ScriptManager] Simple Data Transfer initialized successfully");
+    }
+
     ScriptManager_HandleAutoLoad();
+
+}
+
+void ScriptManager_EnableLogFetching(bool enable)
+{
+    g_log_fetching_enabled = enable;
+    if (enable) {
+        BScript_Log("[ScriptManager] Background log fetching ENABLED");
+    } else {
+        BScript_Log("[ScriptManager] Background log fetching DISABLED");
+    }
 }
 
 /**
@@ -742,6 +820,11 @@ _Bool ScriptManager_ScriptExistsInFRAM(ScriptType_t type)
  */
 void MODFSP_ApplicationHandler(MODFSP_Data_t *ctx, uint8_t id, const uint8_t *payload, uint16_t len)
 {
+    if (id == MODFSP_MASTER_ACK ||  id == MODFSP_MASTER_NAK) {
+        SimpleDataTransfer_HandleMasterAck(id, payload, len);
+        return;
+    }
+
     ScriptManager_HandleMODFSPFrame(id, payload, len);
 }
 
@@ -789,8 +872,16 @@ void ScriptManager_HandleMODFSPFrame(uint8_t frame_id, const uint8_t* data, uint
         	ScriptManager_HandleUpdateOBC(data, length);
         	break;
 
+        case MODFSP_TYPE_GET_STM32RTC:
+        	ScriptManager_HandleCM4GetRTC(data, length);
+        	break;
+
         case UPDATE_EXP_CMD:
         	ScriptManager_HandleUpdateEXP(data, length);
+        	break;
+
+        case 0x98:
+        	BScript_Log("[ScriptManager] Response from CM4 OK!");
         	break;
 
 
@@ -895,18 +986,38 @@ void ScriptManager_HandleRunExperiment(const uint8_t* data, uint32_t length)
     }
 }
 
+void ScriptManager_HandleCM4GetRTC (const uint8_t* data, uint32_t length)
+{
+	s_DateTime dt;
+	Utils_GetRTC(&dt);
+
+	uint8_t payload[6];
+	payload[0] = dt.hour;
+	payload[1] = dt.minute;
+	payload[2] = dt.second;
+	payload[3] = dt.day;
+	payload[4] = dt.month;
+	payload[5] = dt.year;
+
+	MODFSP_Send(&cm4_protocol, MODFSP_TYPE_RESP_STM32RTC, payload,
+			sizeof(payload));
+
+	BScript_Log(
+			"[ScriptManager] Sent RTC: %02d:%02d:%02d, %02d/%02d/20%02d to CM4",
+			dt.hour, dt.minute, dt.second, dt.day, dt.month, dt.year);
+}
+
 void ScriptManager_HandleUpdateOBC(const uint8_t* data, uint32_t length)
 {
 	MODFSP_Send(&cm4_protocol, UPDATE_OBC_ACK, NULL, 0);
     BScript_Log("[ScriptManager] Received UPDATE_OBC frame");
     vTaskDelay(200);
-    System_On_Bootloader_Reset();
-    //NVIC_SystemReset();
+    SystemOnBootloader_Reset();
 }
 
 void ScriptManager_HandleUpdateEXP(const uint8_t* data, uint32_t length)
 {
-	MODFSP_Send(&cm4_protocol, UPDATE_EXP_ACK, NULL, 0);
+//	MODFSP_Send(&cm4_protocol, UPDATE_EXP_ACK, NULL, 0);
     BScript_Log("[ScriptManager] Received UPDATE_EXP frame");
     ExpMonitor_SetEnabled(1);
 }
@@ -1026,6 +1137,7 @@ void ScriptDLS_Task(void *pvParameters)
                 context->state = SCRIPT_EXEC_RUNNING;
                 context->current_step = 0;
                 context->retry_count = 0;
+                SimpleDataTransfer_SetFatfsOk(true);
 
                 // Execute all steps in the DLS routine
                 while (context->current_step < storage->parsed_script.total_steps &&
@@ -1136,6 +1248,127 @@ void ScriptCAM_Task(void *pvParameters)
     }
 }
 
+/**
+ * @brief Background task to fetch logs when the system is idle.
+ * This task attempts to acquire the execution mutex. If successful, it means
+ * neither the DLS nor CAM tasks are running, so it's safe to use shared
+ * peripherals like SPI and UART.
+ * @param pvParameters Task parameters (not used).
+ */
+void LogFetching_Task(void *pvParameters)
+{
+	bool date_file_created = false;
+
+    while (1) {
+        vTaskDelay(pdMS_TO_TICKS(3000));
+
+        if (!g_log_fetching_enabled) {
+            continue;
+        }
+
+        if (xSemaphoreTake(g_script_manager.execution_mutex, pdMS_TO_TICKS(100)) == pdTRUE) {
+
+            // Check if cleanup is needed (only if date file exists)
+            if (NeedCleanup()) {
+                BScript_Log("[LogFetching] Log retention period exceeded. Performing cleanup...");
+
+                if (PerformCleanup() == E_OK) {
+                    date_file_created = false; // Need to recreate date file
+                    BScript_Log("[LogFetching] Cleanup completed successfully");
+                } else {
+                    BScript_Log("[LogFetching] Cleanup failed, continuing with current files");
+                }
+            }
+
+            // Create date_time.txt if not created yet (first run or after cleanup)
+            if (!date_file_created) {
+                if (CreateOrUpdateDateFile() == E_OK) {
+                    date_file_created = true;
+                    BScript_Log("[LogFetching] Date tracking file created");
+                } else {
+                    BScript_Log("[LogFetching] Failed to create date file");
+                }
+            }
+
+            if (!LL_GPIO_IsInputPinSet(EXP_LOG_TRIGGER_GPIO_PORT, EXP_LOG_TRIGGER_GPIO_PIN)) {
+                vTaskDelay(pdMS_TO_TICKS(50));
+                if (!LL_GPIO_IsInputPinSet(EXP_LOG_TRIGGER_GPIO_PORT, EXP_LOG_TRIGGER_GPIO_PIN)) {
+                    BScript_Log("[LogFetching] Stable EXP trigger detected. Initiating special transfer.");
+
+                    char base_filename[48];
+                    s_DateTime rtc;
+                    Utils_GetRTC(&rtc);
+
+                    snprintf(base_filename, sizeof(base_filename), "exp_log_20%02d%02d%02d_%02d%02d%02d",
+                             rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+
+                    SimpleDataTransfer_ExecuteTransfer(DATA_TYPE_LOG, 0, base_filename, rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+
+                    xSemaphoreGive(g_script_manager.execution_mutex);
+                    continue;
+                }
+            }
+
+            BScript_Log("[LogFetching] No stable EXP trigger, processing buffered logs...");
+            LogManager_Process();
+
+            xSemaphoreGive(g_script_manager.execution_mutex);
+        }
+    }
+}
+
+void SDLockRelease_Task(void *pvParameters)
+{
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+    while (1) {
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(30000)); // 30s interval
+
+        if (!g_sd_scheduler.configured)
+            continue;
+
+        uint32_t now_sec = ScriptManager_GetCurrentDailyTimeSeconds();
+
+        // Reset flags at midnight
+        if (now_sec < 60) {
+            g_sd_scheduler.release_done_today = false;
+            g_sd_scheduler.lockin_done_today = false;
+        }
+
+        // Auto-release SD
+        if (!g_sd_scheduler.release_done_today &&
+            now_sec >= g_sd_scheduler.release_time_sec &&
+            now_sec < g_sd_scheduler.release_time_sec + 60) {
+
+        	BScript_Log("[SDScheduler] SD Release");
+
+        	SDMMC1_DeInit();
+            SD_Release();
+
+            g_sd_scheduler.release_done_today = true;
+        }
+
+        // Auto-lockin SD
+        if (!g_sd_scheduler.lockin_done_today &&
+            now_sec >= g_sd_scheduler.lockin_time_sec &&
+            now_sec < g_sd_scheduler.lockin_time_sec + 60) {
+
+        	BScript_Log("[SDScheduler] SD Lock-in");
+
+        	SD_Lockin();
+        	SDMMC1_Init();
+
+        	Std_ReturnType ret = Link_SDFS_Driver();
+        	if(ret != E_OK){
+        		BScript_Log("[SDScheduler] [Link FATFS Fail]");
+        	}else{
+        		BScript_Log("[SDScheduler] [Link FATFS Successfully]");
+        	}
+
+            g_sd_scheduler.lockin_done_today = true;
+        }
+    }
+}
+
 /*************************************************
  *             STEP EXECUTION FUNCTIONS          *
  *************************************************/
@@ -1186,6 +1419,8 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
                 return STEP_EXEC_ERROR;
             }
 
+            SDScheduler_Configure(release_time, lockin_time);
+
             // Parse start time and set as system reference (for logging only)
             uint32_t start_daily_time = ScriptManager_ParseStartTime(start);
             g_script_manager.system_start_daily_time = start_daily_time; // Now stores daily time
@@ -1199,6 +1434,20 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
             uint8_t lockin_time_hh = (uint8_t)((lockin_time >> 16) & 0xFF);
             uint8_t lockin_time_mm = (uint8_t)((lockin_time >> 8) & 0xFF);
             uint8_t lockin_time_ss = (uint8_t)(lockin_time & 0xFF);
+
+
+//            uint8_t config_time_data[8];
+//
+//            config_time_data[0] = (uint8_t)(release_time & 0xFF);
+//            config_time_data[1] = (uint8_t)((release_time >> 8) & 0xFF);
+//            config_time_data[2] = (uint8_t)((release_time >> 16) & 0xFF);
+//            config_time_data[3] = (uint8_t)((release_time >> 24) & 0xFF);
+//
+//            config_time_data[4] = (uint8_t)(lockin_time & 0xFF);
+//            config_time_data[5] = (uint8_t)((lockin_time >> 8) & 0xFF);
+//            config_time_data[6] = (uint8_t)((lockin_time >> 16) & 0xFF);
+//            config_time_data[7] = (uint8_t)((lockin_time >> 24) & 0xFF);
+
 
             BScript_Log("[ScriptInit] ->SET_SYSTEM: System start daily time = %u seconds", start_daily_time);
             BScript_Log("[ScriptInit] ->SET_SYSTEM: Release Time = %02u:%02u:%02u (info only)",
@@ -1251,7 +1500,7 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
 
         case SET_NTC_CONTROL: { // set_ntc_control
         	uint8_t ntc_control_byte = 0;
-            uint8_t resp_info[5];
+            uint8_t resp_info[1];
             uint8_t resp_len = 0;
 
             for (uint8_t i = 0; i < 8; ++i) {
@@ -1272,12 +1521,12 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
 
             }
 
-//            if(MIN_Send_SET_NTC_CONTROL_CMD_WithData(ntc_control_byte, resp_info, &resp_len)){
-//            	BScript_Log("[ScriptInit] SET_NTC_CONTROL received: %u bytes", resp_len);
-//            }else {
-//                BScript_Log("[ScriptInit] Failed to SET_NTC_CONTROL");
-//                return STEP_EXEC_ERROR;
-//            }
+            if(MIN_Send_SET_NTC_CONTROL_CMD_WithData(ntc_control_byte, resp_info, &resp_len)){
+            	BScript_Log("[ScriptInit] SET_NTC_CONTROL received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptInit] Failed to SET_NTC_CONTROL");
+                return STEP_EXEC_ERROR;
+            }
 
             break;
         }
@@ -1304,13 +1553,45 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
             BScript_Log("[ScriptInit] TEC mask=0x%02X, Heater mask=0x%02X", tec_mask, heater_mask);
             BScript_Log("[ScriptInit] TEC voltage=%u mV, Heater duty=%u%%, Auto-recover=%u", tec_vol, heater_duty, auto_recover);
 
-            // TODO: Apply temperature profile settings
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_TEMP_PROFILE_CMD_WithData(target_temp, min_temp, max_temp, ntc_primary, ntc_secondary,
+            											auto_recover, tec_mask, heater_mask, tec_vol, heater_duty,  resp_info, &resp_len)){
+            	BScript_Log("[ScriptInit] SET_TEMP_PROFILE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptInit] Failed to SET_TEMP_PROFILE");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptInit] Response SET_TEMP_PROFILE not OK, retry!");
+                if(MIN_Send_SET_TEMP_PROFILE_CMD_WithData(target_temp, min_temp, max_temp, ntc_primary, ntc_secondary,
+                											auto_recover, tec_mask, heater_mask, tec_vol, heater_duty,  resp_info, &resp_len)){
+                	BScript_Log("[ScriptInit] SET_TEMP_PROFILE received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptInit] Failed to SET_TEMP_PROFILE");
+                    return STEP_EXEC_ERROR;
+                }
+            }
+
             break;
         }
 
         case START_TEMP_PROFILE: {
             BScript_Log("[ScriptInit] ->START_TEMP_PROFILE");
-            // TODO: Start the configured temperature profile
+
+            uint8_t resp_info[1];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_START_TEMP_PROFILE_CMD_WithData(resp_info, &resp_len)){
+            	BScript_Log("[ScriptInit] START_TEMP_PROFILE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptInit] Failed to START_TEMP_PROFILE");
+                return STEP_EXEC_ERROR;
+            }
+
             break;
         }
 
@@ -1326,13 +1607,44 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
 
             BScript_Log("[ScriptInit] ->SET_OVERRIDE_TEC_PROFILE: interval=%u sec, index=%u, voltage=%u mV",
                         interval, tec_index, tec_vol);
-            // TODO: Apply override TEC profile settings
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_OVERRIDE_TEC_PROFILE_CMD_WithData(interval, tec_index, tec_vol, resp_info, &resp_len)){
+            	BScript_Log("[ScriptInit] SET_OVERRIDE_TEC_PROFILE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptInit] Failed to SET_OVERRIDE_TEC_PROFILE");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptInit] Response SET_OVERRIDE_TEC_PROFILE_CMD not OK, retry!");
+                if(MIN_Send_SET_OVERRIDE_TEC_PROFILE_CMD_WithData(interval, tec_index, tec_vol, resp_info, &resp_len)){
+                	BScript_Log("[ScriptInit] SET_OVERRIDE_TEC_PROFILE received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptInit] Failed to SET_OVERRIDE_TEC_PROFILE");
+                    return STEP_EXEC_ERROR;
+                }
+            }
+
             break;
         }
 
         case START_OVERRIDE_TEC_PROFILE: {
             BScript_Log("[ScriptInit] ->START_OVERRIDE_TEC_PROFILE");
-            // TODO: Activate TEC override profile
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_START_OVERRIDE_TEC_PROFILE_CMD_WithData( resp_info, &resp_len)){
+            	BScript_Log("[ScriptInit] START_OVERRIDE_TEC_PROFILE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptInit] Failed to START_OVERRIDE_TEC_PROFILE");
+                return STEP_EXEC_ERROR;
+            }
+
             break;
         }
 
@@ -1349,7 +1661,28 @@ static StepExecResult ScriptManager_ExecuteInitStep(Step* step)
 
             BScript_Log("[ScriptInit] ->SET_PDA_PROFILE: Rate=%u Hz, PreLaser=%u us, InSample=%u us, PostLaser=%u us",
                         rate, pre_laser, in_sample, pos_laser);
-            // TODO: Apply PDA profile configuration
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_PDA_PROFILE_CMD_WithData(rate, pre_laser, in_sample, pos_laser, resp_info, &resp_len)){
+            	BScript_Log("[ScriptInit] SET_PDA_PROFILE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptInit] Failed to SET_PDA_PROFILE");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptInit] Response SET_PDA_PROFILE_CMD not OK, retry!");
+                if(MIN_Send_SET_PDA_PROFILE_CMD_WithData(rate, pre_laser, in_sample, pos_laser, resp_info, &resp_len)){
+                	BScript_Log("[ScriptInit] SET_PDA_PROFILE received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptInit] Failed to SET_PDA_PROFILE");
+                    return STEP_EXEC_ERROR;
+                }
+            }
+
             break;
         }
 
@@ -1402,6 +1735,18 @@ static StepExecResult ScriptManager_ExecuteDLSStep(Step* step)
             }
 
             BScript_Log("[ScriptDLS] ->SET_DLS_INTERVAL: Reached step with interval %u seconds (using time points instead)", interval);
+            BScript_Log("[ScriptDLS] Now, OBC shall set EXP Working RTC");
+
+            uint8_t resp_info[5];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_WORKING_RTC_CMD_WithData(resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] SET_WORKING_RTC received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to SET_WORKING_RTC");
+                return STEP_EXEC_ERROR;
+            }
+
             break;
         }
 
@@ -1411,7 +1756,29 @@ static StepExecResult ScriptManager_ExecuteDLSStep(Step* step)
                 return STEP_EXEC_ERROR;
             }
             BScript_Log("[ScriptDLS] ->SET_LASER_INTENSITY: Set laser intensity %u", intensity);
-            // TODO: Implement laser intensity control
+
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_LASER_INTENSITY_CMD_WithData(intensity, resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] SET_LASER_INTENSITY received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to SET_LASER_INTENSITY");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptDLS] Response SET_LASER_INTENSITY not OK, retry!");
+                if(MIN_Send_SET_LASER_INTENSITY_CMD_WithData(intensity, resp_info, &resp_len)){
+                	BScript_Log("[ScriptDLS] SET_LASER_INTENSITY received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptDLS] Failed to SET_LASER_INTENSITY");
+                    return STEP_EXEC_ERROR;
+                }
+            }
+
             break;
         }
 
@@ -1421,23 +1788,145 @@ static StepExecResult ScriptManager_ExecuteDLSStep(Step* step)
                 return STEP_EXEC_ERROR;
             }
             BScript_Log("[ScriptDLS] ->SET_POSITION: Set position: %u", position);
-            // TODO: Implement position control
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_POSITION_CMD_WithData(position, resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] SET_POSITION received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to SET_POSITION");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptDLS] Response SET_POSITION not OK, retry!");
+                if(MIN_Send_SET_POSITION_CMD_WithData(position, resp_info, &resp_len)){
+                	BScript_Log("[ScriptDLS] SET_POSITION received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptDLS] Failed to SET_POSITION");
+                    return STEP_EXEC_ERROR;
+                }
+            }
             break;
         }
 
         case START_SAMPLING_CYCLE: { // start_sample_cycle
             BScript_Log("[ScriptDLS] ->START_SAMPLING_CYCLE: Start sample cycle");
-            // TODO: Implement sample cycle start
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_START_SAMPLE_CYCLE_CMD_WithData(resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] START_SAMPLING_CYCLE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to START_SAMPLING_CYCLE");
+                return STEP_EXEC_ERROR;
+            }
+
             break;
         }
 
         case GET_SAMPLE: { // obc_get_sample
 
+            TickType_t handshake_start_time = xTaskGetTickCount();
+            TickType_t overall_timeout_ticks = pdMS_TO_TICKS(SAMPLING_TIMEOUT_MS); // 25 s timeout
+            TickType_t minbusy_low_start_time = 0;
+            bool minbusy_low_started = false;
 
+            while (1) {
+                TickType_t now = xTaskGetTickCount();
+
+                if ((now - handshake_start_time) >= overall_timeout_ticks) {
+                    BScript_Log("[ScriptDLS] Timeout: MINBUSY is not LOW in 50ms or HIGH to long %lu ms", (unsigned long)overall_timeout_ticks);
+                    return SIMPLE_TRANSFER_ERROR_MINBUSY_TIMEOUT;
+                }
+
+                if (!LL_GPIO_IsInputPinSet(EXP_MINBUSY_GPIO_PORT, EXP_MINBUSY_GPIO_PIN)) {
+                    // MINBUSY is LOW
+                    if (!minbusy_low_started) {
+                        minbusy_low_start_time = now;
+                        minbusy_low_started = true;
+                    } else if ((now - minbusy_low_start_time) >= pdMS_TO_TICKS(50)) {
+                        BScript_Log("[ScriptDLS] MINBUSY LOW 50ms, next step.");
+                        break;
+                    }
+                } else {
+                    minbusy_low_started = false;
+                }
+                BScript_Delayms(1);
+            }
 
             BScript_Log("[ScriptDLS] ->GET_SAMPLE: Get sample");
-            // TODO: Implement sample retrieval
+
+            // Circle task
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_GET_INFO_SAMPLE_CMD_WithData(resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] GET_INFO_SAMPLE received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to GET_INFO_SAMPLE");
+                return STEP_EXEC_ERROR;
+            }
+
+            uint16_t total_chunk = ((uint16_t)resp_info[0] << 8) | resp_info[1];
+//            uint8_t total_chunk = resp_info[0];
+
+            if(total_chunk > 256){
+            	BScript_Log("[ScriptDLS] Wrong total chunk: %u (> 256)", total_chunk);
+            	return STEP_EXEC_ERROR;
+            }
+
+            BScript_Log("[ScriptDLS] Got total chunk: %u (> 256)", total_chunk);
+
+            char base_filename[48];
+
+            s_DateTime rtc;
+            Utils_GetRTC(&rtc);
+            const char* type_prefix = "";
+            type_prefix = "dls_data";
+            snprintf(base_filename, sizeof(base_filename), "%s_20%02d%02d%02d_%02d%02d%02d",
+                                type_prefix, rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+
+            uint16_t chunk_id = 0;
+            for(chunk_id = 0; chunk_id < total_chunk; chunk_id++){
+
+                BScript_Log("[ScriptDLS] ->GET_SAMPLE: Chunks=%u, Base=%s",
+                		chunk_id, base_filename);
+                SimpleTransferResult_t result;
+                result = SimpleDataTransfer_ExecuteTransfer(DATA_TYPE_CHUNK, chunk_id, base_filename, rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+                // Check result and return appropriate step result
+                if (result == SIMPLE_TRANSFER_SUCCESS) {
+                    BScript_Log("[ScriptDLS] ->GET_SAMPLE: Data acquisition chunk: %u completed successfully", chunk_id);
+                } else {
+                    BScript_Log("[ScriptDLS] ->GET_SAMPLE: Data acquisition failed: %s",
+                               SimpleDataTransfer_GetResultString(result));
+                    return STEP_EXEC_ERROR;
+                }
+            }
+            BScript_Log("[ScriptDLS] ->GET_SAMPLE: Finish collect Chunk");
+            BScript_Log("[ScriptDLS] ->GET_SAMPLE: Now, we shall collect Current sample data");
+            type_prefix = "current_data";
+            snprintf(base_filename, sizeof(base_filename), "%s_20%02d%02d%02d_%02d%02d%02d",
+                                type_prefix, rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+            BScript_Log("[ScriptDLS] ->GET_SAMPLE: Base=%s", base_filename);
+            SimpleTransferResult_t result;
+            result = SimpleDataTransfer_ExecuteTransfer(DATA_TYPE_CURRENT, 0, base_filename, rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+            // Check result and return appropriate step result
+            if (result == SIMPLE_TRANSFER_SUCCESS) {
+                BScript_Log("[ScriptDLS] ->GET_SAMPLE: Data acquisition CURRENT completed successfully");
+            } else {
+                BScript_Log("[ScriptDLS] ->GET_SAMPLE: Data acquisition CURRENT failed: %s",
+                           SimpleDataTransfer_GetResultString(result));
+                return STEP_EXEC_ERROR;
+            }
+
+            BScript_Log("[ScriptDLS] ->GET_SAMPLE: [v] Done this stop");
             break;
+
         }
 
         default:
@@ -1474,7 +1963,28 @@ static StepExecResult ScriptManager_ExecuteCAMStep(Step* step)
                 return STEP_EXEC_ERROR;
             }
             BScript_Log("[ScriptCAM] ->SET_EXT_LASER_INTENSITY: Ext-laser intensity: %u", intensity);
-            // TODO: Implement external laser intensity control
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_SET_EXT_LASER_INTENSITY_CMD_WithData(intensity, resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] SET_EXT_LASER_INTENSITY received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to SET_EXT_LASER_INTENSITY");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptDLS] Response SET_EXT_LASER_INTENSITY not OK, retry!");
+                if(MIN_Send_SET_EXT_LASER_INTENSITY_CMD_WithData(intensity, resp_info, &resp_len)){
+                	BScript_Log("[ScriptDLS] SET_EXT_LASER_INTENSITY received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptDLS] Failed to SET_EXT_LASER_INTENSITY");
+                    return STEP_EXEC_ERROR;
+                }
+            }
+
             break;
         }
 
@@ -1484,7 +1994,28 @@ static StepExecResult ScriptManager_ExecuteCAMStep(Step* step)
                 return STEP_EXEC_ERROR;
             }
             BScript_Log("[ScriptCAM] ->TURN_ON_EXT_LASER: Turn on ext-laser %u", position);
-            // TODO: Implement external laser intensity control
+
+            uint8_t resp_info[2];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_TURN_ON_EXT_LASER_CMD_WithData(position, resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] TURN_ON_EXT_LASER_CMD received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to TURN_ON_EXT_LASER_CMD");
+                return STEP_EXEC_ERROR;
+            }
+
+            if(resp_len == 2 && resp_info[0] != 0x3F ){
+            	resp_len = 0;
+            	BScript_Log("[ScriptDLS] Response TURN_ON_EXT_LASER_CMD not OK, retry!");
+                if(MIN_Send_TURN_ON_EXT_LASER_CMD_WithData(position, resp_info, &resp_len)){
+                	BScript_Log("[ScriptDLS] TURN_ON_EXT_LASER_CMD received: %u bytes", resp_len);
+                }else {
+                    BScript_Log("[ScriptDLS] Failed to TURN_ON_EXT_LASER_CMD");
+                    return STEP_EXEC_ERROR;
+                }
+            }
+
             break;
         }
 
@@ -1494,13 +2025,24 @@ static StepExecResult ScriptManager_ExecuteCAMStep(Step* step)
                 return STEP_EXEC_ERROR;
             }
             BScript_Log("[ScriptCAM] ->SET_CAMERA_POSITION: Set CIS-ID %u", camPosition);
-            // TODO: Implement external laser intensity control
+            uint8_t payload[1];
+            payload[0] = camPosition;
+
+            if (MODFSP_Send(&cm4_protocol, MODFSP_TYPE_SET_CAM_POSITION_CMD,
+                             payload, sizeof(payload)) != MODFSP_OK) {
+                BScript_Log("[ScriptCAM] Master set camera position failed");
+            }
+
             break;
         }
 
         case TAKE_IMG_WITH_TIMEOUT: { // take_img_with_timeout
             BScript_Log("[ScriptCAM] ->TAKE_IMG: Take image with timeout");
-            // TODO: Implement image capture
+            if (MODFSP_Send(&cm4_protocol, MODFSP_TYPE_TAKE_IMAGE_CMD,
+                             NULL, 0) != MODFSP_OK) {
+                BScript_Log("[ScriptCAM] Master take image failed");
+
+            }
             break;
         }
 
@@ -1518,6 +2060,17 @@ static StepExecResult ScriptManager_ExecuteCAMStep(Step* step)
 
         case TURN_OFF_EXT_LASER: {
             BScript_Log("[ScriptCAM] ->TURN_OFF_EXT_LASER: Turn all ext-laser off");
+
+            uint8_t resp_info[1];
+            uint8_t resp_len = 0;
+
+            if(MIN_Send_TURN_OFF_EXT_LASER_CMD_WithData(resp_info, &resp_len)){
+            	BScript_Log("[ScriptDLS] TURN_OFF_EXT_LASER_CMD received: %u bytes", resp_len);
+            }else {
+                BScript_Log("[ScriptDLS] Failed to TURN_OFF_EXT_LASER_CMD");
+                return STEP_EXEC_ERROR;
+            }
+
             break;
         }
 
@@ -1631,10 +2184,32 @@ void ScriptManager_PrintStatus(void)
     BScript_Log("[ScriptManager] System time: %u seconds", current_time);
     BScript_Log("[ScriptManager] Manager running: %s", g_script_manager.manager_running ? "YES" : "NO");
     BScript_Log("[ScriptManager] Init completed: %s", g_script_manager.init_completed ? "YES" : "NO");
+    BScript_Log("[ScriptManager] Log Fetching: %s", g_log_fetching_enabled ? "ENABLED" : "DISABLED");
 
     if (g_script_manager.system_time_configured) {
         BScript_Log("[ScriptManager] System start daily time: %u seconds", g_script_manager.system_start_daily_time);
     }
+
+    BScript_Log("[ScriptManager] === SD LOCK/RELEASE STATUS ===");
+    if (g_sd_scheduler.configured) {
+        uint8_t rel_h = g_sd_scheduler.release_time_sec / 3600;
+        uint8_t rel_m = (g_sd_scheduler.release_time_sec % 3600) / 60;
+        uint8_t rel_s = g_sd_scheduler.release_time_sec % 60;
+
+        uint8_t lock_h = g_sd_scheduler.lockin_time_sec / 3600;
+        uint8_t lock_m = (g_sd_scheduler.lockin_time_sec % 3600) / 60;
+        uint8_t lock_s = g_sd_scheduler.lockin_time_sec % 60;
+
+        BScript_Log("  - Configured: YES");
+        BScript_Log("  - Release time: %02u:%02u:%02u (%u s)", rel_h, rel_m, rel_s, g_sd_scheduler.release_time_sec);
+        BScript_Log("  - Lock-in time: %02u:%02u:%02u (%u s)", lock_h, lock_m, lock_s, g_sd_scheduler.lockin_time_sec);
+        BScript_Log("  - Released today: %s", g_sd_scheduler.release_done_today ? "YES" : "NO");
+        BScript_Log("  - Locked-in today: %s", g_sd_scheduler.lockin_done_today ? "YES" : "NO");
+    } else {
+        BScript_Log("  - Configured: NO");
+    }
+
+    BScript_Log("  - eMMC status: %s", SimpleDataTransfer_IsFatfsOk() ? "OK" : "FAIL");
 
     // Script status
     for (int i = 0; i < SCRIPT_TYPE_COUNT; i++) {

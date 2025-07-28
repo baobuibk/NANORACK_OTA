@@ -126,9 +126,9 @@ Std_ReturnType SPI_SlaveDevice_ResetDMA(uint32_t data_addr, uint32_t data_size)
         return E_ERROR;
     }
 
-    if (toCM4_GetState() != TOCM4_BUSY && toCM4_GetState() != TOCM4_READYSEND) {
-        return E_ERROR;
-    }
+//    if (toCM4_GetState() != TOCM4_BUSY && toCM4_GetState() != TOCM4_READYSEND) {
+//        return E_ERROR;
+//    }
 
     LL_DMA_DisableStream(SPI_DMA_INSTANCE, SPI_DMA_TX_STREAM);
     LL_SPI_DisableDMAReq_TX(SPI_SLAVE_INSTANCE);

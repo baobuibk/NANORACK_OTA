@@ -21,9 +21,9 @@
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bdma.h:2311:22:LL_BDMA_EnableIT_TE	1
 ../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:24:21:SPI_MasterDevice_GetHandle	1
 ../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:29:16:SPI_MasterDevice_Init	3
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:56:16:SPI_MasterDevice_ReadDMA	6
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:120:16:SPI_MasterDevice_Disable	2
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:139:27:SPI_MasterDevice_GetTransferState	1
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:144:6:SPI_MasterDevice_SetTransferState	1
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:149:15:SPI_MasterDevice_GetCM4State	1
-../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:154:6:SPIMaster_IRQHandler	5
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:56:16:SPI_MasterDevice_ReadDMA	4
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:116:16:SPI_MasterDevice_Disable	2
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:135:27:SPI_MasterDevice_GetTransferState	1
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:140:6:SPI_MasterDevice_SetTransferState	1
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:145:15:SPI_MasterDevice_GetCM4State	1
+../1_DEV/M3_Devices/SPI_MasterOfEXP/spi_master.c:150:6:SPIMaster_IRQHandler	5

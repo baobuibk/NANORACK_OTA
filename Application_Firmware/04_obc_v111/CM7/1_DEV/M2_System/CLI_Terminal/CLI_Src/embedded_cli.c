@@ -4,7 +4,7 @@
 
 #include "embedded_cli.h"
 
-#define CMD_NAME_COL_WIDTH 16
+#define CMD_NAME_COL_WIDTH 28
 
 #define CLI_TOKEN_NPOS 0xFFFF
 

@@ -612,12 +612,15 @@ def process_opt_mode():
             print("Choose board selection:")
             print("1: EXP (singlecore)")
             print("2: OBC (dualcore)")
+            print("3: Exit")
             choice = input("Select an option: ")
             choice = int(choice)
             if 1 <= choice <= 2:
                 mcu = choice
                 print(f"Board {('EXP' if mcu == 1 else 'OBC')} selected.")
                 break
+            elif choice == 3:
+                sys.exit(0)
             raise ValueError
         except ValueError as e:
             print(f"Invalid choice. Please select 1 to 2.")

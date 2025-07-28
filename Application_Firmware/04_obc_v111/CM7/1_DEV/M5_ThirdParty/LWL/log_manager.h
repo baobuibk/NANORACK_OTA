@@ -6,10 +6,10 @@
 #include <string.h>
 
 // Configuration
-#define LOG_BUFFER_SIZE_OBC         (16 * 1024)
-#define LOG_TRIGGER_THRESHOLD_OBC   (15 * 1024)
-#define LOG_BUFFER_SIZE_EXP         (16 * 1024) // Can be different if needed
-#define LOG_TRIGGER_THRESHOLD_EXP   (15 * 1024) // Can be different if needed
+#define LOG_BUFFER_SIZE_OBC         (32 * 1024)
+#define LOG_TRIGGER_THRESHOLD_OBC   (31 * 1024)
+#define LOG_BUFFER_SIZE_EXP         (2 * 1024) // Can be different if needed
+#define LOG_TRIGGER_THRESHOLD_EXP   (1 * 1024) // Can be different if needed
 
 // Enum to identify the log source
 typedef enum {

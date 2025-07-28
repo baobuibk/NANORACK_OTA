@@ -2,6 +2,8 @@
 #include <stdio.h>
 
 #include "logger/bscript_logger.h"
+#include "DateTime/date_time.h"
+#include "SimpleDataTransfer/simple_datatrans.h"
 
 __attribute__((section(".log_data"))) __attribute__((aligned(4))) uint8_t obc_log_left[LOG_BUFFER_SIZE_OBC];
 __attribute__((section(".log_data"))) __attribute__((aligned(4))) uint8_t obc_log_right[LOG_BUFFER_SIZE_OBC];
@@ -78,9 +80,9 @@ void LogManager_Process(void) {
             uint8_t *buffer_to_send = (channel->active_buffer == LOG_BUFFER_RIGHT) ? channel->buffer_left : channel->buffer_right;
             uint32_t length_to_send = channel->trigger_threshold; // Send the threshold amount
 
-            LogManager_SendLogData((LogSource_TypeDef)i, buffer_to_send, length_to_send);
-
-            // Clear the buffer that was just sent and reset the flag
+//            LogManager_SendLogData((LogSource_TypeDef)i, buffer_to_send, length_to_send);
+//
+//            // Clear the buffer that was just sent and reset the flag
             if (LogManager_SendLogData((LogSource_TypeDef)i, buffer_to_send, length_to_send)) {
                 memset(buffer_to_send, 0, channel->buffer_size);
                 channel->transfer_ready_flag = false;
@@ -89,21 +91,35 @@ void LogManager_Process(void) {
     }
 }
 
-__attribute__((weak)) bool LogManager_SendLogData(LogSource_TypeDef source, uint8_t *current_buffer_to_send, uint32_t data_length) {
-    #ifdef LOG_MANAGER_DEBUG
-    const char* source_name = (source == LOG_SOURCE_OBC) ? "OBC" : "EXP";
-    printf("LogManager_SendLogData: Simulating send for %s. Length: %lu bytes.\n", source_name, data_length);
-    #endif
 
-    // Mặc định giả lập là gửi thành công
-    return true;
+bool LogManager_SendLogData(LogSource_TypeDef source, uint8_t *current_buffer_to_send, uint32_t data_length) {
 
-    // Thực tế bạn sẽ viết như sau:
-    // if (HAL_UART_Transmit(...) == HAL_OK) return true;
-    // else return false;
+    char base_filename[48];
+    s_DateTime rtc;
+    Utils_GetRTC(&rtc);
+
+    snprintf(base_filename, sizeof(base_filename), "obc_log_20%02d%02d%02d_%02d%02d%02d",
+             rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
+
+
+    BScript_Log("[LogManager] Initiating transfer for %s data...", base_filename);
+
+    SimpleTransferResult_t result = SimpleDataTransfer_ExecuteLogTransfer(
+        base_filename,
+        current_buffer_to_send,
+        data_length,
+		rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second
+    );
+
+    if (result == SIMPLE_TRANSFER_SUCCESS) {
+        BScript_Log("[LogManager] Transfer for %s succeeded.", base_filename);
+        return true;
+    } else {
+        BScript_Log("[LogManager] Transfer for %s failed. Result: %s",
+                      base_filename, SimpleDataTransfer_GetResultString(result));
+        return false;
+    }
 }
-
-
 
 // --- Debugging API Implementation ---
 

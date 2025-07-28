@@ -97,6 +97,9 @@ typedef struct {
 #define GET_LASER_CURRENT_CMD						0x32
 #define GET_LASER_CURRENT_ACK						0x33
 
+#define GET_LOG_CMD									0x34
+#define GET_LOG_ACK									0x35
+
 //-------------------------------------------------------
 #define CUSTOM_COMMAND_CMD							0x36
 #define CUSTOM_COMMAND_ACK							0x37

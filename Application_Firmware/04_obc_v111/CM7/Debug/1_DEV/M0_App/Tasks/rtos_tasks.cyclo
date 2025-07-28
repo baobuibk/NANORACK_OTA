@@ -8,7 +8,7 @@
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:130:6:Task_Kick	3
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:148:6:OBC_RootTask	2
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:163:6:OBC_RootGrowUp	2
-../1_DEV/M0_App/Tasks/rtos_tasks.c:188:16:OBC_AppInit	31
+../1_DEV/M0_App/Tasks/rtos_tasks.c:188:16:OBC_AppInit	32
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:313:6:vSoft_RTC_Task	3
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:334:6:CLI_Handle_Task	4
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:354:6:UART_USB_DMA_RX_TASK	9
@@ -22,4 +22,4 @@
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:552:6:LogManager_Task	1
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:561:6:WatchdogMonitorTask	5
 ../1_DEV/M0_App/Tasks/rtos_tasks.c:587:6:WatchdogPulseTask	3
-../1_DEV/M0_App/Tasks/rtos_tasks.c:602:6:ExpMonitorTask	7
+../1_DEV/M0_App/Tasks/rtos_tasks.c:602:6:ExpMonitorTask	8

@@ -26,6 +26,8 @@
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
@@ -58,7 +60,8 @@
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Define/define.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Tick/tick.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/board.h \
- D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/env.h
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/env.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/BinaryScript/logger/bscript_logger.h
 ../1_DEV/M5_ThirdParty/MIN_R01/min_app/min_command.h:
 ../1_DEV/M5_ThirdParty/MIN_R01/min_app/min_app.h:
 ../1_DEV/M5_ThirdParty/MIN_R01/min_app/../min/min.h:
@@ -85,6 +88,8 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M1_Drivers/UART_DMA/uart_driver_dm
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
@@ -118,3 +123,4 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Define/define.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Tick/tick.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/board.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/_Target/env.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/BinaryScript/logger/bscript_logger.h:

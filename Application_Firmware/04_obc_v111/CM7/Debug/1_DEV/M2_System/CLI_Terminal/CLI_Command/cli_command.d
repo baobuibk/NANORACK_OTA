@@ -29,6 +29,8 @@
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
@@ -99,8 +101,9 @@
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/BinaryScript/parser/bscript_parser.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/LWL/log_manager.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/LWL/lwl.h \
- D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/bsp_system/bsp_system.h \
- D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/AliveCM4/alive_cm4.h
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/AliveCM4/alive_cm4.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SimpleDataTransfer/simple_datatrans.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/ModFSP/modfsp.h
 ../1_DEV/M2_System/CLI_Terminal/CLI_Command/cli_command.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/CLI_Terminal/CLI_Src/embedded_cli.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/CLI_Terminal/CLI_Setup/cli_setup.h:
@@ -130,6 +133,8 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Tick/tick.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
@@ -200,5 +205,6 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/ScriptManager/script_man
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/BinaryScript/parser/bscript_parser.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/LWL/log_manager.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/LWL/lwl.h:
-D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/bsp_system/bsp_system.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/AliveCM4/alive_cm4.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SimpleDataTransfer/simple_datatrans.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/ModFSP/modfsp.h:

@@ -48,6 +48,8 @@
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
@@ -64,13 +66,33 @@
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h \
  ../1_DEV/M2_System/ScriptManager/action_id.h \
- D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/bsp_system/bsp_system.h \
- ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bus.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/ModFSP/modfsp.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/SPI_FRAM/fram_spi.h \
  D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/ScriptManager/script_manager.h \
- D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/MIN_Process/min_process.h
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/MIN_Process/min_process.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SimpleDataTransfer/simple_datatrans.h \
+ ../Core/Inc/main.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_rcc.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_tim.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usart.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_system.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_exti.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bus.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_cortex.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_utils.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_system.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bus.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_pwr.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dma.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dmamux.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bdma.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/LWL/log_manager.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/FileSystem/filesystem.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/CLI_Terminal/CLI_Command/cli_command.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/CLI_Terminal/CLI_Src/embedded_cli.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M0_App/Mgmt/reinit.h \
+ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/RAMBK_Infor/rambk_infor.h
 ../1_DEV/M2_System/ScriptManager/script_manager.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/FreeRTOS/FreeRTOS-Kernel/include/FreeRTOS.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/FreeRTOS/FreeRTOS_Config/FreeRTOSConfig.h:
@@ -119,6 +141,8 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M4_Utils/Tick/tick.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_crc_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
@@ -135,10 +159,30 @@ D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/SPI_FRAM/fram_spi.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_gpio.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_spi.h:
 ../1_DEV/M2_System/ScriptManager/action_id.h:
-D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/bsp_system/bsp_system.h:
-../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bus.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/ModFSP/modfsp.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/BinaryScript/storage/script_storage.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M3_Devices/SPI_FRAM/fram_spi.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/ScriptManager/script_manager.h:
 D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/MIN_Process/min_process.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/SimpleDataTransfer/simple_datatrans.h:
+../Core/Inc/main.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_rcc.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_tim.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usart.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_system.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_exti.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bus.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_cortex.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_utils.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_system.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bus.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_pwr.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dma.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_dmamux.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_bdma.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M5_ThirdParty/LWL/log_manager.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/FileSystem/filesystem.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/CLI_Terminal/CLI_Command/cli_command.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/CLI_Terminal/CLI_Src/embedded_cli.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M0_App/Mgmt/reinit.h:
+D:/WorkSpace/STM32\ PRJ/04_obc_v111/CM7/1_DEV/M2_System/RAMBK_Infor/rambk_infor.h:
