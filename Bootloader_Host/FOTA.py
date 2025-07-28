@@ -721,7 +721,9 @@ def process_opt_mode():
                 bootloader.read_firmware_detail()
 
             elif choice == "6":
+                GPIO9_Set_Output(True)
                 print("Exiting...")
+                
                 bootloader.close()
                 break
             else:

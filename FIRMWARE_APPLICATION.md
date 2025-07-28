@@ -48,50 +48,70 @@ The provided sample application includes:
 
 ### Key Code Snippets
 #### Cortex-M7 for STM32H745ZIT3 (`main_m7.c`)
+- Add macro `#define USE_CORE_M4`
+- Remove code from `USER CODE BEGIN Boot_Mode_Sequence_0` to `USER CODE END Boot_Mode_Sequence_0` and from `USER CODE BEGIN Boot_Mode_Sequence_1` to `USER CODE END Boot_Mode_Sequence_1`
+- Modify from `USER CODE BEGIN Boot_Mode_Sequence_2` to `USER CODE END Boot_Mode_Sequence_2` following this:
 ```c
-#include "bsp_system.h"
+#define USE_CORE_M4
 
 int main(void)
 {
-  /* MPU Configuration */
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+/* USER CODE BEGIN Boot_Mode_Sequence_0 */
+
+/* USER CODE END Boot_Mode_Sequence_0 */
+
+  /* MPU Configuration--------------------------------------------------------*/
   MPU_Config();
 
-  /* MCU Configuration */
+/* USER CODE BEGIN Boot_Mode_Sequence_1 */
+  
+/* USER CODE END Boot_Mode_Sequence_1 */
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-
+/* USER CODE BEGIN Boot_Mode_Sequence_2 */
+/*HW semaphore Clock enable*/
 #ifdef USE_CORE_M4
   __HAL_RCC_HSEM_CLK_ENABLE();
   HAL_HSEM_FastTake(1);
   while (!HAL_HSEM_IsSemTaken(0));
   HAL_HSEM_Release(0, 0);
   while (!__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY));
+  HAL_Init();
 #endif
+/* USER CODE END Boot_Mode_Sequence_2 */
 
-  /* Initialize peripherals */
-  MX_GPIO_Init();
-  MX_USART2_UART_Init();
-
-  /* Initialize BSP */
-  System_On_Bootloader_Reset(); // Handle reset to bootloader if triggered
-  command_init();
-
-  /* Infinite loop */
-  while (1)
-  {
-    SchedulerRun();
-  }
-}
+  /* USER CODE BEGIN SysInit */
+  ...........
 ```
 - Initializes peripherals, BSP, and runs the scheduler.
 - Handles software reset via `System_On_Bootloader_Reset()`.
 
 #### Cortex-M4 for STM32H745ZIT3 (`main_m4.c`)
+- Add macro `#define USE_CORE_M4` and modify from `USER CODE BEGIN Boot_Mode_Sequence_1` to `USER CODE END Boot_Mode_Sequence_1` following this:
 ```c
+#define USE_CORE_M4
+
 int main(void)
 {
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+/* USER CODE BEGIN Boot_Mode_Sequence_1 */
 #ifdef USE_CORE_M4
   __HAL_RCC_HSEM_CLK_ENABLE();
   HAL_HSEM_FastTake(0);
@@ -103,18 +123,47 @@ int main(void)
   __HAL_HSEM_CLEAR_FLAG(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
 #endif
 
-  /* MCU Configuration */
+/* USER CODE END Boot_Mode_Sequence_1 */
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* Initialize peripherals */
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_MDMA_Init();
+  MX_DMA_Init();
+  MX_BDMA_Init();
   MX_GPIO_Init();
+  MX_SDMMC2_MMC_Init();
+  MX_USART6_UART_Init();
+  MX_TIM2_Init();
+  MX_USB_DEVICE_Init();
+  /* USER CODE BEGIN 2 */
+  Mgmt_HardwareSystemPreparing();
+
+  Mgmt_SystemStart();
+
+  /* USER CODE END 2 */
 
   /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_7);
-    HAL_Delay(100);
+	  ;;
+	  // Should not go here
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
   }
+  /* USER CODE END 3 */
 }
 ```
 
