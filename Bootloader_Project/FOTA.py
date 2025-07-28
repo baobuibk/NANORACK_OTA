@@ -81,6 +81,7 @@ def calculate_crc32(data):
 def list_bin_files(mcu):
     """List .bin files in current directory and prompt for .bin and .json file selection"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(current_dir, 'Output')
     
     # List .bin files
     if mcu == 0:
@@ -89,7 +90,7 @@ def list_bin_files(mcu):
         mcu_key = 'm7'
     elif mcu == 2:
         mcu_key = 'm4'
-    bin_files = [f for f in os.listdir(current_dir) if f.lower().endswith('.bin') and mcu_key in f.lower()]
+    bin_files = [f for f in os.listdir(output_dir) if f.lower().endswith('.bin') and mcu_key in f.lower()]
     if not bin_files:
         print("No .bin files found in the current directory!")
     else:
@@ -121,7 +122,7 @@ def list_bin_files(mcu):
                 if not bin_files:
                     print("Invalid choice. Please enter a valid .bin file path!")
                 elif 1 <= choice_num <= len(bin_files):
-                    bin_file = os.path.join(current_dir, bin_files[choice_num - 1])
+                    bin_file = os.path.join(output_dir, bin_files[choice_num - 1])
                     break
                 else:
                     print(f"Invalid choice. Please select 1 to {len(bin_files)} or a valid .bin file path.")

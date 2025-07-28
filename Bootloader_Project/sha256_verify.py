@@ -2,6 +2,51 @@ import hashlib
 import json
 import os
 
+
+def list_bin_files():
+    """List .bin files in current directory and prompt for .bin and .json file selection"""
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(current_dir, 'Output')
+    
+    bin_files = [f for f in os.listdir(output_dir) if f.lower().endswith('.bin')]
+    if not bin_files:
+        print("No .bin files found in the current directory!")
+    else:
+        print("Available .bin files:")
+        for index, file in enumerate(bin_files, start=1):
+            print(f"{index}: {file}")
+    
+    # Select .bin file
+    while True:
+        try:
+            if bin_files:
+                choice = input("Select a .bin file number or enter file path: ")
+            else:
+                choice = input("Enter .bin file path: ")
+            
+            # Check if input is a number
+            try:
+                choice_num = int(choice)
+                if not bin_files:
+                    print("Invalid choice. Please enter a valid .bin file path!")
+                elif 1 <= choice_num <= len(bin_files):
+                    bin_file = os.path.join(output_dir, bin_files[choice_num - 1])
+                    break
+                else:
+                    print(f"Invalid choice. Please select 1 to {len(bin_files)} or a valid .bin file path.")
+            except ValueError:
+                # Check if input is a valid file path
+                file_path = choice.strip().strip('"\' ')
+                if os.path.isfile(file_path) and file_path.lower().endswith('.bin') and os.path.exists(file_path):
+                    bin_file = file_path
+                    break
+                print("Invalid file path or file is not a .bin file.")
+        except KeyboardInterrupt:
+            print("\nOperation cancelled by user.")
+            return None, None
+    
+    return bin_file
+
 def calculate_sha256(file_path):
     sha256_hash = hashlib.sha256()
     try:
@@ -47,13 +92,17 @@ def is_valid_json_file(file_path):
     return file_path.lower().endswith('.json')
 
 def main():
-    while True:
-        bin_file = input("Enter path to .bin file: ")
-        if is_valid_bin_file(bin_file):
-            break
-        print("Error: File must have .bin extension")
-    json_file = os.path.splitext(bin_file)[0] + '.json'
-    file_name, version, stored_hash, stored_size = read_json_file(json_file)
+        
+    bin_file = list_bin_files()
+        
+    output_dir =os.path.dirname(bin_file)
+
+    file_name = os.path.basename(bin_file)
+    output_json = os.path.join(output_dir, os.path.splitext(file_name)[0] + '.json')
+    
+    print(output_json)
+        
+    file_name, version, stored_hash, stored_size = read_json_file(output_json)
     if stored_size and isinstance(stored_size, str) and stored_size.startswith("Error"):
         print(stored_size)
         return

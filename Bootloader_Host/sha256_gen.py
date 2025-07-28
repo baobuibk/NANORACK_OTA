@@ -45,21 +45,12 @@ def main():
         if file_path.lower().endswith('.bin'):
             break
         print("Error: File must have .bin extension!")
-    
+    output_file = os.path.splitext(file_path)[0] + '.json'
     while True:
         version = input("Enter version (e.g., 1.0.0): ")
         if bool(re.match(r"^\d+\.\d+\.\d+$", version)):
             break
         print("Error: Version must follow the format m.n.p (e.g., 1.0.0)!")
-    
-    while True:
-        output_file = input("Enter name of .json file to save (e.g., metadata.json): ")
-        if output_file.lower().endswith('.json'):
-            break
-        print("Error: Output file must have .json extension!")
-    
-    if not output_file.endswith('.json'):
-        output_file += '.json'
     
     hash_value, sha_error = calculate_sha256(file_path)
     if hash_value:
