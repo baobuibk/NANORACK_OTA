@@ -12,5 +12,5 @@
 ../Core/Src/main.c:202:13:MX_CRC_Init	2
 ../Core/Src/main.c:233:13:MX_UART7_Init	2
 ../Core/Src/main.c:306:13:MX_GPIO_Init	1
-../Core/Src/main.c:338:6:MPU_Config	1
-../Core/Src/main.c:369:6:Error_Handler	1
+../Core/Src/main.c:339:6:MPU_Config	1
+../Core/Src/main.c:370:6:Error_Handler	1
