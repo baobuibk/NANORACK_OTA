@@ -31,6 +31,6 @@ python FOTA.py
 ```
  - Then follow this order:
   1. Reset the device into bootloader mode.
-  2. Check the connection (for EXP boards, wait at least 2 seconds before selecting the device).
+  2. Check the connection (for EXP boards, wait at least 2 seconds before select this option).
   4. Choose the .bin file that matches the target board - Flash the firmware. <br /> -> Wait for completion and confirm success.
 
